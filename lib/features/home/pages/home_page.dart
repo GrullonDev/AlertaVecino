@@ -89,6 +89,8 @@ class HomePage extends StatelessWidget {
               Navigator.pushReplacementNamed(context, RoutePath.incidentMap);
             } else if (index == 2) {
               Navigator.pushReplacementNamed(context, RoutePath.notifications);
+            } else if (index == 3) {
+              Navigator.pushReplacementNamed(context, RoutePath.profile);
             }
           },
           items: const [

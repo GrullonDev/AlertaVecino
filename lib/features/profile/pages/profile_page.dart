@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:neighbour_alert/features/alerts/pages/alerts_layout.dart';
+import 'package:neighbour_alert/features/profile/pages/profile_layout.dart';
 import 'package:neighbour_alert/utils/router/route_path.dart';
 
-class AlertsPage extends StatelessWidget {
-  const AlertsPage({super.key});
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,38 +17,35 @@ class AlertsPage extends StatelessWidget {
             Icon(Icons.shield_outlined, color: Colors.blue.shade700),
             const SizedBox(width: 8),
             Text(
-              'Alerts',
+              'Alerta Vecinos',
               style: TextStyle(
                 color: Colors.blue.shade700,
                 fontWeight: FontWeight.bold,
+                letterSpacing: 1.2,
               ),
             ),
           ],
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: CircleAvatar(
-              backgroundColor: Colors.grey.shade800,
-              radius: 16,
-              child: const Icon(Icons.person, size: 20, color: Colors.white),
-            ),
+          IconButton(
+            icon: const Icon(Icons.settings_outlined, color: Colors.black54),
+            onPressed: () {},
           ),
         ],
       ),
-      body: const AlertsLayout(),
+      body: const ProfileLayout(),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.teal.shade700,
         unselectedItemColor: Colors.grey.shade500,
-        currentIndex: 2, // Alertas
+        currentIndex: 3, // Perfil
         onTap: (index) {
           if (index == 0) {
             Navigator.pushReplacementNamed(context, RoutePath.home);
           } else if (index == 1) {
             Navigator.pushReplacementNamed(context, RoutePath.incidentMap);
-          } else if (index == 3) {
-            Navigator.pushReplacementNamed(context, RoutePath.profile);
+          } else if (index == 2) {
+            Navigator.pushReplacementNamed(context, RoutePath.notifications);
           }
         },
         items: const [
