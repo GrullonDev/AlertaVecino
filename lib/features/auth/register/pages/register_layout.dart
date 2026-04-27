@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:neighbour_alert/features/auth/register/widgets/register_footer.dart';
 import 'package:neighbour_alert/features/auth/register/widgets/register_form_fields.dart';
 import 'package:neighbour_alert/features/auth/register/widgets/register_header.dart';
+import 'package:neighbour_alert/utils/router/route_path.dart';
 
 class RegisterLayout extends StatelessWidget {
   const RegisterLayout({super.key});
@@ -35,7 +36,7 @@ class RegisterLayout extends StatelessWidget {
               const RegisterFormFields(),
               const SizedBox(height: 32),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () => Navigator.pushNamed(context, RoutePath.home),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.teal,
                   foregroundColor: Colors.white,

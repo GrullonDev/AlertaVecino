@@ -4,6 +4,8 @@ class RoutePath {
   static const String register = '/register';
   static const String userVerification = '/user-verification';
   static const String sectorSelection = '/sector-selection';
+  
+  static const String home = '/home';
 
   // 2. Reportes de Incidente y Emergencia
   static const String panicButton = '/panic-button';

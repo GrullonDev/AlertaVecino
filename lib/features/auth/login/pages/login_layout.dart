@@ -5,6 +5,7 @@ import 'package:neighbour_alert/features/auth/login/widgets/login_form_fields.da
 import 'package:neighbour_alert/features/auth/login/widgets/login_header.dart';
 import 'package:neighbour_alert/features/auth/login/widgets/login_remember_row.dart';
 import 'package:neighbour_alert/features/auth/login/widgets/option_login.dart';
+import 'package:neighbour_alert/utils/router/route_path.dart';
 
 class LoginLayout extends StatelessWidget {
   const LoginLayout({super.key});
@@ -38,7 +39,7 @@ class LoginLayout extends StatelessWidget {
             const LoginRememberRow(),
             const SizedBox(height: 24),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () => Navigator.pushNamed(context, RoutePath.home),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.teal,
                 foregroundColor: Colors.white,
