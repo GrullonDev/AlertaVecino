@@ -6,10 +6,6 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(
-        child: RegisterLayout(),
-      ),
-    );
+    return const Scaffold(body: SafeArea(child: RegisterLayout()));
   }
 }

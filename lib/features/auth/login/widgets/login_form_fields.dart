@@ -11,9 +11,7 @@ class LoginFormFields extends StatelessWidget {
           decoration: InputDecoration(
             labelText: 'Correo Electrónico',
             prefixIcon: const Icon(Icons.email_outlined, color: Colors.teal),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: const BorderSide(color: Colors.teal, width: 2),
@@ -30,9 +28,7 @@ class LoginFormFields extends StatelessWidget {
               icon: const Icon(Icons.visibility_off_outlined),
               onPressed: () {},
             ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: const BorderSide(color: Colors.teal, width: 2),

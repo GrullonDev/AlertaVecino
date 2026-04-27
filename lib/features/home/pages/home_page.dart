@@ -84,6 +84,11 @@ class HomePage extends StatelessWidget {
           selectedItemColor: Colors.teal.shade700,
           unselectedItemColor: Colors.grey.shade500,
           currentIndex: 0,
+          onTap: (index) {
+            if (index == 1) {
+              Navigator.pushReplacementNamed(context, RoutePath.incidentMap);
+            }
+          },
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home_outlined),

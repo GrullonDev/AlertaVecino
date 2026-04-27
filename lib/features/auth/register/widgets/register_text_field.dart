@@ -26,9 +26,7 @@ class RegisterTextField extends StatelessWidget {
         helperText: helperText,
         prefixIcon: Icon(icon, color: Colors.teal),
         suffixIcon: suffixIcon,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: Colors.teal, width: 2),
