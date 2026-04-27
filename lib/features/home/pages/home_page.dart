@@ -87,6 +87,8 @@ class HomePage extends StatelessWidget {
           onTap: (index) {
             if (index == 1) {
               Navigator.pushReplacementNamed(context, RoutePath.incidentMap);
+            } else if (index == 2) {
+              Navigator.pushReplacementNamed(context, RoutePath.notifications);
             }
           },
           items: const [

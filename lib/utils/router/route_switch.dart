@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:neighbour_alert/features/alerts/pages/alerts_page.dart';
 import 'package:neighbour_alert/features/auth/login/pages/login_page.dart';
 import 'package:neighbour_alert/features/auth/register/pages/register_page.dart';
 import 'package:neighbour_alert/features/home/pages/home_page.dart';
@@ -17,6 +18,8 @@ class RouteSwitch {
         return MaterialPageRoute(builder: (_) => const HomePage());
       case RoutePath.incidentMap:
         return MaterialPageRoute(builder: (_) => const MapPage());
+      case RoutePath.notifications:
+        return MaterialPageRoute(builder: (_) => const AlertsPage());
     }
     return MaterialPageRoute(builder: (_) => const WidgetNotFound());
   }
