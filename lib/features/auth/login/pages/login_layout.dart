@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:neighbour_alert/features/auth/login/widgets/login_divider.dart';
+import 'package:neighbour_alert/features/auth/login/widgets/login_footer.dart';
+import 'package:neighbour_alert/features/auth/login/widgets/login_form_fields.dart';
+import 'package:neighbour_alert/features/auth/login/widgets/login_header.dart';
+import 'package:neighbour_alert/features/auth/login/widgets/login_remember_row.dart';
 import 'package:neighbour_alert/features/auth/login/widgets/option_login.dart';
-import 'package:neighbour_alert/utils/router/route_path.dart';
 
 class LoginLayout extends StatelessWidget {
   const LoginLayout({super.key});
@@ -28,88 +31,11 @@ class LoginLayout extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Center(
-              child: Text(
-                'Alerta Vecinos',
-                style: GoogleFonts.abyssinicaSil(
-                  fontSize: 32,
-                  fontStyle: FontStyle.italic,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.teal.shade700,
-                ),
-              ),
-            ),
-            const SizedBox(height: 8),
-            Center(
-              child: Text(
-                'Bienvenido de nuevo',
-                style: TextStyle(fontSize: 16, color: Colors.grey.shade600),
-              ),
-            ),
+            const Center(child: LoginHeader()),
             const SizedBox(height: 32),
-            TextFormField(
-              decoration: InputDecoration(
-                labelText: 'Correo Electrónico',
-                prefixIcon: const Icon(
-                  Icons.email_outlined,
-                  color: Colors.teal,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: Colors.teal, width: 2),
-                ),
-              ),
-              keyboardType: TextInputType.emailAddress,
-            ),
-            const SizedBox(height: 16),
-            TextFormField(
-              decoration: InputDecoration(
-                labelText: 'Contraseña',
-                prefixIcon: const Icon(Icons.lock_outline, color: Colors.teal),
-                suffixIcon: IconButton(
-                  icon: const Icon(Icons.visibility_off_outlined),
-                  onPressed: () {},
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: Colors.teal, width: 2),
-                ),
-              ),
-              obscureText: true,
-            ),
+            const LoginFormFields(),
             const SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Row(
-                  children: [
-                    Checkbox(
-                      value: false,
-                      onChanged: (value) {},
-                      activeColor: Colors.teal,
-                    ),
-                    Text(
-                      'Mantener sesión iniciada',
-                      style: TextStyle(color: Colors.grey.shade700),
-                    ),
-                  ],
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    '¿Olvidaste tu contraseña?',
-                    style: TextStyle(color: Colors.teal.shade600),
-                  ),
-                ),
-              ],
-            ),
-
+            const LoginRememberRow(),
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: () {},
@@ -128,73 +54,11 @@ class LoginLayout extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-            Row(
-              children: [
-                Expanded(child: Divider(color: Colors.grey.shade300)),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Text(
-                    'o continuar con',
-                    style: TextStyle(
-                      color: Colors.grey.shade600,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                Expanded(child: Divider(color: Colors.grey.shade300)),
-              ],
-            ),
+            const LoginDivider(),
             const SizedBox(height: 24),
-            OptionsLogin(),
+            const OptionsLogin(),
             const SizedBox(height: 32),
-            Wrap(
-              alignment: WrapAlignment.center,
-              children: [
-                Text(
-                  '¿Nuevo en Alerta Vecinos? ',
-                  style: TextStyle(color: Colors.grey.shade700, fontSize: 15),
-                ),
-                GestureDetector(
-                  onTap: () => Navigator.pushNamed(context, RoutePath.register),
-                  child: Text(
-                    'Solicitar acceso como vecino',
-                    style: TextStyle(
-                      color: Colors.blue.shade700,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 24),
-            Center(
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 8,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.info, color: Colors.blue.shade700, size: 16),
-                    const SizedBox(width: 8),
-                    Text(
-                      'Tus datos están protegidos y verificados',
-                      style: TextStyle(
-                        color: Colors.grey.shade600,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            const Center(child: LoginFooter()),
           ],
         ),
       ),
