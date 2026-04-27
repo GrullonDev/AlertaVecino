@@ -46,20 +46,17 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
-      onPopInvoked: (didPop) {
+      onPopInvokedWithResult: (didPop, _) {
         if (didPop) return;
         _showLogoutDialog(context);
       },
       child: Scaffold(
         backgroundColor: Colors.grey.shade50,
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.teal.shade700,
           foregroundColor: Colors.white,
           centerTitle: true,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () => _showLogoutDialog(context),
-          ),
           title: Text(
             'Alerta Vecinos',
             style: GoogleFonts.abyssinicaSil(
