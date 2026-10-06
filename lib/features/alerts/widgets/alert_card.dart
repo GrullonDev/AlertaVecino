@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:neighbour_alert/l10n/app_localizations.dart';
 
 enum AlertType { urgent, update, general, resolved, news }
 
@@ -31,7 +32,6 @@ class AlertCard extends StatelessWidget {
         return Colors.blue.shade700;
       case AlertType.general:
       case AlertType.news:
-      default:
         return Colors.grey.shade800;
     }
   }
@@ -51,23 +51,24 @@ class AlertCard extends StatelessWidget {
     }
   }
 
-  String _getLabel() {
+  String _getLabel(AppLocalizations l10n) {
     switch (type) {
       case AlertType.urgent:
-        return 'URGENT';
+        return l10n.urgent;
       case AlertType.update:
-        return 'UPDATE';
+        return l10n.update;
       case AlertType.general:
-        return 'GENERAL';
+        return l10n.general;
       case AlertType.resolved:
-        return 'RESOLVED';
+        return l10n.resolved;
       case AlertType.news:
-        return 'COMMUNITY NEWS';
+        return l10n.communityNews;
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final color = _getPrimaryColor();
     final bool isUrgent = type == AlertType.urgent;
 
@@ -89,7 +90,11 @@ class AlertCard extends StatelessWidget {
               height: 140,
               width: double.infinity,
               color: Colors.red.shade800,
-              child: const Icon(Icons.image_outlined, color: Colors.white54, size: 64),
+              child: const Icon(
+                Icons.image_outlined,
+                color: Colors.white54,
+                size: 64,
+              ),
             ),
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -101,14 +106,10 @@ class AlertCard extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Icon(
-                          _getIcon(),
-                          color: color,
-                          size: 16,
-                        ),
+                        Icon(_getIcon(), color: color, size: 16),
                         const SizedBox(width: 4),
                         Text(
-                          _getLabel(),
+                          _getLabel(l10n),
                           style: TextStyle(
                             color: color,
                             fontWeight: FontWeight.bold,
@@ -171,7 +172,9 @@ class AlertCard extends StatelessWidget {
                               onPressed: () {},
                               style: OutlinedButton.styleFrom(
                                 foregroundColor: color,
-                                side: BorderSide(color: color.withValues(alpha: 0.5)),
+                                side: BorderSide(
+                                  color: color.withValues(alpha: 0.5),
+                                ),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(4),
                                 ),
@@ -196,15 +199,15 @@ class AlertCard extends StatelessWidget {
                             borderRadius: BorderRadius.circular(4),
                           ),
                         ),
-                        child: const Text(
-                          'SHARE',
-                          style: TextStyle(
+                        child: Text(
+                          l10n.share,
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 12,
                           ),
                         ),
                       ),
-                    ]
+                    ],
                   ],
                 ),
               ],

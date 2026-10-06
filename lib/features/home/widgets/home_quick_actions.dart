@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:neighbour_alert/features/home/widgets/home_action_card.dart';
+import 'package:neighbour_alert/l10n/app_localizations.dart';
 
 class HomeQuickActions extends StatelessWidget {
   const HomeQuickActions({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Acciones Rápidas',
+          l10n.quickActions,
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
@@ -25,24 +27,24 @@ class HomeQuickActions extends StatelessWidget {
           crossAxisSpacing: 16,
           mainAxisSpacing: 16,
           childAspectRatio: 1.2,
-          children: const [
+          children: [
             HomeActionCard(
-              title: 'Reportar\nIncidente',
+              title: l10n.reportIncident,
               icon: Icons.report_problem_outlined,
               color: Colors.orange,
             ),
             HomeActionCard(
-              title: 'Mapa de\nIncidentes',
+              title: l10n.incidentMap,
               icon: Icons.map_outlined,
               color: Colors.blue,
             ),
             HomeActionCard(
-              title: 'Directorio\nLocal',
+              title: l10n.localDirectory,
               icon: Icons.contact_phone_outlined,
               color: Colors.teal,
             ),
             HomeActionCard(
-              title: 'Mis\nReportes',
+              title: l10n.myReports,
               icon: Icons.history_outlined,
               color: Colors.purple,
             ),

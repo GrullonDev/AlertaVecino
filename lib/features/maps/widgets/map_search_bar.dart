@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:neighbour_alert/l10n/app_localizations.dart';
 
 class MapSearchBar extends StatelessWidget {
   const MapSearchBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -19,7 +21,7 @@ class MapSearchBar extends StatelessWidget {
       ),
       child: TextField(
         decoration: InputDecoration(
-          hintText: 'Buscar ubicaciones o reportes...',
+          hintText: l10n.searchLocations,
           hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 14),
           prefixIcon: const Icon(Icons.search, color: Colors.grey),
           suffixIcon: Icon(Icons.my_location, color: Colors.blue.shade700),

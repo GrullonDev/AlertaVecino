@@ -2,33 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:neighbour_alert/features/auth/register/widgets/register_footer.dart';
 import 'package:neighbour_alert/features/auth/register/widgets/register_form_fields.dart';
 import 'package:neighbour_alert/features/auth/register/widgets/register_header.dart';
+import 'package:neighbour_alert/l10n/app_localizations.dart';
 import 'package:neighbour_alert/utils/router/route_path.dart';
 
-class RegisterLayout extends StatelessWidget {
+class RegisterLayout extends StatefulWidget {
   const RegisterLayout({super.key});
 
   @override
+  State<RegisterLayout> createState() => _RegisterLayoutState();
+}
+
+class _RegisterLayoutState extends State<RegisterLayout> {
+  final _formKey = GlobalKey<FormState>();
+
+  void _handleRegister() {
+    if (_formKey.currentState?.validate() ?? false) {
+      Navigator.pushNamed(context, RoutePath.selectResidency);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.all(16.0),
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
-          decoration: BoxDecoration(
-            color: Theme.of(context).cardColor,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.05),
-                blurRadius: 20,
-                offset: const Offset(0, 10),
-              ),
-            ],
-            border: Border.all(color: Colors.teal.withValues(alpha: 0.3)),
-          ),
+    final l10n = AppLocalizations.of(context)!;
+    final cs = Theme.of(context).colorScheme;
+
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
+        decoration: BoxDecoration(
+          color: cs.surface,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: cs.shadow.withValues(alpha: 0.05),
+              blurRadius: 20,
+              offset: const Offset(0, 10),
+            ),
+          ],
+          border: Border.all(color: cs.outline),
+        ),
+        child: Form(
+          key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
               const Center(child: RegisterHeader()),
@@ -36,23 +53,11 @@ class RegisterLayout extends StatelessWidget {
               const RegisterFormFields(),
               const SizedBox(height: 32),
               ElevatedButton(
-                onPressed: () => Navigator.pushNamed(context, RoutePath.home),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.teal,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  elevation: 2,
-                ),
-                child: const Text(
-                  'Registrarse',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
+                onPressed: _handleRegister,
+                child: Text(l10n.continueButton),
               ),
               const SizedBox(height: 24),
-              const RegisterFooter(),
+              const Center(child: RegisterFooter()),
             ],
           ),
         ),

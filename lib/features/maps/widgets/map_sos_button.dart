@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:neighbour_alert/l10n/app_localizations.dart';
 
 class MapSosButton extends StatelessWidget {
   const MapSosButton({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -23,13 +25,13 @@ class MapSosButton extends StatelessWidget {
               ),
             ],
           ),
-          child: const Row(
+          child: Row(
             children: [
-              Icon(Icons.medical_services_outlined, color: Colors.white),
-              SizedBox(width: 8),
+              const Icon(Icons.medical_services_outlined, color: Colors.white),
+              const SizedBox(width: 8),
               Text(
-                'SOS',
-                style: TextStyle(
+                l10n.sos,
+                style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 16,

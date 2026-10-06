@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:neighbour_alert/l10n/app_localizations.dart';
 
 class AlertsSearchBar extends StatelessWidget {
   const AlertsSearchBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -13,7 +15,7 @@ class AlertsSearchBar extends StatelessWidget {
       ),
       child: TextField(
         decoration: InputDecoration(
-          hintText: 'Search alerts...',
+          hintText: l10n.searchAlerts,
           hintStyle: TextStyle(color: Colors.grey.shade500),
           prefixIcon: const Icon(Icons.search, color: Colors.grey),
           border: InputBorder.none,

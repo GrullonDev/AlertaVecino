@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:neighbour_alert/l10n/app_localizations.dart';
 
 class HomePanicButton extends StatelessWidget {
   const HomePanicButton({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         GestureDetector(
@@ -25,14 +27,14 @@ class HomePanicButton extends StatelessWidget {
               ],
               border: Border.all(color: Colors.red.shade300, width: 8),
             ),
-            child: const Column(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.campaign_outlined, size: 64, color: Colors.white),
-                SizedBox(height: 8),
+                const Icon(Icons.campaign_outlined, size: 64, color: Colors.white),
+                const SizedBox(height: 8),
                 Text(
-                  'S.O.S',
-                  style: TextStyle(
+                  l10n.sos,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -45,7 +47,7 @@ class HomePanicButton extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         Text(
-          'Mantén presionado por 3 segundos para alertar',
+          l10n.sosHint,
           style: TextStyle(color: Colors.grey.shade600, fontSize: 14),
         ),
       ],

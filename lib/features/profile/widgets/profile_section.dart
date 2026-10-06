@@ -34,11 +34,7 @@ class ProfileSection extends StatelessWidget {
   final String title;
   final List<ProfileSectionItem> items;
 
-  const ProfileSection({
-    super.key,
-    required this.title,
-    required this.items,
-  });
+  const ProfileSection({super.key, required this.title, required this.items});
 
   @override
   Widget build(BuildContext context) {
@@ -89,15 +85,24 @@ class ProfileSection extends StatelessWidget {
                         ),
                       ),
                       child: ListTile(
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16.0,
+                          vertical: 4.0,
+                        ),
                         leading: item.icon != null
-                            ? Icon(item.icon, color: item.iconColor ?? Colors.grey.shade700, size: 22)
+                            ? Icon(
+                                item.icon,
+                                color: item.iconColor ?? Colors.grey.shade700,
+                                size: 22,
+                              )
                             : null,
                         title: Text(
                           item.title,
                           style: TextStyle(
                             fontSize: item.subtitle != null ? 12 : 14,
-                            fontWeight: item.subtitle != null ? FontWeight.bold : FontWeight.w500,
+                            fontWeight: item.subtitle != null
+                                ? FontWeight.bold
+                                : FontWeight.w500,
                             color: item.titleColor ?? Colors.black87,
                           ),
                         ),
@@ -119,19 +124,27 @@ class ProfileSection extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
-                                  color: item.trailingTextColor ?? Colors.grey.shade700,
+                                  color:
+                                      item.trailingTextColor ??
+                                      Colors.grey.shade700,
                                 ),
                               ),
                             if (item.showChevron) ...[
                               const SizedBox(width: 8),
-                              Icon(Icons.chevron_right, color: Colors.grey.shade400, size: 20),
+                              Icon(
+                                Icons.chevron_right,
+                                color: Colors.grey.shade400,
+                                size: 20,
+                              ),
                             ],
                             if (item.isSwitch)
                               Switch(
                                 value: item.switchValue,
                                 onChanged: (val) {},
-                                activeColor: Colors.white,
-                                activeTrackColor: item.switchActiveColor ?? Colors.blue.shade700,
+                                activeThumbColor: Colors.white,
+                                activeTrackColor:
+                                    item.switchActiveColor ??
+                                    Colors.blue.shade700,
                                 inactiveThumbColor: Colors.white,
                                 inactiveTrackColor: Colors.grey.shade300,
                               ),
@@ -140,7 +153,13 @@ class ProfileSection extends StatelessWidget {
                       ),
                     ),
                     if (!isLast)
-                      Divider(height: 1, thickness: 1, color: Colors.grey.shade200, indent: 16, endIndent: 16),
+                      Divider(
+                        height: 1,
+                        thickness: 1,
+                        color: Colors.grey.shade200,
+                        indent: 16,
+                        endIndent: 16,
+                      ),
                   ],
                 );
               }).toList(),

@@ -1,31 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:neighbour_alert/features/home/pages/home_layout.dart';
+import 'package:neighbour_alert/l10n/app_localizations.dart';
 import 'package:neighbour_alert/utils/router/route_path.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   Future<void> _showLogoutDialog(BuildContext context) async {
+    final l10n = AppLocalizations.of(context)!;
     final bool? shouldLogout = await showDialog<bool>(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Cerrar sesión'),
-          content: const Text('¿Estás seguro de cerrar sesión?'),
+          title: Text(l10n.logoutTitle),
+          content: Text(l10n.logoutMessage),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context, false),
-              child: const Text(
-                'Cancelar',
-                style: TextStyle(color: Colors.grey),
+              child: Text(
+                l10n.cancel,
+                style: const TextStyle(color: Colors.grey),
               ),
             ),
             TextButton(
               onPressed: () => Navigator.pop(context, true),
-              child: const Text(
-                'Sí, salir',
-                style: TextStyle(color: Colors.red),
+              child: Text(
+                l10n.yesExit,
+                style: const TextStyle(color: Colors.red),
               ),
             ),
           ],
@@ -44,6 +46,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, _) {
@@ -58,7 +61,7 @@ class HomePage extends StatelessWidget {
           foregroundColor: Colors.white,
           centerTitle: true,
           title: Text(
-            'Alerta Vecinos',
+            l10n.appTitle,
             style: GoogleFonts.abyssinicaSil(
               fontWeight: FontWeight.w600,
               fontStyle: FontStyle.italic,
@@ -90,26 +93,26 @@ class HomePage extends StatelessWidget {
               Navigator.pushReplacementNamed(context, RoutePath.profile);
             }
           },
-          items: const [
+          items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
-              activeIcon: Icon(Icons.home),
-              label: 'Inicio',
+              icon: const Icon(Icons.home_outlined),
+              activeIcon: const Icon(Icons.home),
+              label: l10n.home,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.map_outlined),
-              activeIcon: Icon(Icons.map),
-              label: 'Mapa',
+              icon: const Icon(Icons.map_outlined),
+              activeIcon: const Icon(Icons.map),
+              label: l10n.map,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.notifications_outlined),
-              activeIcon: Icon(Icons.notifications),
-              label: 'Alertas',
+              icon: const Icon(Icons.notifications_outlined),
+              activeIcon: const Icon(Icons.notifications),
+              label: l10n.alerts,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline),
-              activeIcon: Icon(Icons.person),
-              label: 'Perfil',
+              icon: const Icon(Icons.person_outline),
+              activeIcon: const Icon(Icons.person),
+              label: l10n.profile,
             ),
           ],
         ),

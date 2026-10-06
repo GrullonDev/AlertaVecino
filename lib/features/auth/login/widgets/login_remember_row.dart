@@ -1,32 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:neighbour_alert/l10n/app_localizations.dart';
 
-class LoginRememberRow extends StatelessWidget {
+class LoginRememberRow extends StatefulWidget {
   const LoginRememberRow({super.key});
 
   @override
+  State<LoginRememberRow> createState() => _LoginRememberRowState();
+}
+
+class _LoginRememberRowState extends State<LoginRememberRow> {
+  bool _rememberMe = false;
+
+  @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
+    final l10n = AppLocalizations.of(context)!;
+    final cs = Theme.of(context).colorScheme;
+
+    return Wrap(
+      alignment: WrapAlignment.spaceBetween,
+      crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Checkbox(
-              value: false,
-              onChanged: (value) {},
-              activeColor: Colors.teal,
+              value: _rememberMe,
+              onChanged: (v) => setState(() => _rememberMe = v ?? false),
+              activeColor: cs.primary,
             ),
             Text(
-              'Mantener sesión iniciada',
-              style: TextStyle(color: Colors.grey.shade700),
+              l10n.keepSessionActive,
+              style: TextStyle(color: cs.onSurfaceVariant),
             ),
           ],
         ),
         TextButton(
           onPressed: () {},
-          child: Text(
-            '¿Olvidaste tu contraseña?',
-            style: TextStyle(color: Colors.teal.shade600),
-          ),
+          child: Text(l10n.forgotPassword),
         ),
       ],
     );

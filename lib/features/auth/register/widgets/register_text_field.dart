@@ -9,6 +9,8 @@ class RegisterTextField extends StatelessWidget {
     this.obscureText = false,
     this.suffixIcon,
     this.helperText,
+    this.validator,
+    this.textInputAction,
   });
 
   final String label;
@@ -17,23 +19,25 @@ class RegisterTextField extends StatelessWidget {
   final bool obscureText;
   final Widget? suffixIcon;
   final String? helperText;
+  final String? Function(String?)? validator;
+  final TextInputAction? textInputAction;
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+
     return TextFormField(
       decoration: InputDecoration(
         labelText: label,
         helperText: helperText,
-        prefixIcon: Icon(icon, color: Colors.teal),
+        helperMaxLines: 2,
+        prefixIcon: Icon(icon, color: cs.primary),
         suffixIcon: suffixIcon,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Colors.teal, width: 2),
-        ),
       ),
       keyboardType: keyboardType,
       obscureText: obscureText,
+      validator: validator,
+      textInputAction: textInputAction ?? TextInputAction.next,
     );
   }
 }

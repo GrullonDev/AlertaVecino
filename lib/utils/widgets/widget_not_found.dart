@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:neighbour_alert/l10n/app_localizations.dart';
 
 class WidgetNotFound extends StatelessWidget {
   const WidgetNotFound({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(32.0),
@@ -15,7 +17,7 @@ class WidgetNotFound extends StatelessWidget {
             const Icon(Icons.error_outline, size: 80, color: Colors.white),
             const SizedBox(height: 24),
             Text(
-              'Página no encontrada',
+              l10n.pageNotFound,
               style: GoogleFonts.farro(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -25,7 +27,7 @@ class WidgetNotFound extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              'La página que buscas no existe o fue movida.',
+              l10n.pageNotFoundMessage,
               style: GoogleFonts.farro(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -36,7 +38,7 @@ class WidgetNotFound extends StatelessWidget {
             const SizedBox(height: 32),
             ElevatedButton(
               onPressed: () => Navigator.of(context).maybePop(),
-              child: const Text('Regresar'),
+              child: Text(l10n.goBack),
             ),
           ],
         ),

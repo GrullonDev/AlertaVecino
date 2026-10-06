@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:neighbour_alert/l10n/app_localizations.dart';
 
 class AlertsFilterTabs extends StatelessWidget {
   const AlertsFilterTabs({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
         children: [
-          _buildTab('All Notifications', isSelected: true),
+          _buildTab(l10n.allNotifications, isSelected: true),
           const SizedBox(width: 8),
-          _buildTab('Emergency Broadcasts', isSelected: false),
+          _buildTab(l10n.emergencyBroadcasts, isSelected: false),
           const SizedBox(width: 8),
-          _buildTab('Maintenance', isSelected: false),
+          _buildTab(l10n.maintenance, isSelected: false),
         ],
       ),
     );
