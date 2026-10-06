@@ -1,91 +1,125 @@
 import 'package:flutter/material.dart';
+import 'package:neighbour_alert/config/app_theme.dart';
+import 'package:neighbour_alert/features/maps/models/map_marker_item.dart';
 import 'package:neighbour_alert/l10n/app_localizations.dart';
 
 class MapFilterTabs extends StatelessWidget {
-  const MapFilterTabs({super.key});
+  const MapFilterTabs({
+    super.key,
+    required this.active,
+    required this.onChanged,
+  });
+
+  final Set<MarkerCategory> active;
+  final ValueChanged<MarkerCategory> onChanged;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.1),
-                blurRadius: 5,
-                offset: const Offset(0, 2),
-              ),
-            ],
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                width: 8,
-                height: 8,
-                decoration: const BoxDecoration(
-                  color: Colors.red,
-                  shape: BoxShape.circle,
-                ),
-              ),
-              const SizedBox(width: 8),
-              Text(
-                l10n.liveUpdates,
-                style: const TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                  letterSpacing: 0.5,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 12),
-        Container(
-          padding: const EdgeInsets.all(4),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(24),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.1),
-                blurRadius: 5,
-                offset: const Offset(0, 2),
-              ),
-            ],
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _buildFilterTab(l10n.all, isSelected: true),
-              _buildFilterTab(l10n.emergencies, isSelected: false),
-              _buildFilterTab(l10n.maintenance, isSelected: false),
-            ],
-          ),
-        ),
-      ],
+    final cs = Theme.of(context).colorScheme;
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    final filters = [
+      (
+        MarkerCategory.panic,
+        l10n.mapCategoryPanic,
+        isDark ? AppColors.panicDark : AppColors.panic,
+        Icons.warning_amber_rounded,
+      ),
+      (
+        MarkerCategory.gate,
+        l10n.mapCategoryGates,
+        isDark ? AppColors.infoDark : AppColors.info,
+        Icons.door_sliding_outlined,
+      ),
+      (
+        MarkerCategory.incident,
+        l10n.mapCategoryIncidents,
+        isDark ? AppColors.successDark : AppColors.success,
+        Icons.report_outlined,
+      ),
+    ];
+
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        children: [
+          for (final (cat, label, color, icon) in filters) ...[
+            _FilterChip(
+              label: label,
+              icon: icon,
+              color: color,
+              isActive: active.contains(cat),
+              surface: cs.surface,
+              outline: cs.outline,
+              onSurfaceVariant: cs.onSurfaceVariant,
+              theme: theme,
+              onTap: () => onChanged(cat),
+            ),
+            const SizedBox(width: 8),
+          ],
+        ],
+      ),
     );
   }
+}
 
-  Widget _buildFilterTab(String text, {required bool isSelected}) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      decoration: BoxDecoration(
-        color: isSelected ? Colors.blue.shade800 : Colors.transparent,
+class _FilterChip extends StatelessWidget {
+  const _FilterChip({
+    required this.label,
+    required this.icon,
+    required this.color,
+    required this.isActive,
+    required this.surface,
+    required this.outline,
+    required this.onSurfaceVariant,
+    required this.theme,
+    required this.onTap,
+  });
+
+  final String label;
+  final IconData icon;
+  final Color color;
+  final bool isActive;
+  final Color surface;
+  final Color outline;
+  final Color onSurfaceVariant;
+  final ThemeData theme;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: isActive ? color.withValues(alpha: 0.15) : surface,
+      borderRadius: BorderRadius.circular(20),
+      child: InkWell(
         borderRadius: BorderRadius.circular(20),
-      ),
-      child: Text(
-        text,
-        style: TextStyle(
-          color: isSelected ? Colors.white : Colors.grey.shade800,
-          fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-          fontSize: 12,
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: isActive ? color : outline,
+              width: isActive ? 1.5 : 1,
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(icon, size: 16, color: isActive ? color : onSurfaceVariant),
+              const SizedBox(width: 6),
+              Text(
+                label,
+                style: theme.textTheme.labelMedium?.copyWith(
+                  color: isActive ? color : onSurfaceVariant,
+                  fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
