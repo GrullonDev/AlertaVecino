@@ -10,6 +10,7 @@ class RoutePath {
   static const String home = '/home';
 
   // 2. Reportes de Incidente y Emergencia
+  static const String panic = '/panic';
   static const String panicButton = '/panic-button';
   static const String incidentReport = '/incident-report';
   static const String incidentList = '/incident-list';

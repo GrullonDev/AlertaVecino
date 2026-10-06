@@ -5,6 +5,7 @@ import 'package:neighbour_alert/features/auth/pending_approval/pages/pending_app
 import 'package:neighbour_alert/features/auth/register/pages/register_page.dart';
 import 'package:neighbour_alert/features/auth/select_residency/pages/select_residency_page.dart';
 import 'package:neighbour_alert/features/home/pages/home_page.dart';
+import 'package:neighbour_alert/features/panic/pages/panic_type_selection_page.dart';
 import 'package:neighbour_alert/features/maps/pages/map_page.dart';
 import 'package:neighbour_alert/features/profile/pages/profile_page.dart';
 import 'package:neighbour_alert/utils/router/route_path.dart';
