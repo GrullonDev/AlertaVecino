@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:neighbour_alert/l10n/app_localizations.dart';
+import 'package:neighbour_alert/utils/router/route_path.dart';
 
 class VisitorCard extends StatelessWidget {
   const VisitorCard({super.key});
@@ -73,7 +74,8 @@ class VisitorCard extends StatelessWidget {
             children: [
               Expanded(
                 child: OutlinedButton.icon(
-                  onPressed: () {},
+                  onPressed: () =>
+                      Navigator.pushNamed(context, RoutePath.visitors),
                   icon: const Icon(Icons.qr_code, size: 18),
                   label: Text(l10n.generateQrPass),
                   style: OutlinedButton.styleFrom(
@@ -83,12 +85,11 @@ class VisitorCard extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               OutlinedButton.icon(
-                onPressed: () {},
+                onPressed: () =>
+                    Navigator.pushNamed(context, RoutePath.visitors),
                 icon: const Icon(Icons.history, size: 18),
                 label: Text(l10n.visitorHistory),
-                style: OutlinedButton.styleFrom(
-                  minimumSize: const Size(0, 40),
-                ),
+                style: OutlinedButton.styleFrom(minimumSize: const Size(0, 40)),
               ),
             ],
           ),

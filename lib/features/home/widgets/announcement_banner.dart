@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:neighbour_alert/l10n/app_localizations.dart';
+import 'package:neighbour_alert/utils/router/route_path.dart';
 
 class AnnouncementBanner extends StatefulWidget {
   const AnnouncementBanner({super.key});
@@ -40,7 +41,8 @@ class _AnnouncementBannerState extends State<AnnouncementBanner> {
             Text(l10n.announcements, style: theme.textTheme.titleMedium),
             const Spacer(),
             TextButton(
-              onPressed: () {},
+              onPressed: () =>
+                  Navigator.pushNamed(context, RoutePath.announcementsFeed),
               child: Text(l10n.seeAllAnnouncements),
             ),
           ],
@@ -71,7 +73,11 @@ class _AnnouncementBannerState extends State<AnnouncementBanner> {
                           color: cs.primary.withValues(alpha: 0.12),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Icon(Icons.info_outline, color: cs.primary, size: 22),
+                        child: Icon(
+                          Icons.info_outline,
+                          color: cs.primary,
+                          size: 22,
+                        ),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
