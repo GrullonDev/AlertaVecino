@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:neighbour_alert/features/alerts/pages/alerts_page.dart';
-import 'package:neighbour_alert/features/alerts/pages/alerts_page.dart';
 import 'package:neighbour_alert/features/auth/login/pages/login_page.dart';
+import 'package:neighbour_alert/features/auth/pending_approval/pages/pending_approval_page.dart';
 import 'package:neighbour_alert/features/auth/register/pages/register_page.dart';
+import 'package:neighbour_alert/features/auth/select_residency/pages/select_residency_page.dart';
 import 'package:neighbour_alert/features/home/pages/home_page.dart';
 import 'package:neighbour_alert/features/maps/pages/map_page.dart';
 import 'package:neighbour_alert/features/profile/pages/profile_page.dart';
@@ -16,6 +17,10 @@ class RouteSwitch {
         return MaterialPageRoute(builder: (_) => const LoginPage());
       case RoutePath.register:
         return MaterialPageRoute(builder: (_) => const RegisterPage());
+      case RoutePath.selectResidency:
+        return MaterialPageRoute(builder: (_) => const SelectResidencyPage());
+      case RoutePath.pendingApproval:
+        return MaterialPageRoute(builder: (_) => const PendingApprovalPage());
       case RoutePath.home:
         return MaterialPageRoute(builder: (_) => const HomePage());
       case RoutePath.incidentMap:

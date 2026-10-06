@@ -2,6 +2,8 @@ class RoutePath {
   // 1. Autenticación y Onboarding
   static const String login = '/login';
   static const String register = '/register';
+  static const String selectResidency = '/select-residency';
+  static const String pendingApproval = '/pending-approval';
   static const String userVerification = '/user-verification';
   static const String sectorSelection = '/sector-selection';
 
