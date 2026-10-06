@@ -77,6 +77,7 @@ class _DashboardPanicButtonState extends State<DashboardPanicButton>
             onLongPressEnd: (_) => _onLongPressEnd(),
             onLongPress: () {
               HapticFeedback.heavyImpact();
+              Navigator.pushNamed(context, '/panic');
             },
             child: Container(
               width: 140,
