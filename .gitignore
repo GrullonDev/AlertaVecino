@@ -91,7 +91,9 @@ keys/
 secrets/
 
 # FVM (Flutter Version Management)
-.fvm/flutter_sdk
 
 # Local config
 local.properties
+
+# FVM Version Cache
+.fvm/
