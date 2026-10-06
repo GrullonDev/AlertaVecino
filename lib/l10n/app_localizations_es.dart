@@ -437,4 +437,90 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get communityEvents => 'Eventos';
+
+  @override
+  String get panicSelectType => '¿Qué tipo de emergencia?';
+
+  @override
+  String get panicSelectTypeSubtitle =>
+      'Selecciona para enviar la alerta correcta';
+
+  @override
+  String get panicMedical => 'Emergencia Médica';
+
+  @override
+  String get panicMedicalDesc => 'Ambulancia / Primeros Auxilios';
+
+  @override
+  String get panicIntruder => 'Intruso / Actividad Sospechosa';
+
+  @override
+  String get panicIntruderDesc => 'Seguridad Privada / Policía';
+
+  @override
+  String get panicFire => 'Incendio / Fuga de Gas';
+
+  @override
+  String get panicFireDesc => 'Bomberos';
+
+  @override
+  String get panicOther => 'Otra / Asistencia General';
+
+  @override
+  String get panicOtherDesc => 'Solicitar ayuda general';
+
+  @override
+  String get panicCountdownTitle => 'Tu alerta se enviará en';
+
+  @override
+  String get panicCountdownCancel => 'Cancelar — Fue un error';
+
+  @override
+  String get panicSending => 'Enviando alerta...';
+
+  @override
+  String get panicActiveTitle => 'EMERGENCIA EN CURSO';
+
+  @override
+  String get panicActiveElapsed => 'Tiempo transcurrido';
+
+  @override
+  String get panicActiveOrigin => 'Origen de la alerta';
+
+  @override
+  String get panicActiveType => 'Tipo';
+
+  @override
+  String get panicChatPlaceholder => 'Escribe un mensaje a seguridad...';
+
+  @override
+  String get panicCancelAlert => 'Estoy bien — Cancelar alerta';
+
+  @override
+  String get panicCancelConfirmTitle => '¿Cancelar la alerta?';
+
+  @override
+  String get panicCancelConfirmMessage =>
+      'Confirma que estás a salvo y deseas cancelar la alerta activa.';
+
+  @override
+  String get panicCancelConfirmYes => 'Sí, estoy a salvo';
+
+  @override
+  String get panicAlertSent => 'Alerta enviada a seguridad';
+
+  @override
+  String get panicAlertCancelled => 'Alerta cancelada';
+
+  @override
+  String get panicSecurityNotified => 'Seguridad ha sido notificada';
+
+  @override
+  String get panicNeighborsNotified => 'Vecinos cercanos alertados';
+
+  @override
+  String get panicGuardOnWay => 'Guardia en camino';
+
+  @override
+  String get panicChatLog => 'Registro de comunicación';
 }

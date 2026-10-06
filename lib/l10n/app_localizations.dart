@@ -925,6 +925,174 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Eventos'**
   String get communityEvents;
+
+  /// No description provided for @panicSelectType.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Qué tipo de emergencia?'**
+  String get panicSelectType;
+
+  /// No description provided for @panicSelectTypeSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Selecciona para enviar la alerta correcta'**
+  String get panicSelectTypeSubtitle;
+
+  /// No description provided for @panicMedical.
+  ///
+  /// In es, this message translates to:
+  /// **'Emergencia Médica'**
+  String get panicMedical;
+
+  /// No description provided for @panicMedicalDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Ambulancia / Primeros Auxilios'**
+  String get panicMedicalDesc;
+
+  /// No description provided for @panicIntruder.
+  ///
+  /// In es, this message translates to:
+  /// **'Intruso / Actividad Sospechosa'**
+  String get panicIntruder;
+
+  /// No description provided for @panicIntruderDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Seguridad Privada / Policía'**
+  String get panicIntruderDesc;
+
+  /// No description provided for @panicFire.
+  ///
+  /// In es, this message translates to:
+  /// **'Incendio / Fuga de Gas'**
+  String get panicFire;
+
+  /// No description provided for @panicFireDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Bomberos'**
+  String get panicFireDesc;
+
+  /// No description provided for @panicOther.
+  ///
+  /// In es, this message translates to:
+  /// **'Otra / Asistencia General'**
+  String get panicOther;
+
+  /// No description provided for @panicOtherDesc.
+  ///
+  /// In es, this message translates to:
+  /// **'Solicitar ayuda general'**
+  String get panicOtherDesc;
+
+  /// No description provided for @panicCountdownTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu alerta se enviará en'**
+  String get panicCountdownTitle;
+
+  /// No description provided for @panicCountdownCancel.
+  ///
+  /// In es, this message translates to:
+  /// **'Cancelar — Fue un error'**
+  String get panicCountdownCancel;
+
+  /// No description provided for @panicSending.
+  ///
+  /// In es, this message translates to:
+  /// **'Enviando alerta...'**
+  String get panicSending;
+
+  /// No description provided for @panicActiveTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'EMERGENCIA EN CURSO'**
+  String get panicActiveTitle;
+
+  /// No description provided for @panicActiveElapsed.
+  ///
+  /// In es, this message translates to:
+  /// **'Tiempo transcurrido'**
+  String get panicActiveElapsed;
+
+  /// No description provided for @panicActiveOrigin.
+  ///
+  /// In es, this message translates to:
+  /// **'Origen de la alerta'**
+  String get panicActiveOrigin;
+
+  /// No description provided for @panicActiveType.
+  ///
+  /// In es, this message translates to:
+  /// **'Tipo'**
+  String get panicActiveType;
+
+  /// No description provided for @panicChatPlaceholder.
+  ///
+  /// In es, this message translates to:
+  /// **'Escribe un mensaje a seguridad...'**
+  String get panicChatPlaceholder;
+
+  /// No description provided for @panicCancelAlert.
+  ///
+  /// In es, this message translates to:
+  /// **'Estoy bien — Cancelar alerta'**
+  String get panicCancelAlert;
+
+  /// No description provided for @panicCancelConfirmTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Cancelar la alerta?'**
+  String get panicCancelConfirmTitle;
+
+  /// No description provided for @panicCancelConfirmMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Confirma que estás a salvo y deseas cancelar la alerta activa.'**
+  String get panicCancelConfirmMessage;
+
+  /// No description provided for @panicCancelConfirmYes.
+  ///
+  /// In es, this message translates to:
+  /// **'Sí, estoy a salvo'**
+  String get panicCancelConfirmYes;
+
+  /// No description provided for @panicAlertSent.
+  ///
+  /// In es, this message translates to:
+  /// **'Alerta enviada a seguridad'**
+  String get panicAlertSent;
+
+  /// No description provided for @panicAlertCancelled.
+  ///
+  /// In es, this message translates to:
+  /// **'Alerta cancelada'**
+  String get panicAlertCancelled;
+
+  /// No description provided for @panicSecurityNotified.
+  ///
+  /// In es, this message translates to:
+  /// **'Seguridad ha sido notificada'**
+  String get panicSecurityNotified;
+
+  /// No description provided for @panicNeighborsNotified.
+  ///
+  /// In es, this message translates to:
+  /// **'Vecinos cercanos alertados'**
+  String get panicNeighborsNotified;
+
+  /// No description provided for @panicGuardOnWay.
+  ///
+  /// In es, this message translates to:
+  /// **'Guardia en camino'**
+  String get panicGuardOnWay;
+
+  /// No description provided for @panicChatLog.
+  ///
+  /// In es, this message translates to:
+  /// **'Registro de comunicación'**
+  String get panicChatLog;
 }
 
 class _AppLocalizationsDelegate
