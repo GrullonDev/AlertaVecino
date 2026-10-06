@@ -34,10 +34,7 @@ class _LoginRememberRowState extends State<LoginRememberRow> {
             ),
           ],
         ),
-        TextButton(
-          onPressed: () {},
-          child: Text(l10n.forgotPassword),
-        ),
+        TextButton(onPressed: () {}, child: Text(l10n.forgotPassword)),
       ],
     );
   }

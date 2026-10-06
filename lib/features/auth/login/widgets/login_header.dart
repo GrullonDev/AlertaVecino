@@ -11,11 +11,7 @@ class LoginHeader extends StatelessWidget {
 
     return Column(
       children: [
-        Icon(
-          Icons.shield_outlined,
-          size: 48,
-          color: theme.colorScheme.primary,
-        ),
+        Icon(Icons.shield_outlined, size: 48, color: theme.colorScheme.primary),
         const SizedBox(height: 12),
         Text(l10n.appTitle, style: theme.textTheme.headlineMedium),
         const SizedBox(height: 8),

@@ -163,7 +163,10 @@ class _EmergencyCard extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: activeColor.withValues(alpha: 0.3), width: 1.5),
+            border: Border.all(
+              color: activeColor.withValues(alpha: 0.3),
+              width: 1.5,
+            ),
           ),
           child: Row(
             children: [
@@ -189,10 +192,7 @@ class _EmergencyCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 2),
-                    Text(
-                      option.subtitle,
-                      style: theme.textTheme.bodySmall,
-                    ),
+                    Text(option.subtitle, style: theme.textTheme.bodySmall),
                   ],
                 ),
               ),

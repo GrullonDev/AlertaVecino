@@ -149,7 +149,12 @@ class PendingApprovalPage extends StatelessWidget {
       child: Column(
         children: [
           for (int i = 0; i < steps.length; i++) ...[
-            _buildTimelineItem(steps[i], cs, theme, isLast: i == steps.length - 1),
+            _buildTimelineItem(
+              steps[i],
+              cs,
+              theme,
+              isLast: i == steps.length - 1,
+            ),
           ],
         ],
       ),
@@ -188,7 +193,9 @@ class PendingApprovalPage extends StatelessWidget {
                   child: Container(
                     width: 2,
                     margin: const EdgeInsets.symmetric(vertical: 4),
-                    color: step.isCompleted ? const Color(0xFF2E7D32) : cs.outline,
+                    color: step.isCompleted
+                        ? const Color(0xFF2E7D32)
+                        : cs.outline,
                   ),
                 ),
             ],
@@ -215,10 +222,11 @@ class PendingApprovalPage extends StatelessWidget {
                       color: step.isCompleted
                           ? const Color(0xFF2E7D32)
                           : step.isActive
-                              ? cs.primary
-                              : cs.onSurfaceVariant,
-                      fontWeight:
-                          step.isActive ? FontWeight.w600 : FontWeight.w400,
+                          ? cs.primary
+                          : cs.onSurfaceVariant,
+                      fontWeight: step.isActive
+                          ? FontWeight.w600
+                          : FontWeight.w400,
                     ),
                   ),
                 ],

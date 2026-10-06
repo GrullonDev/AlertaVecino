@@ -12,12 +12,36 @@ class DashboardQuickActions extends StatelessWidget {
     final theme = Theme.of(context);
 
     final actions = <_QuickAction>[
-      _QuickAction(l10n.reportIncident, Icons.report_problem_outlined, AppColors.warning),
-      _QuickAction(l10n.accessHistory, Icons.door_front_door_outlined, AppColors.info),
-      _QuickAction(l10n.neighborhoodDirectory, Icons.contacts_outlined, AppColors.secondary),
-      _QuickAction(l10n.reportsToAdmin, Icons.assignment_outlined, AppColors.primary),
-      _QuickAction(l10n.packageDeliveries, Icons.inventory_2_outlined, AppColors.caution),
-      _QuickAction(l10n.communityEvents, Icons.event_outlined, AppColors.success),
+      _QuickAction(
+        l10n.reportIncident,
+        Icons.report_problem_outlined,
+        AppColors.warning,
+      ),
+      _QuickAction(
+        l10n.accessHistory,
+        Icons.door_front_door_outlined,
+        AppColors.info,
+      ),
+      _QuickAction(
+        l10n.neighborhoodDirectory,
+        Icons.contacts_outlined,
+        AppColors.secondary,
+      ),
+      _QuickAction(
+        l10n.reportsToAdmin,
+        Icons.assignment_outlined,
+        AppColors.primary,
+      ),
+      _QuickAction(
+        l10n.packageDeliveries,
+        Icons.inventory_2_outlined,
+        AppColors.caution,
+      ),
+      _QuickAction(
+        l10n.communityEvents,
+        Icons.event_outlined,
+        AppColors.success,
+      ),
     ];
 
     return Column(

@@ -88,10 +88,7 @@ class _DashboardPanicButtonState extends State<DashboardPanicButton>
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [
-                    panicColor,
-                    panicColor.withValues(alpha: 0.85),
-                  ],
+                  colors: [panicColor, panicColor.withValues(alpha: 0.85)],
                 ),
                 border: Border.all(
                   color: Colors.white.withValues(alpha: 0.25),

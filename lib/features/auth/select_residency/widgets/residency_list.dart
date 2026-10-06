@@ -40,10 +40,7 @@ class ResidencyList extends StatelessWidget {
             children: [
               Icon(Icons.search_off, size: 48, color: cs.onSurfaceVariant),
               const SizedBox(height: 12),
-              Text(
-                l10n.noResidenciesFound,
-                style: theme.textTheme.titleMedium,
-              ),
+              Text(l10n.noResidenciesFound, style: theme.textTheme.titleMedium),
               const SizedBox(height: 4),
               Text(
                 l10n.tryDifferentSearch,
@@ -91,15 +88,9 @@ class ResidencyList extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          r.name,
-                          style: theme.textTheme.titleMedium,
-                        ),
+                        Text(r.name, style: theme.textTheme.titleMedium),
                         const SizedBox(height: 2),
-                        Text(
-                          r.location,
-                          style: theme.textTheme.bodySmall,
-                        ),
+                        Text(r.location, style: theme.textTheme.bodySmall),
                       ],
                     ),
                   ),
@@ -116,10 +107,7 @@ class ResidencyList extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(width: 4),
-                  Icon(
-                    Icons.chevron_right,
-                    color: cs.onSurfaceVariant,
-                  ),
+                  Icon(Icons.chevron_right, color: cs.onSurfaceVariant),
                 ],
               ),
             ),

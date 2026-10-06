@@ -50,11 +50,13 @@ class _PanicActivePageState extends State<PanicActivePage>
       if (mounted) {
         final l10n = AppLocalizations.of(context)!;
         setState(() {
-          _chatMessages.add(_ChatMsg(
-            sender: 'Sistema',
-            text: l10n.panicSecurityNotified,
-            isSystem: true,
-          ));
+          _chatMessages.add(
+            _ChatMsg(
+              sender: 'Sistema',
+              text: l10n.panicSecurityNotified,
+              isSystem: true,
+            ),
+          );
         });
       }
     });
@@ -63,11 +65,13 @@ class _PanicActivePageState extends State<PanicActivePage>
       if (mounted) {
         final l10n = AppLocalizations.of(context)!;
         setState(() {
-          _chatMessages.add(_ChatMsg(
-            sender: 'Sistema',
-            text: l10n.panicGuardOnWay,
-            isSystem: true,
-          ));
+          _chatMessages.add(
+            _ChatMsg(
+              sender: 'Sistema',
+              text: l10n.panicGuardOnWay,
+              isSystem: true,
+            ),
+          );
         });
       }
     });
@@ -157,8 +161,11 @@ class _PanicActivePageState extends State<PanicActivePage>
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.warning_amber_rounded,
-                            color: widget.typeColor, size: 24),
+                        Icon(
+                          Icons.warning_amber_rounded,
+                          color: widget.typeColor,
+                          size: 24,
+                        ),
                         const SizedBox(width: 8),
                         Text(
                           l10n.panicActiveTitle,
@@ -224,7 +231,10 @@ class _PanicActivePageState extends State<PanicActivePage>
                 child: _StatusRow(
                   items: [
                     _StatusItem(l10n.panicAlertSent, true),
-                    _StatusItem(l10n.panicSecurityNotified, _elapsedSeconds >= 2),
+                    _StatusItem(
+                      l10n.panicSecurityNotified,
+                      _elapsedSeconds >= 2,
+                    ),
                     _StatusItem(l10n.panicGuardOnWay, _elapsedSeconds >= 5),
                   ],
                   cs: cs,
@@ -239,7 +249,11 @@ class _PanicActivePageState extends State<PanicActivePage>
                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 4),
                 child: Row(
                   children: [
-                    Icon(Icons.chat_outlined, size: 18, color: cs.onSurfaceVariant),
+                    Icon(
+                      Icons.chat_outlined,
+                      size: 18,
+                      color: cs.onSurfaceVariant,
+                    ),
                     const SizedBox(width: 8),
                     Text(l10n.panicChatLog, style: theme.textTheme.labelLarge),
                   ],
@@ -247,7 +261,10 @@ class _PanicActivePageState extends State<PanicActivePage>
               ),
               Expanded(
                 child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 8,
+                  ),
                   itemCount: _chatMessages.length,
                   itemBuilder: (context, index) {
                     final msg = _chatMessages[index];
@@ -401,29 +418,34 @@ class _StatusRow extends StatelessWidget {
       ),
       child: Column(
         children: [
-          for (int i = 0; i < items.length; i++) ...[
-            if (i > 0) const SizedBox(height: 8),
-            Row(
-              children: [
-                Icon(
-                  items[i].done ? Icons.check_circle : Icons.radio_button_unchecked,
-                  size: 18,
-                  color: items[i].done ? AppColors.success : cs.onSurfaceVariant,
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    items[i].label,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: items[i].done ? cs.onSurface : cs.onSurfaceVariant,
-                      fontWeight: items[i].done ? FontWeight.w600 : FontWeight.w400,
+          for (final item in items)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Row(
+                children: [
+                  Icon(
+                    item.done
+                        ? Icons.check_circle
+                        : Icons.radio_button_unchecked,
+                    size: 18,
+                    color: item.done ? AppColors.success : cs.onSurfaceVariant,
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      item.label,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: item.done ? cs.onSurface : cs.onSurfaceVariant,
+                        fontWeight: item.done
+                            ? FontWeight.w600
+                            : FontWeight.w400,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ],
-        ),
+        ],
       ),
     );
   }
@@ -439,7 +461,11 @@ class _ChatMsg {
   final String sender;
   final String text;
   final bool isSystem;
-  const _ChatMsg({required this.sender, required this.text, required this.isSystem});
+  const _ChatMsg({
+    required this.sender,
+    required this.text,
+    required this.isSystem,
+  });
 }
 
 class _ChatBubble extends StatelessWidget {

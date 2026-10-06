@@ -61,10 +61,7 @@ class _LoginLayoutState extends State<LoginLayout> {
               const SizedBox(height: 8),
               const LoginRememberRow(),
               const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: _handleLogin,
-                child: Text(l10n.login),
-              ),
+              ElevatedButton(onPressed: _handleLogin, child: Text(l10n.login)),
               const SizedBox(height: 24),
               const LoginDivider(),
               const SizedBox(height: 24),

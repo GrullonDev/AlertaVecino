@@ -62,8 +62,10 @@ class HomePage extends StatelessWidget {
                 backgroundColor: cs.error,
                 child: Icon(Icons.notifications_outlined, color: cs.onSurface),
               ),
-              onPressed: () =>
-                  Navigator.pushReplacementNamed(context, RoutePath.notifications),
+              onPressed: () => Navigator.pushReplacementNamed(
+                context,
+                RoutePath.notifications,
+              ),
             ),
             IconButton(
               icon: Icon(Icons.account_circle_outlined, color: cs.onSurface),

@@ -38,10 +38,7 @@ class DashboardHeader extends StatelessWidget {
                 style: theme.textTheme.titleMedium,
               ),
               const SizedBox(height: 2),
-              Text(
-                l10n.houseUnit('42'),
-                style: theme.textTheme.bodySmall,
-              ),
+              Text(l10n.houseUnit('42'), style: theme.textTheme.bodySmall),
             ],
           ),
         ),

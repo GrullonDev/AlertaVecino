@@ -30,7 +30,11 @@ class HomePanicButton extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.campaign_outlined, size: 64, color: Colors.white),
+                const Icon(
+                  Icons.campaign_outlined,
+                  size: 64,
+                  color: Colors.white,
+                ),
                 const SizedBox(height: 8),
                 Text(
                   l10n.sos,

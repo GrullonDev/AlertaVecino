@@ -71,9 +71,11 @@ class _SelectResidencyLayoutState extends State<SelectResidencyLayout> {
     if (_searchQuery.isEmpty) return _mockResidencies;
     final q = _searchQuery.toLowerCase();
     return _mockResidencies
-        .where((r) =>
-            r.name.toLowerCase().contains(q) ||
-            r.location.toLowerCase().contains(q))
+        .where(
+          (r) =>
+              r.name.toLowerCase().contains(q) ||
+              r.location.toLowerCase().contains(q),
+        )
         .toList();
   }
 
@@ -137,12 +139,14 @@ class _SelectResidencyLayoutState extends State<SelectResidencyLayout> {
         Expanded(
           child: ResidencyList(
             residencies: _filtered
-                .map((r) => ResidencyItem(
-                      name: r.name,
-                      location: r.location,
-                      residentCount: r.residentCount,
-                      icon: r.icon,
-                    ))
+                .map(
+                  (r) => ResidencyItem(
+                    name: r.name,
+                    location: r.location,
+                    residentCount: r.residentCount,
+                    icon: r.icon,
+                  ),
+                )
                 .toList(),
             onTap: (index) => _onResidencySelected(_filtered[index]),
           ),

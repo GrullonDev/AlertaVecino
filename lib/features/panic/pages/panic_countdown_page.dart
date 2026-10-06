@@ -139,10 +139,7 @@ class _PanicCountdownPageState extends State<PanicCountdownPage>
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: widget.typeColor.withValues(alpha: 0.15),
-                        border: Border.all(
-                          color: widget.typeColor,
-                          width: 4,
-                        ),
+                        border: Border.all(color: widget.typeColor, width: 4),
                       ),
                       child: Center(
                         child: Text(
@@ -180,7 +177,10 @@ class _PanicCountdownPageState extends State<PanicCountdownPage>
                       icon: const Icon(Icons.close, size: 24),
                       label: Text(
                         l10n.panicCountdownCancel,
-                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: cs.surface,
