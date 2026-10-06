@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:neighbour_alert/features/home/pages/home_layout.dart';
 import 'package:neighbour_alert/l10n/app_localizations.dart';
 import 'package:neighbour_alert/utils/router/route_path.dart';
@@ -18,16 +17,13 @@ class HomePage extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context, false),
-              child: Text(
-                l10n.cancel,
-                style: const TextStyle(color: Colors.grey),
-              ),
+              child: Text(l10n.cancel),
             ),
             TextButton(
               onPressed: () => Navigator.pop(context, true),
               child: Text(
                 l10n.yesExit,
-                style: const TextStyle(color: Colors.red),
+                style: TextStyle(color: Theme.of(context).colorScheme.error),
               ),
             ),
           ],
@@ -47,6 +43,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final cs = Theme.of(context).colorScheme;
+
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, _) {
@@ -54,35 +52,28 @@ class HomePage extends StatelessWidget {
         _showLogoutDialog(context);
       },
       child: Scaffold(
-        backgroundColor: Colors.grey.shade50,
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: Colors.teal.shade700,
-          foregroundColor: Colors.white,
-          centerTitle: true,
-          title: Text(
-            l10n.appTitle,
-            style: GoogleFonts.abyssinicaSil(
-              fontWeight: FontWeight.w600,
-              fontStyle: FontStyle.italic,
-            ),
-          ),
+          title: Text(l10n.appTitle),
           actions: [
             IconButton(
-              icon: const Icon(Icons.notifications_none_outlined),
-              onPressed: () {},
+              icon: Badge(
+                smallSize: 8,
+                backgroundColor: cs.error,
+                child: Icon(Icons.notifications_outlined, color: cs.onSurface),
+              ),
+              onPressed: () =>
+                  Navigator.pushReplacementNamed(context, RoutePath.notifications),
             ),
             IconButton(
-              icon: const Icon(Icons.account_circle_outlined),
-              onPressed: () {},
+              icon: Icon(Icons.account_circle_outlined, color: cs.onSurface),
+              onPressed: () =>
+                  Navigator.pushReplacementNamed(context, RoutePath.profile),
             ),
           ],
         ),
         body: const HomeLayout(),
         bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: Colors.teal.shade700,
-          unselectedItemColor: Colors.grey.shade500,
           currentIndex: 0,
           onTap: (index) {
             if (index == 1) {
