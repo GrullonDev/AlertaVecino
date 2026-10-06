@@ -46,6 +46,8 @@ class AlertsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final cs = Theme.of(context).colorScheme;
+
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, _) {
@@ -53,42 +55,20 @@ class AlertsPage extends StatelessWidget {
         _showLogoutDialog(context);
       },
       child: Scaffold(
-        backgroundColor: Colors.grey.shade50,
         appBar: AppBar(
           automaticallyImplyLeading: false,
           centerTitle: true,
-          backgroundColor: Colors.white,
-          elevation: 0,
           title: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.shield_outlined, color: Colors.blue.shade700),
+              Icon(Icons.shield_outlined, color: cs.primary),
               const SizedBox(width: 8),
-              Text(
-                l10n.alerts,
-                style: TextStyle(
-                  color: Colors.blue.shade700,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              Text(l10n.alertsHistoryTitle),
             ],
           ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: CircleAvatar(
-                backgroundColor: Colors.grey.shade800,
-                radius: 16,
-                child: const Icon(Icons.person, size: 20, color: Colors.white),
-              ),
-            ),
-          ],
         ),
         body: const AlertsLayout(),
         bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: Colors.teal.shade700,
-          unselectedItemColor: Colors.grey.shade500,
           currentIndex: 2,
           onTap: (index) {
             if (index == 0) {
