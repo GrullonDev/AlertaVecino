@@ -8,30 +8,24 @@ class ProfilePage extends StatelessWidget {
 
   Future<void> _showLogoutDialog(BuildContext context) async {
     final l10n = AppLocalizations.of(context)!;
-    final bool? shouldLogout = await showDialog<bool>(
+    final cs = Theme.of(context).colorScheme;
+
+    final shouldLogout = await showDialog<bool>(
       context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text(l10n.logoutTitle),
-          content: Text(l10n.logoutMessage),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context, false),
-              child: Text(
-                l10n.cancel,
-                style: const TextStyle(color: Colors.grey),
-              ),
-            ),
-            TextButton(
-              onPressed: () => Navigator.pop(context, true),
-              child: Text(
-                l10n.yesExit,
-                style: const TextStyle(color: Colors.red),
-              ),
-            ),
-          ],
-        );
-      },
+      builder: (ctx) => AlertDialog(
+        title: Text(l10n.logoutTitle),
+        content: Text(l10n.logoutMessage),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(l10n.cancel),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: Text(l10n.yesExit, style: TextStyle(color: cs.error)),
+          ),
+        ],
+      ),
     );
 
     if (shouldLogout == true && context.mounted) {
@@ -46,6 +40,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, _) {
@@ -53,39 +48,13 @@ class ProfilePage extends StatelessWidget {
         _showLogoutDialog(context);
       },
       child: Scaffold(
-        backgroundColor: Colors.grey.shade50,
         appBar: AppBar(
           automaticallyImplyLeading: false,
           centerTitle: true,
-          backgroundColor: Colors.white,
-          elevation: 0,
-          title: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(Icons.shield_outlined, color: Colors.blue.shade700),
-              const SizedBox(width: 8),
-              Text(
-                l10n.appTitle,
-                style: TextStyle(
-                  color: Colors.blue.shade700,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.2,
-                ),
-              ),
-            ],
-          ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.settings_outlined, color: Colors.black54),
-              onPressed: () {},
-            ),
-          ],
+          title: Text(l10n.profile),
         ),
         body: const ProfileLayout(),
         bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: Colors.teal.shade700,
-          unselectedItemColor: Colors.grey.shade500,
           currentIndex: 3,
           onTap: (index) {
             if (index == 0) {

@@ -7,55 +7,42 @@ class ProfileInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final cs = Theme.of(context).colorScheme;
+    final theme = Theme.of(context);
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: cs.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade200),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.02),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
+        border: Border.all(color: cs.outline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                l10n.neighborhoodInfo,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Colors.black87,
-                ),
-              ),
-              Icon(
-                Icons.location_on_outlined,
-                color: Colors.blue.shade700,
-                size: 20,
-              ),
+              Icon(Icons.location_on_outlined, color: cs.primary, size: 20),
+              const SizedBox(width: 8),
+              Text(l10n.neighborhoodInfo, style: theme.textTheme.titleMedium),
             ],
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 10),
           Text(
             l10n.sampleNeighborhood,
-            style: TextStyle(
-              fontSize: 14,
+            style: theme.textTheme.bodyLarge?.copyWith(
               fontWeight: FontWeight.w600,
-              color: Colors.grey.shade800,
             ),
           ),
-          const SizedBox(height: 4),
+          const SizedBox(height: 2),
           Text(
-            l10n.activeMemberSince,
-            style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
+            l10n.houseUnit('42'),
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: cs.onSurfaceVariant,
+            ),
           ),
+          const SizedBox(height: 10),
+          Text(l10n.activeMemberSince, style: theme.textTheme.bodySmall),
         ],
       ),
     );

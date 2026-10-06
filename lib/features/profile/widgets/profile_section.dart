@@ -2,153 +2,145 @@ import 'package:flutter/material.dart';
 
 class ProfileSectionItem {
   final IconData? icon;
-  final Color? iconColor;
   final String title;
-  final Color? titleColor;
   final String? subtitle;
   final String? trailingText;
-  final Color? trailingTextColor;
   final bool showChevron;
   final bool isSwitch;
   final bool switchValue;
-  final Color? switchActiveColor;
-  final Color? backgroundColor;
+  final ValueChanged<bool>? onSwitchChanged;
+  final VoidCallback? onTap;
+  final Color? accentColor;
 
   ProfileSectionItem({
     this.icon,
-    this.iconColor,
     required this.title,
-    this.titleColor,
     this.subtitle,
     this.trailingText,
-    this.trailingTextColor,
     this.showChevron = false,
     this.isSwitch = false,
     this.switchValue = false,
-    this.switchActiveColor,
-    this.backgroundColor,
+    this.onSwitchChanged,
+    this.onTap,
+    this.accentColor,
   });
 }
 
 class ProfileSection extends StatelessWidget {
+  const ProfileSection({super.key, required this.title, required this.items});
+
   final String title;
   final List<ProfileSectionItem> items;
 
-  const ProfileSection({super.key, required this.title, required this.items});
-
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final theme = Theme.of(context);
+
     return Padding(
-      padding: const EdgeInsets.only(bottom: 24.0),
+      padding: const EdgeInsets.only(bottom: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 4.0, bottom: 8.0),
+            padding: const EdgeInsets.only(left: 4, bottom: 8),
             child: Text(
               title,
-              style: TextStyle(
-                fontSize: 11,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey.shade500,
-                letterSpacing: 1.0,
+              style: theme.textTheme.labelMedium?.copyWith(
+                letterSpacing: 0.8,
+                fontWeight: FontWeight.w700,
               ),
             ),
           ),
           Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: cs.surface,
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.grey.shade200),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.02),
-                  blurRadius: 10,
-                  offset: const Offset(0, 4),
-                ),
-              ],
+              border: Border.all(color: cs.outline),
             ),
             child: Column(
               children: items.asMap().entries.map((entry) {
-                final int index = entry.key;
-                final ProfileSectionItem item = entry.value;
-                final bool isLast = index == items.length - 1;
+                final index = entry.key;
+                final item = entry.value;
+                final isLast = index == items.length - 1;
+                final accent = item.accentColor;
 
                 return Column(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: item.backgroundColor ?? Colors.transparent,
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: item.onTap,
                         borderRadius: BorderRadius.vertical(
                           top: Radius.circular(index == 0 ? 12 : 0),
                           bottom: Radius.circular(isLast ? 12 : 0),
                         ),
-                      ),
-                      child: ListTile(
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16.0,
-                          vertical: 4.0,
-                        ),
-                        leading: item.icon != null
-                            ? Icon(
-                                item.icon,
-                                color: item.iconColor ?? Colors.grey.shade700,
-                                size: 22,
-                              )
-                            : null,
-                        title: Text(
-                          item.title,
-                          style: TextStyle(
-                            fontSize: item.subtitle != null ? 12 : 14,
-                            fontWeight: item.subtitle != null
-                                ? FontWeight.bold
-                                : FontWeight.w500,
-                            color: item.titleColor ?? Colors.black87,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 14,
                           ),
-                        ),
-                        subtitle: item.subtitle != null
-                            ? Text(
-                                item.subtitle!,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey.shade800,
+                          child: Row(
+                            children: [
+                              if (item.icon != null) ...[
+                                Icon(
+                                  item.icon,
+                                  color: accent ?? cs.onSurfaceVariant,
+                                  size: 22,
                                 ),
-                              )
-                            : null,
-                        trailing: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            if (item.trailingText != null)
-                              Text(
-                                item.trailingText!,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  color:
-                                      item.trailingTextColor ??
-                                      Colors.grey.shade700,
+                                const SizedBox(width: 14),
+                              ],
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      item.title,
+                                      style: theme.textTheme.bodyLarge
+                                          ?.copyWith(
+                                            fontSize: item.subtitle != null
+                                                ? 13
+                                                : 15,
+                                            fontWeight: item.subtitle != null
+                                                ? FontWeight.w600
+                                                : FontWeight.w500,
+                                          ),
+                                    ),
+                                    if (item.subtitle != null) ...[
+                                      const SizedBox(height: 2),
+                                      Text(
+                                        item.subtitle!,
+                                        style: theme.textTheme.bodyMedium,
+                                      ),
+                                    ],
+                                  ],
                                 ),
                               ),
-                            if (item.showChevron) ...[
-                              const SizedBox(width: 8),
-                              Icon(
-                                Icons.chevron_right,
-                                color: Colors.grey.shade400,
-                                size: 20,
-                              ),
+                              if (item.trailingText != null)
+                                Text(
+                                  item.trailingText!,
+                                  style: theme.textTheme.labelMedium?.copyWith(
+                                    color: accent ?? cs.primary,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              if (item.isSwitch)
+                                Switch(
+                                  value: item.switchValue,
+                                  onChanged: item.onSwitchChanged,
+                                  activeTrackColor: accent ?? cs.primary,
+                                ),
+                              if (item.showChevron)
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 8),
+                                  child: Icon(
+                                    Icons.chevron_right,
+                                    color: cs.onSurfaceVariant,
+                                    size: 20,
+                                  ),
+                                ),
                             ],
-                            if (item.isSwitch)
-                              Switch(
-                                value: item.switchValue,
-                                onChanged: (val) {},
-                                activeThumbColor: Colors.white,
-                                activeTrackColor:
-                                    item.switchActiveColor ??
-                                    Colors.blue.shade700,
-                                inactiveThumbColor: Colors.white,
-                                inactiveTrackColor: Colors.grey.shade300,
-                              ),
-                          ],
+                          ),
                         ),
                       ),
                     ),
@@ -156,8 +148,8 @@ class ProfileSection extends StatelessWidget {
                       Divider(
                         height: 1,
                         thickness: 1,
-                        color: Colors.grey.shade200,
-                        indent: 16,
+                        color: cs.outline,
+                        indent: item.icon != null ? 52 : 16,
                         endIndent: 16,
                       ),
                   ],

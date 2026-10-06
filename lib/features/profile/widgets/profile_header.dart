@@ -7,65 +7,81 @@ class ProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final cs = Theme.of(context).colorScheme;
+    final theme = Theme.of(context);
+
     return Column(
       children: [
         Stack(
           children: [
             Container(
-              width: 80,
-              height: 80,
+              width: 88,
+              height: 88,
               decoration: BoxDecoration(
-                color: Colors.grey.shade200,
+                color: cs.primaryContainer,
                 shape: BoxShape.circle,
-                image: const DecorationImage(
-                  image: NetworkImage(
-                    'https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg',
-                  ),
-                  fit: BoxFit.cover,
-                ),
               ),
+              child: Icon(Icons.person, size: 48, color: cs.primary),
             ),
             Positioned(
               bottom: 0,
               right: 0,
-              child: Container(
-                padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  color: Colors.blue.shade700,
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white, width: 2),
-                ),
-                child: const Icon(
-                  Icons.verified_user,
-                  color: Colors.white,
-                  size: 12,
+              child: GestureDetector(
+                onTap: () {},
+                child: Container(
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
+                    color: cs.primary,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: cs.surface, width: 2),
+                  ),
+                  child: Icon(
+                    Icons.camera_alt_outlined,
+                    color: cs.onPrimary,
+                    size: 16,
+                  ),
                 ),
               ),
             ),
           ],
         ),
-        const SizedBox(height: 16),
-        const Text(
-          'Johnathan Doe',
-          style: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
+        const SizedBox(height: 14),
+        Text('Jorge Martínez', style: theme.textTheme.headlineMedium),
+        const SizedBox(height: 4),
+        Text(
+          'jorge.martinez@email.com',
+          style: theme.textTheme.bodyMedium?.copyWith(
+            color: cs.onSurfaceVariant,
           ),
         ),
-        const SizedBox(height: 6),
+        const SizedBox(height: 10),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
           decoration: BoxDecoration(
-            color: Colors.blue.shade50,
-            borderRadius: BorderRadius.circular(4),
+            color: cs.primaryContainer,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Text(
+            l10n.profileResidenceLabel,
+            style: theme.textTheme.labelMedium?.copyWith(
+              color: cs.primary,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ),
+        const SizedBox(height: 4),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+          decoration: BoxDecoration(
+            color: cs.secondaryContainer,
+            borderRadius: BorderRadius.circular(12),
           ),
           child: Text(
             l10n.verifiedResident,
-            style: TextStyle(
-              color: Colors.blue.shade700,
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
+            style: theme.textTheme.labelMedium?.copyWith(
+              color: cs.onSecondaryContainer,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),
