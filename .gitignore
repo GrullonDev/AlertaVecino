@@ -33,6 +33,7 @@ Desktop.ini
 .pub/
 /build/
 /coverage/
+pubspec.lock
 
 # Symbolication related
 app.*.symbols
@@ -69,20 +70,13 @@ app.*.map.json
 /web/build/
 
 # Windows
-/windows/flutter/ephemeral/
-/windows/flutter/generated_plugin_registrant.cc
-/windows/flutter/flutter_export_environment.cpp
+/windows/
 
 # Linux
-/linux/flutter/ephemeral/
-/linux/flutter/generated_plugin_registrant.cc
-/linux/flutter/generated_plugins.cmake
+/linux/
 
 # macOS
-/macos/Flutter/GeneratedPluginRegistrant.swift
-/macos/Flutter/ephemeral/
-/macos/Runner.xcworkspace/xcuserdata/
-/macos/Runner/xcuserdata/
+/macos/
 
 # Environment variables and secrets
 *.env
