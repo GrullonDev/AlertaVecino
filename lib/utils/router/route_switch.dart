@@ -6,6 +6,8 @@ import 'package:neighbour_alert/features/auth/register/pages/register_page.dart'
 import 'package:neighbour_alert/features/auth/select_residency/pages/select_residency_page.dart';
 import 'package:neighbour_alert/features/home/pages/home_page.dart';
 import 'package:neighbour_alert/features/panic/pages/panic_type_selection_page.dart';
+import 'package:neighbour_alert/features/announcements/pages/announcements_page.dart';
+import 'package:neighbour_alert/features/visitors/pages/visitors_page.dart';
 import 'package:neighbour_alert/features/maps/pages/map_page.dart';
 import 'package:neighbour_alert/features/profile/pages/profile_page.dart';
 import 'package:neighbour_alert/utils/router/route_path.dart';
@@ -23,7 +25,13 @@ class RouteSwitch {
       case RoutePath.pendingApproval:
         return MaterialPageRoute(builder: (_) => const PendingApprovalPage());
       case RoutePath.panic:
-        return MaterialPageRoute(builder: (_) => const PanicTypeSelectionPage());
+        return MaterialPageRoute(
+          builder: (_) => const PanicTypeSelectionPage(),
+        );
+      case RoutePath.announcementsFeed:
+        return MaterialPageRoute(builder: (_) => const AnnouncementsPage());
+      case RoutePath.visitors:
+        return MaterialPageRoute(builder: (_) => const VisitorsPage());
       case RoutePath.home:
         return MaterialPageRoute(builder: (_) => const HomePage());
       case RoutePath.incidentMap:

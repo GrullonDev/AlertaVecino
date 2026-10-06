@@ -12,6 +12,8 @@ class RoutePath {
   // 2. Reportes de Incidente y Emergencia
   static const String panic = '/panic';
   static const String panicButton = '/panic-button';
+  static const String visitors = '/visitors';
+  static const String announcementsFeed = '/announcements';
   static const String incidentReport = '/incident-report';
   static const String incidentList = '/incident-list';
   static const String incidentDetail = '/incident-detail';
