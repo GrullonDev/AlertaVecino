@@ -24,22 +24,28 @@ class ProfileHeader extends StatelessWidget {
               child: Icon(Icons.person, size: 48, color: cs.primary),
             ),
             Positioned(
-              bottom: 0,
-              right: 0,
-              child: GestureDetector(
-                onTap: () {},
-                child: Container(
-                  width: 32,
-                  height: 32,
-                  decoration: BoxDecoration(
-                    color: cs.primary,
-                    shape: BoxShape.circle,
-                    border: Border.all(color: cs.surface, width: 2),
-                  ),
-                  child: Icon(
-                    Icons.camera_alt_outlined,
-                    color: cs.onPrimary,
-                    size: 16,
+              bottom: -4,
+              right: -4,
+              child: SizedBox(
+                width: 48,
+                height: 48,
+                child: Center(
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      width: 32,
+                      height: 32,
+                      decoration: BoxDecoration(
+                        color: cs.primary,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: cs.surface, width: 2),
+                      ),
+                      child: Icon(
+                        Icons.camera_alt_outlined,
+                        color: cs.onPrimary,
+                        size: 16,
+                      ),
+                    ),
                   ),
                 ),
               ),

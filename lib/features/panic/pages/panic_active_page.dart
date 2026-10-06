@@ -275,12 +275,7 @@ class _PanicActivePageState extends State<PanicActivePage>
 
               // Chat input
               Container(
-                padding: EdgeInsets.fromLTRB(
-                  16,
-                  8,
-                  16,
-                  8 + MediaQuery.of(context).viewInsets.bottom,
-                ),
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                 decoration: BoxDecoration(
                   color: cs.surface,
                   border: Border(top: BorderSide(color: cs.outline)),
