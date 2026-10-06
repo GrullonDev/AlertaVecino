@@ -49,7 +49,7 @@ class _AnnouncementBannerState extends State<AnnouncementBanner> {
         ),
         const SizedBox(height: 8),
         SizedBox(
-          height: 100,
+          height: 104,
           child: PageView.builder(
             controller: _controller,
             onPageChanged: (i) => setState(() => _current = i),
@@ -84,6 +84,7 @@ class _AnnouncementBannerState extends State<AnnouncementBanner> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
                               l10n.announcementFromAdmin,
@@ -91,6 +92,8 @@ class _AnnouncementBannerState extends State<AnnouncementBanner> {
                                 color: cs.primary,
                                 fontWeight: FontWeight.w700,
                               ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
                             const SizedBox(height: 4),
                             Text(

@@ -83,11 +83,10 @@ class VisitorCard extends StatelessWidget {
                   onPressed: () =>
                       Navigator.pushNamed(context, RoutePath.visitors),
                   icon: const Icon(Icons.qr_code, size: 18),
-                  label: Flexible(
-                    child: Text(
-                      l10n.generateQrPass,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                  label: Text(
+                    l10n.generateQrPass,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
                   style: OutlinedButton.styleFrom(
                     minimumSize: const Size(0, 44),
@@ -100,11 +99,10 @@ class VisitorCard extends StatelessWidget {
                   onPressed: () =>
                       Navigator.pushNamed(context, RoutePath.visitors),
                   icon: const Icon(Icons.history, size: 18),
-                  label: Flexible(
-                    child: Text(
-                      l10n.visitorHistory,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                  label: Text(
+                    l10n.visitorHistory,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
                   style: OutlinedButton.styleFrom(
                     minimumSize: const Size(0, 44),
