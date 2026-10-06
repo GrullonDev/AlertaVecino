@@ -753,4 +753,293 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get announcementsMock5Body =>
       'Starting November 1, the community pool hours will be 8:00 AM to 8:00 PM. Swimming caps and pre-swim showers are required. Children under 12 must be accompanied by an adult. See the full rules at the administration office.';
+
+  @override
+  String get mapCategoryPanic => 'Emergencies';
+
+  @override
+  String get mapCategoryGates => 'Gates';
+
+  @override
+  String get mapCategoryIncidents => 'Incidents';
+
+  @override
+  String get mapMyLocation => 'My location';
+
+  @override
+  String get mapMockPanic1Title => 'Active panic alert';
+
+  @override
+  String get mapMockPanic1Desc =>
+      'A neighbor activated a medical emergency alert near sector 3. Security has been notified and is on the way.';
+
+  @override
+  String get mapMockPanic2Title => 'Suspicious activity reported';
+
+  @override
+  String get mapMockPanic2Desc =>
+      'A suspicious person was reported loitering in block B parking lot. The guard is verifying.';
+
+  @override
+  String get mapMockGate1Title => 'Main Gate';
+
+  @override
+  String get mapMockGate1Desc =>
+      'Main vehicular and pedestrian access. 24-hour operation with security guard.';
+
+  @override
+  String get mapMockGate2Title => 'South Gate';
+
+  @override
+  String get mapMockGate2Desc =>
+      'Secondary access for residents. Hours: 6:00 AM - 10:00 PM.';
+
+  @override
+  String get mapMockIncident1Title => 'Damaged street light';
+
+  @override
+  String get mapMockIncident1Desc =>
+      'A non-functioning street light pole was reported on the main street of sector 1. Maintenance has been notified.';
+
+  @override
+  String get mapMockIncident2Title => 'Water leak';
+
+  @override
+  String get mapMockIncident2Desc =>
+      'Water leak detected in the pipe in front of house #45. Urgent repair requested from the municipality.';
+
+  @override
+  String get alertsHistoryTitle => 'Alert History';
+
+  @override
+  String get alertFilterAll => 'All';
+
+  @override
+  String get alertFilterActive => 'Active';
+
+  @override
+  String get alertFilterResolved => 'Resolved';
+
+  @override
+  String get alertFilterMedical => 'Medical';
+
+  @override
+  String get alertFilterSecurity => 'Security';
+
+  @override
+  String get alertCategoryFire => 'Fire';
+
+  @override
+  String get alertCategoryGeneral => 'General';
+
+  @override
+  String get alertStatusActive => 'Active';
+
+  @override
+  String get alertStatusHandled => 'Handled by Guard';
+
+  @override
+  String get alertStatusResolved => 'Resolved';
+
+  @override
+  String get alertStatusFalseAlarm => 'False Alarm';
+
+  @override
+  String get alertsEmpty => 'No alerts recorded';
+
+  @override
+  String get alertsEmptyHint =>
+      'Your residential alert history will appear here';
+
+  @override
+  String get alertDetailLocation => 'Location';
+
+  @override
+  String get alertDetailReportedAt => 'Reported';
+
+  @override
+  String get alertDetailDuration => 'Duration';
+
+  @override
+  String get alertDetailReportedBy => 'Reported by';
+
+  @override
+  String get alertDetailResponseTime => 'Response time';
+
+  @override
+  String get alertDetailDescription => 'Description';
+
+  @override
+  String get alertDetailGuardNotes => 'Guard notes';
+
+  @override
+  String get alertMock1Title => 'Medical emergency — Elderly resident';
+
+  @override
+  String get alertMock1Location => 'House #42, Sector 2';
+
+  @override
+  String get alertMock1Duration => '8 min ongoing';
+
+  @override
+  String get alertMock1Desc =>
+      'Elderly resident reported chest pain and difficulty breathing. An ambulance was requested immediately. Security is heading to the home to facilitate access.';
+
+  @override
+  String get alertMock1ReportedBy => 'María López (House #42)';
+
+  @override
+  String get alertMock1ResponseTime => '2 min 15 sec';
+
+  @override
+  String get alertMock2Title => 'Suspicious person in parking lot';
+
+  @override
+  String get alertMock2Location => 'Block B Parking';
+
+  @override
+  String get alertMock2Duration => '45 min';
+
+  @override
+  String get alertMock2Desc =>
+      'An unknown person was spotted checking vehicles in the block B parking lot. The on-duty guard was dispatched to verify the situation.';
+
+  @override
+  String get alertMock2GuardNotes =>
+      'Identity verified. It was a cable company technician who did not register at the gate. They were asked to leave the area and register properly.';
+
+  @override
+  String get alertMock2ReportedBy => 'Carlos Méndez (House #15)';
+
+  @override
+  String get alertMock2ResponseTime => '4 min 30 sec';
+
+  @override
+  String get alertMock3Title => 'Gas leak detected';
+
+  @override
+  String get alertMock3Location => 'House #28, Sector 1';
+
+  @override
+  String get alertMock3Duration => '2 h 15 min';
+
+  @override
+  String get alertMock3Desc =>
+      'Neighbors reported a gas smell coming from house #28. Nearby residents were evacuated as a precaution while the fire department arrived.';
+
+  @override
+  String get alertMock3GuardNotes =>
+      'Firefighters confirmed a minor leak in the stove connection. It was repaired and residents were cleared to return to their homes.';
+
+  @override
+  String get alertMock3ReportedBy => 'Roberto García (House #30)';
+
+  @override
+  String get alertMock3ResponseTime => '6 min';
+
+  @override
+  String get alertMock4Title => 'Intrusion alarm sector 3';
+
+  @override
+  String get alertMock4Location => 'Perimeter wall, Sector 3';
+
+  @override
+  String get alertMock4Duration => '20 min';
+
+  @override
+  String get alertMock4Desc =>
+      'The motion sensor on the sector 3 perimeter wall was triggered at 11:15 PM. The guard performed an immediate verification round.';
+
+  @override
+  String get alertMock4GuardNotes =>
+      'False alarm. A stray cat triggered the sensor. Equipment sensitivity was adjusted.';
+
+  @override
+  String get alertMock5Title => 'Fall in playground area';
+
+  @override
+  String get alertMock5Location => 'Children\'s play area, Sector 2';
+
+  @override
+  String get alertMock5Duration => '1 h 30 min';
+
+  @override
+  String get alertMock5Desc =>
+      'A child fell in the playground and suffered an arm injury. Parents requested emergency medical assistance.';
+
+  @override
+  String get alertMock5ReportedBy => 'Ana de Rodríguez (House #8)';
+
+  @override
+  String get alertMock5ResponseTime => '3 min';
+
+  @override
+  String get alertMock6Title => 'Unscheduled power outage';
+
+  @override
+  String get alertMock6Location => 'Entire residential complex';
+
+  @override
+  String get alertMock6Duration => '4 h';
+
+  @override
+  String get alertMock6Desc =>
+      'A total power outage was reported. The utility company confirmed a transformer failure. The emergency generator was activated for common areas.';
+
+  @override
+  String get profileResidenceLabel => 'Residencial Los Sauces · House #42';
+
+  @override
+  String get profileAccountSection => 'ACCOUNT & RESIDENCE';
+
+  @override
+  String get profileResidenceDetails => 'Residence details';
+
+  @override
+  String get profileRequestAddressChange => 'Request address change';
+
+  @override
+  String get profileHouseholdMembers => 'Household members';
+
+  @override
+  String get profilePersonalInfo => 'PERSONAL INFORMATION';
+
+  @override
+  String get profileNotificationsSection => 'PREFERENCES & NOTIFICATIONS';
+
+  @override
+  String get profileNotifVisitors => 'Gatehouse visitor alerts';
+
+  @override
+  String get profileNotifPanic => 'Community panic alerts';
+
+  @override
+  String get profileNotifAdmin => 'Official administration notices';
+
+  @override
+  String get profileDarkMode => 'Dark mode';
+
+  @override
+  String get profileDarkModeOn => 'On';
+
+  @override
+  String get profileDarkModeAuto => 'Auto';
+
+  @override
+  String get profileSecuritySection => 'SECURITY';
+
+  @override
+  String get profileTrustedDevices => 'Trusted devices';
+
+  @override
+  String get profileLegalSection => 'LEGAL';
+
+  @override
+  String get profileTerms => 'Terms and conditions';
+
+  @override
+  String get profilePrivacyPolicy => 'Privacy policy';
+
+  @override
+  String get profileVersion => 'AlertaVecino v1.0.0';
 }

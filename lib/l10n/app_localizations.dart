@@ -1513,6 +1513,552 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'A partir del 1 de noviembre, el horario de la piscina comunitaria será de 8:00 a 20:00 hrs. Se requiere el uso de gorro de baño y ducha previa. Menores de 12 años deben estar acompañados por un adulto. Consulte el reglamento completo en la oficina de administración.'**
   String get announcementsMock5Body;
+
+  /// No description provided for @mapCategoryPanic.
+  ///
+  /// In es, this message translates to:
+  /// **'Emergencias'**
+  String get mapCategoryPanic;
+
+  /// No description provided for @mapCategoryGates.
+  ///
+  /// In es, this message translates to:
+  /// **'Garitas'**
+  String get mapCategoryGates;
+
+  /// No description provided for @mapCategoryIncidents.
+  ///
+  /// In es, this message translates to:
+  /// **'Incidentes'**
+  String get mapCategoryIncidents;
+
+  /// No description provided for @mapMyLocation.
+  ///
+  /// In es, this message translates to:
+  /// **'Mi ubicación'**
+  String get mapMyLocation;
+
+  /// No description provided for @mapMockPanic1Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Alerta de pánico activa'**
+  String get mapMockPanic1Title;
+
+  /// No description provided for @mapMockPanic1Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Un vecino activó una alerta de emergencia médica cerca del sector 3. Seguridad ha sido notificada y se dirige al lugar.'**
+  String get mapMockPanic1Desc;
+
+  /// No description provided for @mapMockPanic2Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Actividad sospechosa reportada'**
+  String get mapMockPanic2Title;
+
+  /// No description provided for @mapMockPanic2Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Se reportó una persona sospechosa merodeando en el estacionamiento del bloque B. La guardia está verificando.'**
+  String get mapMockPanic2Desc;
+
+  /// No description provided for @mapMockGate1Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Garita Principal'**
+  String get mapMockGate1Title;
+
+  /// No description provided for @mapMockGate1Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Acceso vehicular y peatonal principal. Operativa 24 horas con guardia de seguridad.'**
+  String get mapMockGate1Desc;
+
+  /// No description provided for @mapMockGate2Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Garita Sur'**
+  String get mapMockGate2Title;
+
+  /// No description provided for @mapMockGate2Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Acceso secundario para residentes. Horario: 6:00 AM - 10:00 PM.'**
+  String get mapMockGate2Desc;
+
+  /// No description provided for @mapMockIncident1Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Poste de luz dañado'**
+  String get mapMockIncident1Title;
+
+  /// No description provided for @mapMockIncident1Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Se reportó un poste de alumbrado público sin funcionar en la calle principal del sector 1. Mantenimiento fue notificado.'**
+  String get mapMockIncident1Desc;
+
+  /// No description provided for @mapMockIncident2Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Fuga de agua'**
+  String get mapMockIncident2Title;
+
+  /// No description provided for @mapMockIncident2Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Fuga de agua detectada en la tubería frente a la casa #45. Se solicitó reparación urgente a la municipalidad.'**
+  String get mapMockIncident2Desc;
+
+  /// No description provided for @alertsHistoryTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Historial de Alertas'**
+  String get alertsHistoryTitle;
+
+  /// No description provided for @alertFilterAll.
+  ///
+  /// In es, this message translates to:
+  /// **'Todas'**
+  String get alertFilterAll;
+
+  /// No description provided for @alertFilterActive.
+  ///
+  /// In es, this message translates to:
+  /// **'Activas'**
+  String get alertFilterActive;
+
+  /// No description provided for @alertFilterResolved.
+  ///
+  /// In es, this message translates to:
+  /// **'Resueltas'**
+  String get alertFilterResolved;
+
+  /// No description provided for @alertFilterMedical.
+  ///
+  /// In es, this message translates to:
+  /// **'Médica'**
+  String get alertFilterMedical;
+
+  /// No description provided for @alertFilterSecurity.
+  ///
+  /// In es, this message translates to:
+  /// **'Seguridad'**
+  String get alertFilterSecurity;
+
+  /// No description provided for @alertCategoryFire.
+  ///
+  /// In es, this message translates to:
+  /// **'Incendio'**
+  String get alertCategoryFire;
+
+  /// No description provided for @alertCategoryGeneral.
+  ///
+  /// In es, this message translates to:
+  /// **'General'**
+  String get alertCategoryGeneral;
+
+  /// No description provided for @alertStatusActive.
+  ///
+  /// In es, this message translates to:
+  /// **'Activa'**
+  String get alertStatusActive;
+
+  /// No description provided for @alertStatusHandled.
+  ///
+  /// In es, this message translates to:
+  /// **'Atendida por Garita'**
+  String get alertStatusHandled;
+
+  /// No description provided for @alertStatusResolved.
+  ///
+  /// In es, this message translates to:
+  /// **'Resuelta'**
+  String get alertStatusResolved;
+
+  /// No description provided for @alertStatusFalseAlarm.
+  ///
+  /// In es, this message translates to:
+  /// **'Falsa Alarma'**
+  String get alertStatusFalseAlarm;
+
+  /// No description provided for @alertsEmpty.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin alertas registradas'**
+  String get alertsEmpty;
+
+  /// No description provided for @alertsEmptyHint.
+  ///
+  /// In es, this message translates to:
+  /// **'El historial de alertas de tu residencial aparecerá aquí'**
+  String get alertsEmptyHint;
+
+  /// No description provided for @alertDetailLocation.
+  ///
+  /// In es, this message translates to:
+  /// **'Ubicación'**
+  String get alertDetailLocation;
+
+  /// No description provided for @alertDetailReportedAt.
+  ///
+  /// In es, this message translates to:
+  /// **'Reportada'**
+  String get alertDetailReportedAt;
+
+  /// No description provided for @alertDetailDuration.
+  ///
+  /// In es, this message translates to:
+  /// **'Duración'**
+  String get alertDetailDuration;
+
+  /// No description provided for @alertDetailReportedBy.
+  ///
+  /// In es, this message translates to:
+  /// **'Reportó'**
+  String get alertDetailReportedBy;
+
+  /// No description provided for @alertDetailResponseTime.
+  ///
+  /// In es, this message translates to:
+  /// **'Tiempo de respuesta'**
+  String get alertDetailResponseTime;
+
+  /// No description provided for @alertDetailDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Descripción'**
+  String get alertDetailDescription;
+
+  /// No description provided for @alertDetailGuardNotes.
+  ///
+  /// In es, this message translates to:
+  /// **'Notas de la garita'**
+  String get alertDetailGuardNotes;
+
+  /// No description provided for @alertMock1Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Emergencia médica — Adulto mayor'**
+  String get alertMock1Title;
+
+  /// No description provided for @alertMock1Location.
+  ///
+  /// In es, this message translates to:
+  /// **'Casa #42, Sector 2'**
+  String get alertMock1Location;
+
+  /// No description provided for @alertMock1Duration.
+  ///
+  /// In es, this message translates to:
+  /// **'8 min en curso'**
+  String get alertMock1Duration;
+
+  /// No description provided for @alertMock1Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Residente de la tercera edad reportó dolor en el pecho y dificultad para respirar. Se solicitó ambulancia de inmediato. Seguridad se dirige a la vivienda para facilitar acceso.'**
+  String get alertMock1Desc;
+
+  /// No description provided for @alertMock1ReportedBy.
+  ///
+  /// In es, this message translates to:
+  /// **'María López (Casa #42)'**
+  String get alertMock1ReportedBy;
+
+  /// No description provided for @alertMock1ResponseTime.
+  ///
+  /// In es, this message translates to:
+  /// **'2 min 15 seg'**
+  String get alertMock1ResponseTime;
+
+  /// No description provided for @alertMock2Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Persona sospechosa en estacionamiento'**
+  String get alertMock2Title;
+
+  /// No description provided for @alertMock2Location.
+  ///
+  /// In es, this message translates to:
+  /// **'Parqueo Bloque B'**
+  String get alertMock2Location;
+
+  /// No description provided for @alertMock2Duration.
+  ///
+  /// In es, this message translates to:
+  /// **'45 min'**
+  String get alertMock2Duration;
+
+  /// No description provided for @alertMock2Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Se detectó una persona desconocida revisando vehículos en el estacionamiento del bloque B. El guardia de turno fue enviado a verificar la situación.'**
+  String get alertMock2Desc;
+
+  /// No description provided for @alertMock2GuardNotes.
+  ///
+  /// In es, this message translates to:
+  /// **'Se verificó la identidad de la persona. Era un técnico de la empresa de cable que no se registró en la garita. Se le solicitó abandonar el área y registrarse debidamente.'**
+  String get alertMock2GuardNotes;
+
+  /// No description provided for @alertMock2ReportedBy.
+  ///
+  /// In es, this message translates to:
+  /// **'Carlos Méndez (Casa #15)'**
+  String get alertMock2ReportedBy;
+
+  /// No description provided for @alertMock2ResponseTime.
+  ///
+  /// In es, this message translates to:
+  /// **'4 min 30 seg'**
+  String get alertMock2ResponseTime;
+
+  /// No description provided for @alertMock3Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Fuga de gas detectada'**
+  String get alertMock3Title;
+
+  /// No description provided for @alertMock3Location.
+  ///
+  /// In es, this message translates to:
+  /// **'Casa #28, Sector 1'**
+  String get alertMock3Location;
+
+  /// No description provided for @alertMock3Duration.
+  ///
+  /// In es, this message translates to:
+  /// **'2 h 15 min'**
+  String get alertMock3Duration;
+
+  /// No description provided for @alertMock3Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Vecinos reportaron olor a gas proveniente de la casa #28. Se evacuó a los residentes cercanos como medida preventiva mientras llegaban los bomberos.'**
+  String get alertMock3Desc;
+
+  /// No description provided for @alertMock3GuardNotes.
+  ///
+  /// In es, this message translates to:
+  /// **'Bomberos confirmaron fuga menor en la conexión de la estufa. Fue reparada y se autorizó el retorno de residentes a sus viviendas.'**
+  String get alertMock3GuardNotes;
+
+  /// No description provided for @alertMock3ReportedBy.
+  ///
+  /// In es, this message translates to:
+  /// **'Roberto García (Casa #30)'**
+  String get alertMock3ReportedBy;
+
+  /// No description provided for @alertMock3ResponseTime.
+  ///
+  /// In es, this message translates to:
+  /// **'6 min'**
+  String get alertMock3ResponseTime;
+
+  /// No description provided for @alertMock4Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Alarma de intrusión sector 3'**
+  String get alertMock4Title;
+
+  /// No description provided for @alertMock4Location.
+  ///
+  /// In es, this message translates to:
+  /// **'Muro perimetral, Sector 3'**
+  String get alertMock4Location;
+
+  /// No description provided for @alertMock4Duration.
+  ///
+  /// In es, this message translates to:
+  /// **'20 min'**
+  String get alertMock4Duration;
+
+  /// No description provided for @alertMock4Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'El sensor de movimiento del muro perimetral del sector 3 se activó a las 23:15. El guardia realizó ronda de verificación inmediata.'**
+  String get alertMock4Desc;
+
+  /// No description provided for @alertMock4GuardNotes.
+  ///
+  /// In es, this message translates to:
+  /// **'Falsa alarma. Se detectó un gato callejero que activó el sensor. Se ajustó la sensibilidad del equipo.'**
+  String get alertMock4GuardNotes;
+
+  /// No description provided for @alertMock5Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Caída en área de juegos'**
+  String get alertMock5Title;
+
+  /// No description provided for @alertMock5Location.
+  ///
+  /// In es, this message translates to:
+  /// **'Área infantil, Sector 2'**
+  String get alertMock5Location;
+
+  /// No description provided for @alertMock5Duration.
+  ///
+  /// In es, this message translates to:
+  /// **'1 h 30 min'**
+  String get alertMock5Duration;
+
+  /// No description provided for @alertMock5Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Un menor sufrió una caída en los juegos infantiles y presentó una lesión en el brazo. Los padres solicitaron asistencia médica de emergencia.'**
+  String get alertMock5Desc;
+
+  /// No description provided for @alertMock5ReportedBy.
+  ///
+  /// In es, this message translates to:
+  /// **'Ana de Rodríguez (Casa #8)'**
+  String get alertMock5ReportedBy;
+
+  /// No description provided for @alertMock5ResponseTime.
+  ///
+  /// In es, this message translates to:
+  /// **'3 min'**
+  String get alertMock5ResponseTime;
+
+  /// No description provided for @alertMock6Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Corte eléctrico no programado'**
+  String get alertMock6Title;
+
+  /// No description provided for @alertMock6Location.
+  ///
+  /// In es, this message translates to:
+  /// **'Toda la residencial'**
+  String get alertMock6Location;
+
+  /// No description provided for @alertMock6Duration.
+  ///
+  /// In es, this message translates to:
+  /// **'4 h'**
+  String get alertMock6Duration;
+
+  /// No description provided for @alertMock6Desc.
+  ///
+  /// In es, this message translates to:
+  /// **'Se reportó corte total de energía eléctrica. Se contactó a la empresa distribuidora quien confirmó una falla en el transformador. Se activó la planta de emergencia para áreas comunes.'**
+  String get alertMock6Desc;
+
+  /// No description provided for @profileResidenceLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Residencial Los Sauces · Casa #42'**
+  String get profileResidenceLabel;
+
+  /// No description provided for @profileAccountSection.
+  ///
+  /// In es, this message translates to:
+  /// **'CUENTA Y RESIDENCIA'**
+  String get profileAccountSection;
+
+  /// No description provided for @profileResidenceDetails.
+  ///
+  /// In es, this message translates to:
+  /// **'Detalles de residencia'**
+  String get profileResidenceDetails;
+
+  /// No description provided for @profileRequestAddressChange.
+  ///
+  /// In es, this message translates to:
+  /// **'Solicitar cambio de dirección'**
+  String get profileRequestAddressChange;
+
+  /// No description provided for @profileHouseholdMembers.
+  ///
+  /// In es, this message translates to:
+  /// **'Miembros del hogar'**
+  String get profileHouseholdMembers;
+
+  /// No description provided for @profilePersonalInfo.
+  ///
+  /// In es, this message translates to:
+  /// **'INFORMACIÓN PERSONAL'**
+  String get profilePersonalInfo;
+
+  /// No description provided for @profileNotificationsSection.
+  ///
+  /// In es, this message translates to:
+  /// **'PREFERENCIAS Y NOTIFICACIONES'**
+  String get profileNotificationsSection;
+
+  /// No description provided for @profileNotifVisitors.
+  ///
+  /// In es, this message translates to:
+  /// **'Alertas de visitantes en garita'**
+  String get profileNotifVisitors;
+
+  /// No description provided for @profileNotifPanic.
+  ///
+  /// In es, this message translates to:
+  /// **'Alertas de pánico comunitarias'**
+  String get profileNotifPanic;
+
+  /// No description provided for @profileNotifAdmin.
+  ///
+  /// In es, this message translates to:
+  /// **'Avisos oficiales de administración'**
+  String get profileNotifAdmin;
+
+  /// No description provided for @profileDarkMode.
+  ///
+  /// In es, this message translates to:
+  /// **'Modo oscuro'**
+  String get profileDarkMode;
+
+  /// No description provided for @profileDarkModeOn.
+  ///
+  /// In es, this message translates to:
+  /// **'Activado'**
+  String get profileDarkModeOn;
+
+  /// No description provided for @profileDarkModeAuto.
+  ///
+  /// In es, this message translates to:
+  /// **'Automático'**
+  String get profileDarkModeAuto;
+
+  /// No description provided for @profileSecuritySection.
+  ///
+  /// In es, this message translates to:
+  /// **'SEGURIDAD'**
+  String get profileSecuritySection;
+
+  /// No description provided for @profileTrustedDevices.
+  ///
+  /// In es, this message translates to:
+  /// **'Dispositivos de confianza'**
+  String get profileTrustedDevices;
+
+  /// No description provided for @profileLegalSection.
+  ///
+  /// In es, this message translates to:
+  /// **'LEGAL'**
+  String get profileLegalSection;
+
+  /// No description provided for @profileTerms.
+  ///
+  /// In es, this message translates to:
+  /// **'Términos y condiciones'**
+  String get profileTerms;
+
+  /// No description provided for @profilePrivacyPolicy.
+  ///
+  /// In es, this message translates to:
+  /// **'Política de privacidad'**
+  String get profilePrivacyPolicy;
+
+  /// No description provided for @profileVersion.
+  ///
+  /// In es, this message translates to:
+  /// **'AlertaVecino v1.0.0'**
+  String get profileVersion;
 }
 
 class _AppLocalizationsDelegate
