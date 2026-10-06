@@ -76,7 +76,10 @@ class MapDetailCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 2),
-                    Row(
+                    Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      spacing: 8,
+                      runSpacing: 4,
                       children: [
                         Container(
                           padding: const EdgeInsets.symmetric(
@@ -95,29 +98,35 @@ class MapDetailCard extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 8),
-                        Icon(
-                          Icons.access_time,
-                          size: 13,
-                          color: cs.onSurfaceVariant,
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.access_time,
+                              size: 13,
+                              color: cs.onSurfaceVariant,
+                            ),
+                            const SizedBox(width: 3),
+                            Text(
+                              marker.timeAgo,
+                              style: theme.textTheme.bodySmall,
+                            ),
+                          ],
                         ),
-                        const SizedBox(width: 3),
-                        Text(marker.timeAgo, style: theme.textTheme.bodySmall),
                       ],
                     ),
                   ],
                 ),
               ),
-              GestureDetector(
-                onTap: onClose,
-                child: Container(
-                  width: 32,
-                  height: 32,
-                  decoration: BoxDecoration(
-                    color: cs.outlineVariant,
-                    shape: BoxShape.circle,
+              SizedBox(
+                width: 48,
+                height: 48,
+                child: IconButton(
+                  onPressed: onClose,
+                  style: IconButton.styleFrom(
+                    backgroundColor: cs.outlineVariant,
                   ),
-                  child: Icon(
+                  icon: Icon(
                     Icons.close,
                     size: 18,
                     color: cs.onSurfaceVariant,

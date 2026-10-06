@@ -104,7 +104,9 @@ class _MapLayoutState extends State<MapLayout> {
           child: SafeArea(
             bottom: false,
             child: Padding(
-              padding: const EdgeInsets.only(top: 140),
+              padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.16,
+              ),
               child: Column(
                 children: [
                   const MapSosButton(),
