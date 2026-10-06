@@ -22,6 +22,8 @@ class RouteSwitch {
         return MaterialPageRoute(builder: (_) => const SelectResidencyPage());
       case RoutePath.pendingApproval:
         return MaterialPageRoute(builder: (_) => const PendingApprovalPage());
+      case RoutePath.panic:
+        return MaterialPageRoute(builder: (_) => const PanicTypeSelectionPage());
       case RoutePath.home:
         return MaterialPageRoute(builder: (_) => const HomePage());
       case RoutePath.incidentMap:

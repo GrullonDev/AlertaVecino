@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:neighbour_alert/config/app_theme.dart';
 import 'package:neighbour_alert/l10n/app_localizations.dart';
+import 'package:neighbour_alert/utils/router/route_path.dart';
 
 class DashboardPanicButton extends StatefulWidget {
   const DashboardPanicButton({super.key});
@@ -77,7 +78,7 @@ class _DashboardPanicButtonState extends State<DashboardPanicButton>
             onLongPressEnd: (_) => _onLongPressEnd(),
             onLongPress: () {
               HapticFeedback.heavyImpact();
-              Navigator.pushNamed(context, '/panic');
+              Navigator.pushNamed(context, RoutePath.panic);
             },
             child: Container(
               width: 140,
