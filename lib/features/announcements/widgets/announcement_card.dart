@@ -152,12 +152,15 @@ class AnnouncementCard extends StatelessWidget {
                     color: cs.onSurfaceVariant,
                   ),
                   const SizedBox(width: 4),
-                  Text(
-                    l10n.announcementsPostedBy(announcement.author),
-                    style: theme.textTheme.bodySmall,
+                  Expanded(
+                    child: Text(
+                      l10n.announcementsPostedBy(announcement.author),
+                      style: theme.textTheme.bodySmall,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                   if (announcement.pdfUrl != null) ...[
-                    const Spacer(),
+                    const SizedBox(width: 8),
                     Icon(
                       Icons.attach_file,
                       size: 14,

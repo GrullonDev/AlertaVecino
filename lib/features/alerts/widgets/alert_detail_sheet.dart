@@ -68,7 +68,9 @@ class AlertDetailSheet extends StatelessWidget {
                       children: [
                         Text(item.title, style: theme.textTheme.titleLarge),
                         const SizedBox(height: 4),
-                        Row(
+                        Wrap(
+                          spacing: 8,
+                          runSpacing: 4,
                           children: [
                             Container(
                               padding: const EdgeInsets.symmetric(
@@ -87,7 +89,6 @@ class AlertDetailSheet extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            const SizedBox(width: 8),
                             Container(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 8,

@@ -86,9 +86,12 @@ class AlertCard extends StatelessWidget {
                         const SizedBox(width: 3),
                         Text(timeStr, style: theme.textTheme.bodySmall),
                         const SizedBox(width: 8),
-                        Text(
-                          '· ${item.duration}',
-                          style: theme.textTheme.bodySmall,
+                        Flexible(
+                          child: Text(
+                            '· ${item.duration}',
+                            style: theme.textTheme.bodySmall,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       ],
                     ),
