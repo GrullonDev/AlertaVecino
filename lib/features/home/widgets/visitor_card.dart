@@ -25,8 +25,14 @@ class VisitorCard extends StatelessWidget {
             children: [
               Icon(Icons.people_outline, size: 20, color: cs.primary),
               const SizedBox(width: 8),
-              Text(l10n.visitors, style: theme.textTheme.titleMedium),
-              const Spacer(),
+              Flexible(
+                child: Text(
+                  l10n.visitors,
+                  style: theme.textTheme.titleMedium,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              const SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 decoration: BoxDecoration(
@@ -77,19 +83,33 @@ class VisitorCard extends StatelessWidget {
                   onPressed: () =>
                       Navigator.pushNamed(context, RoutePath.visitors),
                   icon: const Icon(Icons.qr_code, size: 18),
-                  label: Text(l10n.generateQrPass),
+                  label: Flexible(
+                    child: Text(
+                      l10n.generateQrPass,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
                   style: OutlinedButton.styleFrom(
-                    minimumSize: const Size(0, 40),
+                    minimumSize: const Size(0, 44),
                   ),
                 ),
               ),
               const SizedBox(width: 8),
-              OutlinedButton.icon(
-                onPressed: () =>
-                    Navigator.pushNamed(context, RoutePath.visitors),
-                icon: const Icon(Icons.history, size: 18),
-                label: Text(l10n.visitorHistory),
-                style: OutlinedButton.styleFrom(minimumSize: const Size(0, 40)),
+              Expanded(
+                child: OutlinedButton.icon(
+                  onPressed: () =>
+                      Navigator.pushNamed(context, RoutePath.visitors),
+                  icon: const Icon(Icons.history, size: 18),
+                  label: Flexible(
+                    child: Text(
+                      l10n.visitorHistory,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    minimumSize: const Size(0, 44),
+                  ),
+                ),
               ),
             ],
           ),

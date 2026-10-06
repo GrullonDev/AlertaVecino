@@ -52,6 +52,10 @@ class DashboardQuickActions extends StatelessWidget {
         LayoutBuilder(
           builder: (context, constraints) {
             final crossAxisCount = constraints.maxWidth > 500 ? 3 : 2;
+            final itemWidth =
+                (constraints.maxWidth - 12 * (crossAxisCount - 1)) /
+                    crossAxisCount;
+            final aspectRatio = itemWidth < 140 ? 1.1 : 1.3;
             return GridView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -59,7 +63,7 @@ class DashboardQuickActions extends StatelessWidget {
                 crossAxisCount: crossAxisCount,
                 crossAxisSpacing: 12,
                 mainAxisSpacing: 12,
-                childAspectRatio: 1.3,
+                childAspectRatio: aspectRatio,
               ),
               itemCount: actions.length,
               itemBuilder: (context, index) {
