@@ -1093,6 +1093,426 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Registro de comunicación'**
   String get panicChatLog;
+
+  /// No description provided for @visitorsTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Control de Visitantes'**
+  String get visitorsTitle;
+
+  /// No description provided for @visitorsPasses.
+  ///
+  /// In es, this message translates to:
+  /// **'Mis Pases'**
+  String get visitorsPasses;
+
+  /// No description provided for @visitorsHistory.
+  ///
+  /// In es, this message translates to:
+  /// **'Historial'**
+  String get visitorsHistory;
+
+  /// No description provided for @createPass.
+  ///
+  /// In es, this message translates to:
+  /// **'Crear Pase'**
+  String get createPass;
+
+  /// No description provided for @activePasses.
+  ///
+  /// In es, this message translates to:
+  /// **'Pases Activos'**
+  String get activePasses;
+
+  /// No description provided for @noPasses.
+  ///
+  /// In es, this message translates to:
+  /// **'No tienes pases activos'**
+  String get noPasses;
+
+  /// No description provided for @noPassesHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Crea un pase para que tu visitante ingrese fácilmente'**
+  String get noPassesHint;
+
+  /// No description provided for @noHistory.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin registros de visitas'**
+  String get noHistory;
+
+  /// No description provided for @noHistoryHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Aquí verás el historial de ingresos a tu residencia'**
+  String get noHistoryHint;
+
+  /// No description provided for @visitorName.
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre completo del visitante'**
+  String get visitorName;
+
+  /// No description provided for @visitorDpi.
+  ///
+  /// In es, this message translates to:
+  /// **'DPI o CUI (opcional)'**
+  String get visitorDpi;
+
+  /// No description provided for @visitorPlate.
+  ///
+  /// In es, this message translates to:
+  /// **'Placa del vehículo (opcional)'**
+  String get visitorPlate;
+
+  /// No description provided for @visitType.
+  ///
+  /// In es, this message translates to:
+  /// **'Tipo de visita'**
+  String get visitType;
+
+  /// No description provided for @visitTypeFamily.
+  ///
+  /// In es, this message translates to:
+  /// **'Familiar'**
+  String get visitTypeFamily;
+
+  /// No description provided for @visitTypeDelivery.
+  ///
+  /// In es, this message translates to:
+  /// **'Proveedor / Delivery'**
+  String get visitTypeDelivery;
+
+  /// No description provided for @visitTypeService.
+  ///
+  /// In es, this message translates to:
+  /// **'Servicio Frecuente'**
+  String get visitTypeService;
+
+  /// No description provided for @visitTypeOther.
+  ///
+  /// In es, this message translates to:
+  /// **'Otro'**
+  String get visitTypeOther;
+
+  /// No description provided for @validFrom.
+  ///
+  /// In es, this message translates to:
+  /// **'Válido desde'**
+  String get validFrom;
+
+  /// No description provided for @validUntil.
+  ///
+  /// In es, this message translates to:
+  /// **'Válido hasta'**
+  String get validUntil;
+
+  /// No description provided for @savePass.
+  ///
+  /// In es, this message translates to:
+  /// **'Guardar y Generar QR'**
+  String get savePass;
+
+  /// No description provided for @passCreated.
+  ///
+  /// In es, this message translates to:
+  /// **'Pase creado exitosamente'**
+  String get passCreated;
+
+  /// No description provided for @shareViaWhatsapp.
+  ///
+  /// In es, this message translates to:
+  /// **'Compartir por WhatsApp'**
+  String get shareViaWhatsapp;
+
+  /// No description provided for @sharePass.
+  ///
+  /// In es, this message translates to:
+  /// **'Compartir Pase'**
+  String get sharePass;
+
+  /// No description provided for @qrPassTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Pase QR de Ingreso'**
+  String get qrPassTitle;
+
+  /// No description provided for @qrShareMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Hola, aquí está tu pase QR para ingresar a {residency}, {unit}. Muestra este código en la garita.'**
+  String qrShareMessage(String residency, String unit);
+
+  /// No description provided for @copyLink.
+  ///
+  /// In es, this message translates to:
+  /// **'Copiar enlace'**
+  String get copyLink;
+
+  /// No description provided for @passDetails.
+  ///
+  /// In es, this message translates to:
+  /// **'Detalles del pase'**
+  String get passDetails;
+
+  /// No description provided for @closeQr.
+  ///
+  /// In es, this message translates to:
+  /// **'Cerrar'**
+  String get closeQr;
+
+  /// No description provided for @visitorStatusEntered.
+  ///
+  /// In es, this message translates to:
+  /// **'Ingresó'**
+  String get visitorStatusEntered;
+
+  /// No description provided for @visitorStatusExpected.
+  ///
+  /// In es, this message translates to:
+  /// **'Esperado'**
+  String get visitorStatusExpected;
+
+  /// No description provided for @visitorStatusExpired.
+  ///
+  /// In es, this message translates to:
+  /// **'Expirado'**
+  String get visitorStatusExpired;
+
+  /// No description provided for @visitorStatusAtGate.
+  ///
+  /// In es, this message translates to:
+  /// **'En la garita'**
+  String get visitorStatusAtGate;
+
+  /// No description provided for @visitorEntryTime.
+  ///
+  /// In es, this message translates to:
+  /// **'Hora de ingreso'**
+  String get visitorEntryTime;
+
+  /// No description provided for @visitorPlateLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Placa'**
+  String get visitorPlateLabel;
+
+  /// No description provided for @visitorLiveNow.
+  ///
+  /// In es, this message translates to:
+  /// **'EN VIVO'**
+  String get visitorLiveNow;
+
+  /// No description provided for @visitorAtGateMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu visitante {name} está en la garita esperando autorización'**
+  String visitorAtGateMessage(String name);
+
+  /// No description provided for @authorizeEntry.
+  ///
+  /// In es, this message translates to:
+  /// **'Autorizar Ingreso'**
+  String get authorizeEntry;
+
+  /// No description provided for @denyEntry.
+  ///
+  /// In es, this message translates to:
+  /// **'Denegar'**
+  String get denyEntry;
+
+  /// No description provided for @today.
+  ///
+  /// In es, this message translates to:
+  /// **'Hoy'**
+  String get today;
+
+  /// No description provided for @yesterday.
+  ///
+  /// In es, this message translates to:
+  /// **'Ayer'**
+  String get yesterday;
+
+  /// No description provided for @announcementsTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Anuncios'**
+  String get announcementsTitle;
+
+  /// No description provided for @announcementsCategoryUrgent.
+  ///
+  /// In es, this message translates to:
+  /// **'Urgente'**
+  String get announcementsCategoryUrgent;
+
+  /// No description provided for @announcementsCategoryMaintenance.
+  ///
+  /// In es, this message translates to:
+  /// **'Mantenimiento'**
+  String get announcementsCategoryMaintenance;
+
+  /// No description provided for @announcementsCategoryInfo.
+  ///
+  /// In es, this message translates to:
+  /// **'Informativo'**
+  String get announcementsCategoryInfo;
+
+  /// No description provided for @announcementsAll.
+  ///
+  /// In es, this message translates to:
+  /// **'Todos'**
+  String get announcementsAll;
+
+  /// No description provided for @announcementsUnread.
+  ///
+  /// In es, this message translates to:
+  /// **'No leídos'**
+  String get announcementsUnread;
+
+  /// No description provided for @announcementsEmpty.
+  ///
+  /// In es, this message translates to:
+  /// **'No hay anuncios'**
+  String get announcementsEmpty;
+
+  /// No description provided for @announcementsEmptyHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Aquí aparecerán los comunicados de la administración'**
+  String get announcementsEmptyHint;
+
+  /// No description provided for @announcementsPostedBy.
+  ///
+  /// In es, this message translates to:
+  /// **'Publicado por {author}'**
+  String announcementsPostedBy(String author);
+
+  /// No description provided for @announcementsTimeAgo.
+  ///
+  /// In es, this message translates to:
+  /// **'hace {time}'**
+  String announcementsTimeAgo(String time);
+
+  /// No description provided for @announcementsMinutes.
+  ///
+  /// In es, this message translates to:
+  /// **'{count} min'**
+  String announcementsMinutes(int count);
+
+  /// No description provided for @announcementsHours.
+  ///
+  /// In es, this message translates to:
+  /// **'{count} h'**
+  String announcementsHours(int count);
+
+  /// No description provided for @announcementsDays.
+  ///
+  /// In es, this message translates to:
+  /// **'{count} d'**
+  String announcementsDays(int count);
+
+  /// No description provided for @announcementsDetail.
+  ///
+  /// In es, this message translates to:
+  /// **'Detalle del anuncio'**
+  String get announcementsDetail;
+
+  /// No description provided for @announcementsShareText.
+  ///
+  /// In es, this message translates to:
+  /// **'📢 Anuncio de {residency}:\n\n{title}\n\n{body}'**
+  String announcementsShareText(String residency, String title, String body);
+
+  /// No description provided for @announcementsAttachments.
+  ///
+  /// In es, this message translates to:
+  /// **'Adjuntos'**
+  String get announcementsAttachments;
+
+  /// No description provided for @announcementsViewPdf.
+  ///
+  /// In es, this message translates to:
+  /// **'Ver documento'**
+  String get announcementsViewPdf;
+
+  /// No description provided for @announcementsMarkRead.
+  ///
+  /// In es, this message translates to:
+  /// **'Marcar como leído'**
+  String get announcementsMarkRead;
+
+  /// No description provided for @announcementsPullToRefresh.
+  ///
+  /// In es, this message translates to:
+  /// **'Desliza hacia abajo para actualizar'**
+  String get announcementsPullToRefresh;
+
+  /// No description provided for @announcementsRefreshing.
+  ///
+  /// In es, this message translates to:
+  /// **'Actualizando...'**
+  String get announcementsRefreshing;
+
+  /// No description provided for @announcementsMock1Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Corte de agua no programado'**
+  String get announcementsMock1Title;
+
+  /// No description provided for @announcementsMock1Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Se informa a todos los residentes que debido a una reparación de emergencia en la tubería principal, el servicio de agua será suspendido hoy de 14:00 a 18:00 hrs. Se recomienda almacenar agua con anticipación. Disculpe las molestias.'**
+  String get announcementsMock1Body;
+
+  /// No description provided for @announcementsMock2Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Mantenimiento del portón eléctrico'**
+  String get announcementsMock2Title;
+
+  /// No description provided for @announcementsMock2Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Se realizará mantenimiento preventivo al portón eléctrico principal este viernes 11 de octubre de 8:00 a 12:00 hrs. Durante este período, el ingreso será por el portón peatonal. Favor de informar a sus visitantes.'**
+  String get announcementsMock2Body;
+
+  /// No description provided for @announcementsMock3Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Asamblea General de Vecinos'**
+  String get announcementsMock3Title;
+
+  /// No description provided for @announcementsMock3Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Se convoca a todos los propietarios a la Asamblea General Ordinaria que se llevará a cabo el sábado 19 de octubre a las 10:00 hrs en el salón de usos múltiples. Temas a tratar: presupuesto 2025, elección de nueva junta directiva y mejoras en áreas comunes. Su asistencia es importante.'**
+  String get announcementsMock3Body;
+
+  /// No description provided for @announcementsMock4Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Fumigación de áreas comunes'**
+  String get announcementsMock4Title;
+
+  /// No description provided for @announcementsMock4Body.
+  ///
+  /// In es, this message translates to:
+  /// **'El próximo lunes 14 de octubre se realizará fumigación general en jardines, pasillos y áreas de juego infantil. Se recomienda mantener puertas y ventanas cerradas de 7:00 a 9:00 hrs y no permitir que mascotas accedan a las áreas tratadas durante 24 horas.'**
+  String get announcementsMock4Body;
+
+  /// No description provided for @announcementsMock5Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Nuevas reglas de uso de piscina'**
+  String get announcementsMock5Title;
+
+  /// No description provided for @announcementsMock5Body.
+  ///
+  /// In es, this message translates to:
+  /// **'A partir del 1 de noviembre, el horario de la piscina comunitaria será de 8:00 a 20:00 hrs. Se requiere el uso de gorro de baño y ducha previa. Menores de 12 años deben estar acompañados por un adulto. Consulte el reglamento completo en la oficina de administración.'**
+  String get announcementsMock5Body;
 }
 
 class _AppLocalizationsDelegate

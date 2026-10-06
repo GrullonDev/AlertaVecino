@@ -521,4 +521,236 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get panicChatLog => 'Communication log';
+
+  @override
+  String get visitorsTitle => 'Visitor Control';
+
+  @override
+  String get visitorsPasses => 'My Passes';
+
+  @override
+  String get visitorsHistory => 'History';
+
+  @override
+  String get createPass => 'Create Pass';
+
+  @override
+  String get activePasses => 'Active Passes';
+
+  @override
+  String get noPasses => 'No active passes';
+
+  @override
+  String get noPassesHint => 'Create a pass so your visitor can enter easily';
+
+  @override
+  String get noHistory => 'No visit records';
+
+  @override
+  String get noHistoryHint => 'Your entry history will appear here';
+
+  @override
+  String get visitorName => 'Visitor\'s full name';
+
+  @override
+  String get visitorDpi => 'DPI or CUI (optional)';
+
+  @override
+  String get visitorPlate => 'Vehicle license plate (optional)';
+
+  @override
+  String get visitType => 'Visit type';
+
+  @override
+  String get visitTypeFamily => 'Family';
+
+  @override
+  String get visitTypeDelivery => 'Vendor / Delivery';
+
+  @override
+  String get visitTypeService => 'Frequent Service';
+
+  @override
+  String get visitTypeOther => 'Other';
+
+  @override
+  String get validFrom => 'Valid from';
+
+  @override
+  String get validUntil => 'Valid until';
+
+  @override
+  String get savePass => 'Save & Generate QR';
+
+  @override
+  String get passCreated => 'Pass created successfully';
+
+  @override
+  String get shareViaWhatsapp => 'Share via WhatsApp';
+
+  @override
+  String get sharePass => 'Share Pass';
+
+  @override
+  String get qrPassTitle => 'Entry QR Pass';
+
+  @override
+  String qrShareMessage(String residency, String unit) {
+    return 'Hello, here is your QR pass to enter $residency, $unit. Show this code at the gate.';
+  }
+
+  @override
+  String get copyLink => 'Copy link';
+
+  @override
+  String get passDetails => 'Pass details';
+
+  @override
+  String get closeQr => 'Close';
+
+  @override
+  String get visitorStatusEntered => 'Entered';
+
+  @override
+  String get visitorStatusExpected => 'Expected';
+
+  @override
+  String get visitorStatusExpired => 'Expired';
+
+  @override
+  String get visitorStatusAtGate => 'At the gate';
+
+  @override
+  String get visitorEntryTime => 'Entry time';
+
+  @override
+  String get visitorPlateLabel => 'Plate';
+
+  @override
+  String get visitorLiveNow => 'LIVE';
+
+  @override
+  String visitorAtGateMessage(String name) {
+    return 'Your visitor $name is at the gate waiting for authorization';
+  }
+
+  @override
+  String get authorizeEntry => 'Authorize Entry';
+
+  @override
+  String get denyEntry => 'Deny';
+
+  @override
+  String get today => 'Today';
+
+  @override
+  String get yesterday => 'Yesterday';
+
+  @override
+  String get announcementsTitle => 'Announcements';
+
+  @override
+  String get announcementsCategoryUrgent => 'Urgent';
+
+  @override
+  String get announcementsCategoryMaintenance => 'Maintenance';
+
+  @override
+  String get announcementsCategoryInfo => 'Informational';
+
+  @override
+  String get announcementsAll => 'All';
+
+  @override
+  String get announcementsUnread => 'Unread';
+
+  @override
+  String get announcementsEmpty => 'No announcements';
+
+  @override
+  String get announcementsEmptyHint =>
+      'Administration notices will appear here';
+
+  @override
+  String announcementsPostedBy(String author) {
+    return 'Posted by $author';
+  }
+
+  @override
+  String announcementsTimeAgo(String time) {
+    return '$time ago';
+  }
+
+  @override
+  String announcementsMinutes(int count) {
+    return '$count min';
+  }
+
+  @override
+  String announcementsHours(int count) {
+    return '$count h';
+  }
+
+  @override
+  String announcementsDays(int count) {
+    return '$count d';
+  }
+
+  @override
+  String get announcementsDetail => 'Announcement detail';
+
+  @override
+  String announcementsShareText(String residency, String title, String body) {
+    return '📢 Announcement from $residency:\n\n$title\n\n$body';
+  }
+
+  @override
+  String get announcementsAttachments => 'Attachments';
+
+  @override
+  String get announcementsViewPdf => 'View document';
+
+  @override
+  String get announcementsMarkRead => 'Mark as read';
+
+  @override
+  String get announcementsPullToRefresh => 'Pull down to refresh';
+
+  @override
+  String get announcementsRefreshing => 'Refreshing...';
+
+  @override
+  String get announcementsMock1Title => 'Unscheduled water outage';
+
+  @override
+  String get announcementsMock1Body =>
+      'All residents are informed that due to an emergency repair on the main pipeline, water service will be suspended today from 2:00 PM to 6:00 PM. We recommend storing water in advance. We apologize for the inconvenience.';
+
+  @override
+  String get announcementsMock2Title => 'Electric gate maintenance';
+
+  @override
+  String get announcementsMock2Body =>
+      'Preventive maintenance will be performed on the main electric gate this Friday, October 11, from 8:00 AM to 12:00 PM. During this time, entry will be through the pedestrian gate. Please inform your visitors.';
+
+  @override
+  String get announcementsMock3Title => 'General Residents Assembly';
+
+  @override
+  String get announcementsMock3Body =>
+      'All property owners are invited to the Ordinary General Assembly to be held on Saturday, October 19, at 10:00 AM in the multipurpose hall. Topics: 2025 budget, new board election, and common area improvements. Your attendance is important.';
+
+  @override
+  String get announcementsMock4Title => 'Common area fumigation';
+
+  @override
+  String get announcementsMock4Body =>
+      'Next Monday, October 14, general fumigation will be carried out in gardens, hallways, and children\'s play areas. We recommend keeping doors and windows closed from 7:00 to 9:00 AM and not allowing pets to access treated areas for 24 hours.';
+
+  @override
+  String get announcementsMock5Title => 'New pool usage rules';
+
+  @override
+  String get announcementsMock5Body =>
+      'Starting November 1, the community pool hours will be 8:00 AM to 8:00 PM. Swimming caps and pre-swim showers are required. Children under 12 must be accompanied by an adult. See the full rules at the administration office.';
 }

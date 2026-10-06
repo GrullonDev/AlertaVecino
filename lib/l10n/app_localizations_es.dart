@@ -523,4 +523,239 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get panicChatLog => 'Registro de comunicación';
+
+  @override
+  String get visitorsTitle => 'Control de Visitantes';
+
+  @override
+  String get visitorsPasses => 'Mis Pases';
+
+  @override
+  String get visitorsHistory => 'Historial';
+
+  @override
+  String get createPass => 'Crear Pase';
+
+  @override
+  String get activePasses => 'Pases Activos';
+
+  @override
+  String get noPasses => 'No tienes pases activos';
+
+  @override
+  String get noPassesHint =>
+      'Crea un pase para que tu visitante ingrese fácilmente';
+
+  @override
+  String get noHistory => 'Sin registros de visitas';
+
+  @override
+  String get noHistoryHint =>
+      'Aquí verás el historial de ingresos a tu residencia';
+
+  @override
+  String get visitorName => 'Nombre completo del visitante';
+
+  @override
+  String get visitorDpi => 'DPI o CUI (opcional)';
+
+  @override
+  String get visitorPlate => 'Placa del vehículo (opcional)';
+
+  @override
+  String get visitType => 'Tipo de visita';
+
+  @override
+  String get visitTypeFamily => 'Familiar';
+
+  @override
+  String get visitTypeDelivery => 'Proveedor / Delivery';
+
+  @override
+  String get visitTypeService => 'Servicio Frecuente';
+
+  @override
+  String get visitTypeOther => 'Otro';
+
+  @override
+  String get validFrom => 'Válido desde';
+
+  @override
+  String get validUntil => 'Válido hasta';
+
+  @override
+  String get savePass => 'Guardar y Generar QR';
+
+  @override
+  String get passCreated => 'Pase creado exitosamente';
+
+  @override
+  String get shareViaWhatsapp => 'Compartir por WhatsApp';
+
+  @override
+  String get sharePass => 'Compartir Pase';
+
+  @override
+  String get qrPassTitle => 'Pase QR de Ingreso';
+
+  @override
+  String qrShareMessage(String residency, String unit) {
+    return 'Hola, aquí está tu pase QR para ingresar a $residency, $unit. Muestra este código en la garita.';
+  }
+
+  @override
+  String get copyLink => 'Copiar enlace';
+
+  @override
+  String get passDetails => 'Detalles del pase';
+
+  @override
+  String get closeQr => 'Cerrar';
+
+  @override
+  String get visitorStatusEntered => 'Ingresó';
+
+  @override
+  String get visitorStatusExpected => 'Esperado';
+
+  @override
+  String get visitorStatusExpired => 'Expirado';
+
+  @override
+  String get visitorStatusAtGate => 'En la garita';
+
+  @override
+  String get visitorEntryTime => 'Hora de ingreso';
+
+  @override
+  String get visitorPlateLabel => 'Placa';
+
+  @override
+  String get visitorLiveNow => 'EN VIVO';
+
+  @override
+  String visitorAtGateMessage(String name) {
+    return 'Tu visitante $name está en la garita esperando autorización';
+  }
+
+  @override
+  String get authorizeEntry => 'Autorizar Ingreso';
+
+  @override
+  String get denyEntry => 'Denegar';
+
+  @override
+  String get today => 'Hoy';
+
+  @override
+  String get yesterday => 'Ayer';
+
+  @override
+  String get announcementsTitle => 'Anuncios';
+
+  @override
+  String get announcementsCategoryUrgent => 'Urgente';
+
+  @override
+  String get announcementsCategoryMaintenance => 'Mantenimiento';
+
+  @override
+  String get announcementsCategoryInfo => 'Informativo';
+
+  @override
+  String get announcementsAll => 'Todos';
+
+  @override
+  String get announcementsUnread => 'No leídos';
+
+  @override
+  String get announcementsEmpty => 'No hay anuncios';
+
+  @override
+  String get announcementsEmptyHint =>
+      'Aquí aparecerán los comunicados de la administración';
+
+  @override
+  String announcementsPostedBy(String author) {
+    return 'Publicado por $author';
+  }
+
+  @override
+  String announcementsTimeAgo(String time) {
+    return 'hace $time';
+  }
+
+  @override
+  String announcementsMinutes(int count) {
+    return '$count min';
+  }
+
+  @override
+  String announcementsHours(int count) {
+    return '$count h';
+  }
+
+  @override
+  String announcementsDays(int count) {
+    return '$count d';
+  }
+
+  @override
+  String get announcementsDetail => 'Detalle del anuncio';
+
+  @override
+  String announcementsShareText(String residency, String title, String body) {
+    return '📢 Anuncio de $residency:\n\n$title\n\n$body';
+  }
+
+  @override
+  String get announcementsAttachments => 'Adjuntos';
+
+  @override
+  String get announcementsViewPdf => 'Ver documento';
+
+  @override
+  String get announcementsMarkRead => 'Marcar como leído';
+
+  @override
+  String get announcementsPullToRefresh =>
+      'Desliza hacia abajo para actualizar';
+
+  @override
+  String get announcementsRefreshing => 'Actualizando...';
+
+  @override
+  String get announcementsMock1Title => 'Corte de agua no programado';
+
+  @override
+  String get announcementsMock1Body =>
+      'Se informa a todos los residentes que debido a una reparación de emergencia en la tubería principal, el servicio de agua será suspendido hoy de 14:00 a 18:00 hrs. Se recomienda almacenar agua con anticipación. Disculpe las molestias.';
+
+  @override
+  String get announcementsMock2Title => 'Mantenimiento del portón eléctrico';
+
+  @override
+  String get announcementsMock2Body =>
+      'Se realizará mantenimiento preventivo al portón eléctrico principal este viernes 11 de octubre de 8:00 a 12:00 hrs. Durante este período, el ingreso será por el portón peatonal. Favor de informar a sus visitantes.';
+
+  @override
+  String get announcementsMock3Title => 'Asamblea General de Vecinos';
+
+  @override
+  String get announcementsMock3Body =>
+      'Se convoca a todos los propietarios a la Asamblea General Ordinaria que se llevará a cabo el sábado 19 de octubre a las 10:00 hrs en el salón de usos múltiples. Temas a tratar: presupuesto 2025, elección de nueva junta directiva y mejoras en áreas comunes. Su asistencia es importante.';
+
+  @override
+  String get announcementsMock4Title => 'Fumigación de áreas comunes';
+
+  @override
+  String get announcementsMock4Body =>
+      'El próximo lunes 14 de octubre se realizará fumigación general en jardines, pasillos y áreas de juego infantil. Se recomienda mantener puertas y ventanas cerradas de 7:00 a 9:00 hrs y no permitir que mascotas accedan a las áreas tratadas durante 24 horas.';
+
+  @override
+  String get announcementsMock5Title => 'Nuevas reglas de uso de piscina';
+
+  @override
+  String get announcementsMock5Body =>
+      'A partir del 1 de noviembre, el horario de la piscina comunitaria será de 8:00 a 20:00 hrs. Se requiere el uso de gorro de baño y ducha previa. Menores de 12 años deben estar acompañados por un adulto. Consulte el reglamento completo en la oficina de administración.';
 }
