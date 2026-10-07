@@ -126,11 +126,7 @@ class MapDetailCard extends StatelessWidget {
                   style: IconButton.styleFrom(
                     backgroundColor: cs.outlineVariant,
                   ),
-                  icon: Icon(
-                    Icons.close,
-                    size: 18,
-                    color: cs.onSurfaceVariant,
-                  ),
+                  icon: Icon(Icons.close, size: 18, color: cs.onSurfaceVariant),
                 ),
               ),
             ],

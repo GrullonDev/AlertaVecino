@@ -54,7 +54,7 @@ class DashboardQuickActions extends StatelessWidget {
             final crossAxisCount = constraints.maxWidth > 500 ? 3 : 2;
             final itemWidth =
                 (constraints.maxWidth - 12 * (crossAxisCount - 1)) /
-                    crossAxisCount;
+                crossAxisCount;
             final aspectRatio = itemWidth < 140 ? 1.1 : 1.3;
             return GridView.builder(
               shrinkWrap: true,
