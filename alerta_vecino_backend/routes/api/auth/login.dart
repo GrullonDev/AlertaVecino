@@ -28,7 +28,6 @@ Future<Response> onRequest(RequestContext context) async {
 
     // 4. Responder con éxito simulando la entrega del Token
     return Response.json(
-      statusCode: HttpStatus.ok,
       body: {
         'message': 'Login exitoso',
         'token': 'jwt_token_ejemplo_12345',
