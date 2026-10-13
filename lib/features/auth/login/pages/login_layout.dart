@@ -10,6 +10,7 @@ import 'package:neighbour_alert/features/auth/login/widgets/login_header.dart';
 import 'package:neighbour_alert/features/auth/login/widgets/login_remember_row.dart';
 import 'package:neighbour_alert/features/auth/login/widgets/option_login.dart';
 import 'package:neighbour_alert/l10n/app_localizations.dart';
+import 'package:neighbour_alert/utils/widgets/error_banner.dart';
 
 class LoginLayout extends StatelessWidget {
   const LoginLayout({super.key});
@@ -57,10 +58,22 @@ class LoginLayout extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 const LoginRememberRow(),
+                if (logic.hasError) ...[
+                  const SizedBox(height: 16),
+                  ErrorBanner(message: logic.errorMessage!),
+                ],
                 const SizedBox(height: 24),
                 ElevatedButton(
-                  onPressed: () => logic.login(context),
-                  child: Text(l10n.login),
+                  onPressed: logic.isLoading
+                      ? null
+                      : () => logic.login(context),
+                  child: logic.isLoading
+                      ? const SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : Text(l10n.login),
                 ),
                 const SizedBox(height: 24),
                 const LoginDivider(),

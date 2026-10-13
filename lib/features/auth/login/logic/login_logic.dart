@@ -2,6 +2,7 @@ import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
 import 'package:neighbour_alert/features/auth/login/data/repository.dart';
+import 'package:neighbour_alert/features/auth/login/model/login_error.dart';
 import 'package:neighbour_alert/features/auth/login/model/login_request.dart';
 import 'package:neighbour_alert/l10n/app_localizations.dart';
 import 'package:neighbour_alert/utils/router/route_path.dart';
@@ -18,6 +19,10 @@ class LoginLogic extends ChangeNotifier {
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+
+  String? _errorMessage;
+  String? get errorMessage => _errorMessage;
+  bool get hasError => _errorMessage != null;
 
   void togglePasswordVisibility() {
     obscurePassword.value = !obscurePassword.value;
@@ -40,6 +45,8 @@ class LoginLogic extends ChangeNotifier {
   Future<void> login(BuildContext context) async {
     if (!(formKey.currentState?.validate() ?? false)) return;
 
+    final l10n = AppLocalizations.of(context)!;
+    setError(null);
     setLoading(true);
 
     final user = userController.text.trim();
@@ -47,28 +54,62 @@ class LoginLogic extends ChangeNotifier {
 
     try {
       final request = LoginRequest(email: user, password: password);
-      final result = await _repository
-          .login(request)
-          .timeout(const Duration(seconds: 10));
-      setLoading(false);
+      final result = await _repository.login(request);
+
+      if (!result.isValid) {
+        throw const LoginException(LoginErrorType.badResponse);
+      }
 
       if (!context.mounted) return;
+      setLoading(false);
       Navigator.pushReplacementNamed(
         context,
         RoutePath.home,
         arguments: result.user,
       );
-    } catch (e) {
+    } on LoginException catch (e) {
       dev.log('Login error: $e');
-      setLoading(false);
-
       if (!context.mounted) return;
-      Navigator.pushReplacementNamed(context, RoutePath.home);
+      setLoading(false);
+      setError(_messageFor(e, l10n));
+    } catch (e) {
+      dev.log('Login error inesperado: $e');
+      if (!context.mounted) return;
+      setLoading(false);
+      setError(l10n.loginErrorUnexpected);
+    }
+  }
+
+  String _messageFor(LoginException error, AppLocalizations l10n) {
+    switch (error.type) {
+      case LoginErrorType.invalidCredentials:
+      case LoginErrorType.notFound:
+        return l10n.loginErrorInvalidCredentials;
+      case LoginErrorType.validation:
+        return error.serverMessage ?? l10n.loginErrorValidation;
+      case LoginErrorType.conflict:
+        return error.serverMessage ?? l10n.loginErrorConflict;
+      case LoginErrorType.server:
+        return l10n.loginErrorServer;
+      case LoginErrorType.timeout:
+        return l10n.loginErrorTimeout;
+      case LoginErrorType.connection:
+        return l10n.loginErrorConnection;
+      case LoginErrorType.badResponse:
+        return l10n.loginErrorBadResponse;
+      case LoginErrorType.unknown:
+        return l10n.loginErrorUnexpected;
     }
   }
 
   void setLoading(bool value) {
     _isLoading = value;
+    notifyListeners();
+  }
+
+  void setError(String? value) {
+    if (_errorMessage == value) return;
+    _errorMessage = value;
     notifyListeners();
   }
 
