@@ -100,6 +100,40 @@ class AppLocalizationsEn extends AppLocalizations {
       'An unexpected error occurred. Try again';
 
   @override
+  String get completeProfileTitle => 'Complete your details';
+
+  @override
+  String get completeProfileSubtitle =>
+      'You haven\'t set your residency and unit yet. Select them to continue.';
+
+  @override
+  String get completeProfileErrorValidation =>
+      'Invalid data. Check the information entered';
+
+  @override
+  String get completeProfileErrorUnauthorized =>
+      'Your session expired or is invalid. Please log in again';
+
+  @override
+  String get completeProfileErrorServer =>
+      'Server error. Please try again later';
+
+  @override
+  String get completeProfileErrorTimeout =>
+      'The server took too long to respond. Try again';
+
+  @override
+  String get completeProfileErrorConnection =>
+      'Could not connect to the server. Check your connection';
+
+  @override
+  String get completeProfileErrorBadResponse => 'Invalid server response';
+
+  @override
+  String get completeProfileErrorUnexpected =>
+      'An unexpected error occurred. Try again';
+
+  @override
   String get register => 'Register';
 
   @override

@@ -33,6 +33,16 @@
   "registerErrorBadResponse": "Respuesta inválida del servidor",
   "registerErrorUnexpected": "Ocurrió un error inesperado. Intenta de nuevo",
 
+  "completeProfileTitle": "Completa tus datos",
+  "completeProfileSubtitle": "Aún no registras tu residencia y unidad. Selecciónalas para continuar.",
+  "completeProfileErrorValidation": "Datos inválidos. Revisa la información ingresada",
+  "completeProfileErrorUnauthorized": "Tu sesión expiró o no es válida. Inicia sesión de nuevo",
+  "completeProfileErrorServer": "Error en el servidor. Intenta de nuevo más tarde",
+  "completeProfileErrorTimeout": "El servidor tardó demasiado en responder. Intenta de nuevo",
+  "completeProfileErrorConnection": "No se pudo conectar con el servidor. Verifica tu conexión",
+  "completeProfileErrorBadResponse": "Respuesta inválida del servidor",
+  "completeProfileErrorUnexpected": "Ocurrió un error inesperado. Intenta de nuevo",
+
   "register": "Registro",
   "createAccount": "Crea una cuenta en Alerta Vecinos",
   "fullName": "Nombre completo",

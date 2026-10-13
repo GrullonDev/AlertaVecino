@@ -33,6 +33,16 @@
   "registerErrorBadResponse": "Invalid server response",
   "registerErrorUnexpected": "An unexpected error occurred. Try again",
 
+  "completeProfileTitle": "Complete your details",
+  "completeProfileSubtitle": "You haven't set your residency and unit yet. Select them to continue.",
+  "completeProfileErrorValidation": "Invalid data. Check the information entered",
+  "completeProfileErrorUnauthorized": "Your session expired or is invalid. Please log in again",
+  "completeProfileErrorServer": "Server error. Please try again later",
+  "completeProfileErrorTimeout": "The server took too long to respond. Try again",
+  "completeProfileErrorConnection": "Could not connect to the server. Check your connection",
+  "completeProfileErrorBadResponse": "Invalid server response",
+  "completeProfileErrorUnexpected": "An unexpected error occurred. Try again",
+
   "register": "Register",
   "createAccount": "Create a Neighbor Alert account",
   "fullName": "Full name",

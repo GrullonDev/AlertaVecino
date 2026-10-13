@@ -103,6 +103,41 @@ class AppLocalizationsEs extends AppLocalizations {
       'Ocurrió un error inesperado. Intenta de nuevo';
 
   @override
+  String get completeProfileTitle => 'Completa tus datos';
+
+  @override
+  String get completeProfileSubtitle =>
+      'Aún no registras tu residencia y unidad. Selecciónalas para continuar.';
+
+  @override
+  String get completeProfileErrorValidation =>
+      'Datos inválidos. Revisa la información ingresada';
+
+  @override
+  String get completeProfileErrorUnauthorized =>
+      'Tu sesión expiró o no es válida. Inicia sesión de nuevo';
+
+  @override
+  String get completeProfileErrorServer =>
+      'Error en el servidor. Intenta de nuevo más tarde';
+
+  @override
+  String get completeProfileErrorTimeout =>
+      'El servidor tardó demasiado en responder. Intenta de nuevo';
+
+  @override
+  String get completeProfileErrorConnection =>
+      'No se pudo conectar con el servidor. Verifica tu conexión';
+
+  @override
+  String get completeProfileErrorBadResponse =>
+      'Respuesta inválida del servidor';
+
+  @override
+  String get completeProfileErrorUnexpected =>
+      'Ocurrió un error inesperado. Intenta de nuevo';
+
+  @override
   String get register => 'Registro';
 
   @override

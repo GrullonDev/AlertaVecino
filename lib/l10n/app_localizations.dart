@@ -266,6 +266,60 @@ abstract class AppLocalizations {
   /// **'Ocurrió un error inesperado. Intenta de nuevo'**
   String get registerErrorUnexpected;
 
+  /// No description provided for @completeProfileTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Completa tus datos'**
+  String get completeProfileTitle;
+
+  /// No description provided for @completeProfileSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Aún no registras tu residencia y unidad. Selecciónalas para continuar.'**
+  String get completeProfileSubtitle;
+
+  /// No description provided for @completeProfileErrorValidation.
+  ///
+  /// In es, this message translates to:
+  /// **'Datos inválidos. Revisa la información ingresada'**
+  String get completeProfileErrorValidation;
+
+  /// No description provided for @completeProfileErrorUnauthorized.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu sesión expiró o no es válida. Inicia sesión de nuevo'**
+  String get completeProfileErrorUnauthorized;
+
+  /// No description provided for @completeProfileErrorServer.
+  ///
+  /// In es, this message translates to:
+  /// **'Error en el servidor. Intenta de nuevo más tarde'**
+  String get completeProfileErrorServer;
+
+  /// No description provided for @completeProfileErrorTimeout.
+  ///
+  /// In es, this message translates to:
+  /// **'El servidor tardó demasiado en responder. Intenta de nuevo'**
+  String get completeProfileErrorTimeout;
+
+  /// No description provided for @completeProfileErrorConnection.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo conectar con el servidor. Verifica tu conexión'**
+  String get completeProfileErrorConnection;
+
+  /// No description provided for @completeProfileErrorBadResponse.
+  ///
+  /// In es, this message translates to:
+  /// **'Respuesta inválida del servidor'**
+  String get completeProfileErrorBadResponse;
+
+  /// No description provided for @completeProfileErrorUnexpected.
+  ///
+  /// In es, this message translates to:
+  /// **'Ocurrió un error inesperado. Intenta de nuevo'**
+  String get completeProfileErrorUnexpected;
+
   /// No description provided for @register.
   ///
   /// In es, this message translates to:
