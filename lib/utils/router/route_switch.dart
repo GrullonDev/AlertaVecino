@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:neighbour_alert/features/alerts/pages/alerts_page.dart';
+import 'package:neighbour_alert/features/auth/complete_profile/model/complete_profile_args.dart';
+import 'package:neighbour_alert/features/auth/complete_profile/pages/complete_profile_page.dart';
 import 'package:neighbour_alert/features/auth/login/pages/login_page.dart';
 import 'package:neighbour_alert/features/auth/pending_approval/pages/pending_approval_page.dart';
 import 'package:neighbour_alert/features/auth/register/model/registration_draft.dart';
@@ -30,6 +32,13 @@ class RouteSwitch {
         );
       case RoutePath.pendingApproval:
         return MaterialPageRoute(builder: (_) => const PendingApprovalPage());
+      case RoutePath.completeProfile:
+        final args = settings.arguments;
+        return MaterialPageRoute(
+          builder: (_) => args is ProfileCompletionArgs
+              ? CompleteProfilePage(args: args)
+              : const LoginPage(),
+        );
       case RoutePath.panic:
         return MaterialPageRoute(
           builder: (_) => const PanicTypeSelectionPage(),

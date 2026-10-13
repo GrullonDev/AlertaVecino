@@ -13,7 +13,7 @@ class LoginResponse {
       token: json['token'] as String? ?? '',
       user: json['user'] != null
           ? User.fromJson(json['user'] as Map<String, dynamic>)
-          : User(email: '', residency: '', house: ''),
+          : User(id: '', email: ''),
     );
   }
 

@@ -4,6 +4,7 @@ class RoutePath {
   static const String register = '/register';
   static const String selectResidency = '/select-residency';
   static const String pendingApproval = '/pending-approval';
+  static const String completeProfile = '/complete-profile';
   static const String userVerification = '/user-verification';
   static const String sectorSelection = '/sector-selection';
 

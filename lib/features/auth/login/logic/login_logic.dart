@@ -1,6 +1,7 @@
 import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
+import 'package:neighbour_alert/features/auth/complete_profile/model/complete_profile_args.dart';
 import 'package:neighbour_alert/features/auth/login/data/repository.dart';
 import 'package:neighbour_alert/features/auth/login/model/login_error.dart';
 import 'package:neighbour_alert/features/auth/login/model/login_request.dart';
@@ -62,11 +63,22 @@ class LoginLogic extends ChangeNotifier {
 
       if (!context.mounted) return;
       setLoading(false);
-      Navigator.pushReplacementNamed(
-        context,
-        RoutePath.home,
-        arguments: result.user,
-      );
+      if (result.user.hasCompleteProfile) {
+        Navigator.pushReplacementNamed(
+          context,
+          RoutePath.home,
+          arguments: result.user,
+        );
+      } else {
+        Navigator.pushReplacementNamed(
+          context,
+          RoutePath.completeProfile,
+          arguments: ProfileCompletionArgs(
+            token: result.token,
+            userId: result.user.id,
+          ),
+        );
+      }
     } on LoginException catch (e) {
       dev.log('Login error: $e');
       if (!context.mounted) return;
