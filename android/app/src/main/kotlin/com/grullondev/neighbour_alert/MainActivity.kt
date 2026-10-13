@@ -1,4 +1,4 @@
-package com.example.neighbour_alert
+package com.grullondev.neighbour_alert
 
 import io.flutter.embedding.android.FlutterActivity
 
