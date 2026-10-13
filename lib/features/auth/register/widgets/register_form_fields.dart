@@ -3,7 +3,18 @@ import 'package:neighbour_alert/features/auth/register/widgets/register_text_fie
 import 'package:neighbour_alert/l10n/app_localizations.dart';
 
 class RegisterFormFields extends StatefulWidget {
-  const RegisterFormFields({super.key});
+  const RegisterFormFields({
+    super.key,
+    required this.fullNameController,
+    required this.emailController,
+    required this.phoneController,
+    required this.passwordController,
+  });
+
+  final TextEditingController fullNameController;
+  final TextEditingController emailController;
+  final TextEditingController phoneController;
+  final TextEditingController passwordController;
 
   @override
   State<RegisterFormFields> createState() => _RegisterFormFieldsState();
@@ -21,6 +32,7 @@ class _RegisterFormFieldsState extends State<RegisterFormFields> {
         RegisterTextField(
           label: l10n.fullName,
           icon: Icons.person_outline,
+          controller: widget.fullNameController,
           keyboardType: TextInputType.name,
           validator: (v) =>
               (v == null || v.trim().isEmpty) ? l10n.fieldRequired : null,
@@ -29,6 +41,7 @@ class _RegisterFormFieldsState extends State<RegisterFormFields> {
         RegisterTextField(
           label: l10n.emailLower,
           icon: Icons.email_outlined,
+          controller: widget.emailController,
           keyboardType: TextInputType.emailAddress,
           validator: (v) {
             if (v == null || v.trim().isEmpty) return l10n.fieldRequired;
@@ -42,6 +55,7 @@ class _RegisterFormFieldsState extends State<RegisterFormFields> {
         RegisterTextField(
           label: l10n.phoneNumber,
           icon: Icons.phone_outlined,
+          controller: widget.phoneController,
           keyboardType: TextInputType.phone,
           validator: (v) {
             if (v == null || v.trim().isEmpty) return l10n.fieldRequired;
@@ -53,6 +67,7 @@ class _RegisterFormFieldsState extends State<RegisterFormFields> {
         RegisterTextField(
           label: l10n.password,
           icon: Icons.lock_outline,
+          controller: widget.passwordController,
           obscureText: _obscurePassword,
           textInputAction: TextInputAction.done,
           suffixIcon: IconButton(

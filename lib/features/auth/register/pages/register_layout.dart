@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:neighbour_alert/features/auth/register/model/registration_draft.dart';
 import 'package:neighbour_alert/features/auth/register/widgets/register_footer.dart';
 import 'package:neighbour_alert/features/auth/register/widgets/register_form_fields.dart';
 import 'package:neighbour_alert/features/auth/register/widgets/register_header.dart';
@@ -14,11 +15,35 @@ class RegisterLayout extends StatefulWidget {
 
 class _RegisterLayoutState extends State<RegisterLayout> {
   final _formKey = GlobalKey<FormState>();
+  final _fullNameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _fullNameController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   void _handleRegister() {
-    if (_formKey.currentState?.validate() ?? false) {
-      Navigator.pushNamed(context, RoutePath.selectResidency);
-    }
+    if (!(_formKey.currentState?.validate() ?? false)) return;
+
+    final draft = RegistrationDraft(
+      fullName: _fullNameController.text.trim(),
+      email: _emailController.text.trim().toLowerCase(),
+      phone: _phoneController.text.trim(),
+      password: _passwordController.text,
+    );
+
+    Navigator.pushNamed(
+      context,
+      RoutePath.selectResidency,
+      arguments: draft,
+    );
   }
 
   @override
@@ -50,7 +75,12 @@ class _RegisterLayoutState extends State<RegisterLayout> {
             children: [
               const Center(child: RegisterHeader()),
               const SizedBox(height: 32),
-              const RegisterFormFields(),
+              RegisterFormFields(
+                fullNameController: _fullNameController,
+                emailController: _emailController,
+                phoneController: _phoneController,
+                passwordController: _passwordController,
+              ),
               const SizedBox(height: 32),
               ElevatedButton(
                 onPressed: _handleRegister,
