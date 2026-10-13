@@ -48,6 +48,61 @@ class AppLocalizationsEs extends AppLocalizations {
   String get dataProtected => 'Tus datos están protegidos y verificados';
 
   @override
+  String get loginErrorInvalidCredentials => 'Correo o contraseña incorrectos';
+
+  @override
+  String get loginErrorValidation =>
+      'Datos inválidos. Revisa la información ingresada';
+
+  @override
+  String get loginErrorConflict => 'El correo ya está registrado';
+
+  @override
+  String get loginErrorServer =>
+      'Error en el servidor. Intenta de nuevo más tarde';
+
+  @override
+  String get loginErrorTimeout =>
+      'El servidor tardó demasiado en responder. Intenta de nuevo';
+
+  @override
+  String get loginErrorConnection =>
+      'No se pudo conectar con el servidor. Verifica tu conexión';
+
+  @override
+  String get loginErrorBadResponse => 'Respuesta inválida del servidor';
+
+  @override
+  String get loginErrorUnexpected =>
+      'Ocurrió un error inesperado. Intenta de nuevo';
+
+  @override
+  String get registerErrorValidation =>
+      'Datos inválidos. Revisa la información ingresada';
+
+  @override
+  String get registerErrorConflict => 'El correo ya está registrado';
+
+  @override
+  String get registerErrorServer =>
+      'Error en el servidor. Intenta de nuevo más tarde';
+
+  @override
+  String get registerErrorTimeout =>
+      'El servidor tardó demasiado en responder. Intenta de nuevo';
+
+  @override
+  String get registerErrorConnection =>
+      'No se pudo conectar con el servidor. Verifica tu conexión';
+
+  @override
+  String get registerErrorBadResponse => 'Respuesta inválida del servidor';
+
+  @override
+  String get registerErrorUnexpected =>
+      'Ocurrió un error inesperado. Intenta de nuevo';
+
+  @override
   String get register => 'Registro';
 
   @override

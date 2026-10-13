@@ -48,6 +48,58 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dataProtected => 'Your data is protected and verified';
 
   @override
+  String get loginErrorInvalidCredentials => 'Incorrect email or password';
+
+  @override
+  String get loginErrorValidation =>
+      'Invalid data. Check the information entered';
+
+  @override
+  String get loginErrorConflict => 'The email is already registered';
+
+  @override
+  String get loginErrorServer => 'Server error. Please try again later';
+
+  @override
+  String get loginErrorTimeout =>
+      'The server took too long to respond. Try again';
+
+  @override
+  String get loginErrorConnection =>
+      'Could not connect to the server. Check your connection';
+
+  @override
+  String get loginErrorBadResponse => 'Invalid server response';
+
+  @override
+  String get loginErrorUnexpected => 'An unexpected error occurred. Try again';
+
+  @override
+  String get registerErrorValidation =>
+      'Invalid data. Check the information entered';
+
+  @override
+  String get registerErrorConflict => 'The email is already registered';
+
+  @override
+  String get registerErrorServer => 'Server error. Please try again later';
+
+  @override
+  String get registerErrorTimeout =>
+      'The server took too long to respond. Try again';
+
+  @override
+  String get registerErrorConnection =>
+      'Could not connect to the server. Check your connection';
+
+  @override
+  String get registerErrorBadResponse => 'Invalid server response';
+
+  @override
+  String get registerErrorUnexpected =>
+      'An unexpected error occurred. Try again';
+
+  @override
   String get register => 'Register';
 
   @override

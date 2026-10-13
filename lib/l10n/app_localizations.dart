@@ -176,6 +176,96 @@ abstract class AppLocalizations {
   /// **'Tus datos están protegidos y verificados'**
   String get dataProtected;
 
+  /// No description provided for @loginErrorInvalidCredentials.
+  ///
+  /// In es, this message translates to:
+  /// **'Correo o contraseña incorrectos'**
+  String get loginErrorInvalidCredentials;
+
+  /// No description provided for @loginErrorValidation.
+  ///
+  /// In es, this message translates to:
+  /// **'Datos inválidos. Revisa la información ingresada'**
+  String get loginErrorValidation;
+
+  /// No description provided for @loginErrorConflict.
+  ///
+  /// In es, this message translates to:
+  /// **'El correo ya está registrado'**
+  String get loginErrorConflict;
+
+  /// No description provided for @loginErrorServer.
+  ///
+  /// In es, this message translates to:
+  /// **'Error en el servidor. Intenta de nuevo más tarde'**
+  String get loginErrorServer;
+
+  /// No description provided for @loginErrorTimeout.
+  ///
+  /// In es, this message translates to:
+  /// **'El servidor tardó demasiado en responder. Intenta de nuevo'**
+  String get loginErrorTimeout;
+
+  /// No description provided for @loginErrorConnection.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo conectar con el servidor. Verifica tu conexión'**
+  String get loginErrorConnection;
+
+  /// No description provided for @loginErrorBadResponse.
+  ///
+  /// In es, this message translates to:
+  /// **'Respuesta inválida del servidor'**
+  String get loginErrorBadResponse;
+
+  /// No description provided for @loginErrorUnexpected.
+  ///
+  /// In es, this message translates to:
+  /// **'Ocurrió un error inesperado. Intenta de nuevo'**
+  String get loginErrorUnexpected;
+
+  /// No description provided for @registerErrorValidation.
+  ///
+  /// In es, this message translates to:
+  /// **'Datos inválidos. Revisa la información ingresada'**
+  String get registerErrorValidation;
+
+  /// No description provided for @registerErrorConflict.
+  ///
+  /// In es, this message translates to:
+  /// **'El correo ya está registrado'**
+  String get registerErrorConflict;
+
+  /// No description provided for @registerErrorServer.
+  ///
+  /// In es, this message translates to:
+  /// **'Error en el servidor. Intenta de nuevo más tarde'**
+  String get registerErrorServer;
+
+  /// No description provided for @registerErrorTimeout.
+  ///
+  /// In es, this message translates to:
+  /// **'El servidor tardó demasiado en responder. Intenta de nuevo'**
+  String get registerErrorTimeout;
+
+  /// No description provided for @registerErrorConnection.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo conectar con el servidor. Verifica tu conexión'**
+  String get registerErrorConnection;
+
+  /// No description provided for @registerErrorBadResponse.
+  ///
+  /// In es, this message translates to:
+  /// **'Respuesta inválida del servidor'**
+  String get registerErrorBadResponse;
+
+  /// No description provided for @registerErrorUnexpected.
+  ///
+  /// In es, this message translates to:
+  /// **'Ocurrió un error inesperado. Intenta de nuevo'**
+  String get registerErrorUnexpected;
+
   /// No description provided for @register.
   ///
   /// In es, this message translates to:

@@ -16,6 +16,23 @@
   "requestAccess": "Solicitar acceso como vecino",
   "dataProtected": "Tus datos están protegidos y verificados",
 
+  "loginErrorInvalidCredentials": "Correo o contraseña incorrectos",
+  "loginErrorValidation": "Datos inválidos. Revisa la información ingresada",
+  "loginErrorConflict": "El correo ya está registrado",
+  "loginErrorServer": "Error en el servidor. Intenta de nuevo más tarde",
+  "loginErrorTimeout": "El servidor tardó demasiado en responder. Intenta de nuevo",
+  "loginErrorConnection": "No se pudo conectar con el servidor. Verifica tu conexión",
+  "loginErrorBadResponse": "Respuesta inválida del servidor",
+  "loginErrorUnexpected": "Ocurrió un error inesperado. Intenta de nuevo",
+
+  "registerErrorValidation": "Datos inválidos. Revisa la información ingresada",
+  "registerErrorConflict": "El correo ya está registrado",
+  "registerErrorServer": "Error en el servidor. Intenta de nuevo más tarde",
+  "registerErrorTimeout": "El servidor tardó demasiado en responder. Intenta de nuevo",
+  "registerErrorConnection": "No se pudo conectar con el servidor. Verifica tu conexión",
+  "registerErrorBadResponse": "Respuesta inválida del servidor",
+  "registerErrorUnexpected": "Ocurrió un error inesperado. Intenta de nuevo",
+
   "register": "Registro",
   "createAccount": "Crea una cuenta en Alerta Vecinos",
   "fullName": "Nombre completo",
