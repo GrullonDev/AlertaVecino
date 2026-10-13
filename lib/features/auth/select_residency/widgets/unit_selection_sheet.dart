@@ -9,7 +9,7 @@ class UnitSelectionSheet extends StatefulWidget {
   });
 
   final String residencyName;
-  final VoidCallback onConfirm;
+  final void Function(String section, String unit) onConfirm;
 
   @override
   State<UnitSelectionSheet> createState() => _UnitSelectionSheetState();
@@ -17,10 +17,22 @@ class UnitSelectionSheet extends StatefulWidget {
 
 class _UnitSelectionSheetState extends State<UnitSelectionSheet> {
   final _formKey = GlobalKey<FormState>();
+  final _sectionController = TextEditingController();
+  final _unitController = TextEditingController();
+
+  @override
+  void dispose() {
+    _sectionController.dispose();
+    _unitController.dispose();
+    super.dispose();
+  }
 
   void _handleConfirm() {
     if (_formKey.currentState?.validate() ?? false) {
-      widget.onConfirm();
+      widget.onConfirm(
+        _sectionController.text.trim(),
+        _unitController.text.trim(),
+      );
     }
   }
 
@@ -60,6 +72,7 @@ class _UnitSelectionSheetState extends State<UnitSelectionSheet> {
             ),
             const SizedBox(height: 24),
             TextFormField(
+              controller: _sectionController,
               decoration: InputDecoration(
                 labelText: l10n.section,
                 prefixIcon: Icon(Icons.signpost_outlined, color: cs.primary),
@@ -70,6 +83,7 @@ class _UnitSelectionSheetState extends State<UnitSelectionSheet> {
             ),
             const SizedBox(height: 16),
             TextFormField(
+              controller: _unitController,
               decoration: InputDecoration(
                 labelText: l10n.unitNumber,
                 prefixIcon: Icon(Icons.home_outlined, color: cs.primary),
