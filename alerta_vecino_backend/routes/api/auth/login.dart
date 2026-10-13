@@ -96,6 +96,7 @@ Future<Response> onRequest(RequestContext context) async {
         'token': token,
         'status': status,
         'user': {
+          'id': user['id'].toString(),
           'email': user['email'] as String?,
           'residency': user['residency'] as String?,
           'house': user['house'] as String?,

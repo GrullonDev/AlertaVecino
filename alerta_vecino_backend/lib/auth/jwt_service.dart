@@ -30,4 +30,21 @@ class JwtService {
       expiresIn: const Duration(hours: 24),
     );
   }
+
+  /// Verifica un token de sesión y devuelve sus claims.
+  ///
+  /// Devuelve `null` si el token es inválido, ha expirado o fue firmado con
+  /// otra llave, para que el llamador responda `401` sin filtrar detalles.
+  static Map<String, dynamic>? verifySessionToken(String token) {
+    try {
+      final jwt = JWT.verify(token, SecretKey(Env.jwtSecret));
+      final payload = jwt.payload;
+      if (payload is Map) {
+        return Map<String, dynamic>.from(payload);
+      }
+      return null;
+    } catch (_) {
+      return null;
+    }
+  }
 }
