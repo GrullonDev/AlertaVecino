@@ -1,0 +1,34 @@
+# PostgreSQL local para AlertaVecino.
+#
+# Levanta la base de datos y aplica automáticamente los scripts de ./migrations
+# (solo durante la primera inicialización del volumen de datos).
+#
+#   podman compose up -d      (o: docker compose up -d)
+#
+# Las credenciales se toman del archivo .env del backend (mismo directorio).
+#
+# Nota (Windows/WSL): se usa "network_mode: host" porque nftables del
+# podman machine falla al aplicar reglas de red bridge (bug conocido).
+# Con red host, Postgres escucha directamente en ${DB_PORT} del host.
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: alerta_vecino_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    network_mode: host
+    command: ['-p', '${DB_PORT:-5432}']
+    volumes:
+      - alerta_vecino_pgdata:/var/lib/postgresql/data
+      - ./migrations:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${DB_USER} -d ${DB_NAME}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  alerta_vecino_pgdata:

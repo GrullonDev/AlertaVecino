@@ -12,5 +12,9 @@ pubspec.lock
 build/
 .dart_frog
 
+# Environment variables (credenciales de base de datos y JWT secret)
+.env
+.env.*
+
 # Test related files
 coverage/
