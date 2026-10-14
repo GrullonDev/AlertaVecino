@@ -52,17 +52,13 @@ Middleware jwtGuard() {
 }
 
 bool _isPublicRoute(String path) {
-  const publicPrefixes = [
+  const publicSegments = [
     '/auth/login',
     '/auth/register',
     '/auth/pending_approval',
-    '/api/auth/login',
-    '/api/auth/register',
-    '/api/auth/pending_approval',
     '/admin/',
-    '/api/admin/',
   ];
-  return publicPrefixes.any(path.startsWith);
+  return publicSegments.any(path.contains);
 }
 
 String? _extractBearer(String? header) {
