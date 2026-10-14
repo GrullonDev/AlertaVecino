@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 
+import 'package:neighbour_alert/core/session/session_service.dart';
 import 'package:neighbour_alert/features/auth/login/data/datasource.dart';
 import 'package:neighbour_alert/features/auth/login/data/repository.dart';
 import 'package:neighbour_alert/features/auth/complete_profile/data/datasource.dart'
@@ -14,10 +15,14 @@ import 'package:neighbour_alert/features/auth/register/data/repository.dart'
 final GetIt sl = GetIt.instance;
 
 Future<void> init() async {
-   initDependencies();
+  initDependencies();
 }
 
 void initDependencies() {
+  if (!sl.isRegistered<SessionService>()) {
+    sl.registerLazySingleton<SessionService>(() => SessionService());
+  }
+
   // DataSource -> Repository
   if (!sl.isRegistered<DataSource>()) {
     sl.registerLazySingleton<DataSource>(() => DataSourceImpl());
