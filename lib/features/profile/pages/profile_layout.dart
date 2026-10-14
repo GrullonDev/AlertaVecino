@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:neighbour_alert/config/app_theme.dart';
+import 'package:neighbour_alert/core/session/session_service.dart';
 import 'package:neighbour_alert/features/profile/widgets/profile_header.dart';
 import 'package:neighbour_alert/features/profile/widgets/profile_info_card.dart';
 import 'package:neighbour_alert/features/profile/widgets/profile_section.dart';
@@ -42,6 +44,8 @@ class _ProfileLayoutState extends State<ProfileLayout> {
     );
 
     if (confirmed == true && mounted) {
+      await context.read<SessionService>().clearSession();
+      if (!mounted) return;
       Navigator.pushNamedAndRemoveUntil(
         context,
         RoutePath.login,
@@ -101,14 +105,15 @@ class _ProfileLayoutState extends State<ProfileLayout> {
                   ProfileSectionItem(
                     icon: Icons.email_outlined,
                     title: l10n.email,
-                    subtitle: 'jorge.martinez@email.com',
+                    subtitle: context.watch<SessionService>().user?.email ??
+                        '',
                     showChevron: true,
                     onTap: () {},
                   ),
                   ProfileSectionItem(
                     icon: Icons.phone_outlined,
                     title: l10n.phone,
-                    subtitle: '+502 5555 1234',
+                    subtitle: '',
                     showChevron: true,
                     onTap: () {},
                   ),

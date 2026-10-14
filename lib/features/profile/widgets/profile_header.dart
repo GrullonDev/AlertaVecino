@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:neighbour_alert/core/session/session_service.dart';
 import 'package:neighbour_alert/l10n/app_localizations.dart';
 
 class ProfileHeader extends StatelessWidget {
@@ -9,6 +11,10 @@ class ProfileHeader extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     final theme = Theme.of(context);
+    final session = context.watch<SessionService>();
+    final user = session.user;
+    final displayName = user?.email ?? '';
+    final residencyLabel = user?.residency ?? l10n.profileResidenceLabel;
 
     return Column(
       children: [
@@ -53,10 +59,10 @@ class ProfileHeader extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 14),
-        Text('Jorge Martínez', style: theme.textTheme.headlineMedium),
+        Text(displayName, style: theme.textTheme.headlineMedium),
         const SizedBox(height: 4),
         Text(
-          'jorge.martinez@email.com',
+          user?.email ?? '',
           style: theme.textTheme.bodyMedium?.copyWith(
             color: cs.onSurfaceVariant,
           ),
@@ -69,7 +75,7 @@ class ProfileHeader extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(
-            l10n.profileResidenceLabel,
+            residencyLabel,
             style: theme.textTheme.labelMedium?.copyWith(
               color: cs.primary,
               fontWeight: FontWeight.w700,
