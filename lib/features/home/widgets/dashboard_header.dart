@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:neighbour_alert/core/session/session_service.dart';
 import 'package:neighbour_alert/l10n/app_localizations.dart';
 
 class DashboardHeader extends StatelessWidget {
@@ -16,6 +18,8 @@ class DashboardHeader extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     final theme = Theme.of(context);
+    final user = context.watch<SessionService>().user;
+    final name = user?.email.split('@').first ?? 'Vecino';
 
     return Row(
       children: [
@@ -34,11 +38,14 @@ class DashboardHeader extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${_greeting(l10n)}, Vecino',
+                '${_greeting(l10n)}, $name',
                 style: theme.textTheme.titleMedium,
               ),
               const SizedBox(height: 2),
-              Text(l10n.houseUnit('42'), style: theme.textTheme.bodySmall),
+              Text(
+                l10n.houseUnit(user?.house ?? '—'),
+                style: theme.textTheme.bodySmall,
+              ),
             ],
           ),
         ),

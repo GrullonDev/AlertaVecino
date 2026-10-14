@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:neighbour_alert/core/session/session_service.dart';
 import 'package:neighbour_alert/features/home/pages/home_layout.dart';
 import 'package:neighbour_alert/l10n/app_localizations.dart';
 import 'package:neighbour_alert/utils/router/route_path.dart';
@@ -32,6 +34,8 @@ class HomePage extends StatelessWidget {
     );
 
     if (shouldLogout == true && context.mounted) {
+      await context.read<SessionService>().clearSession();
+      if (!context.mounted) return;
       Navigator.pushNamedAndRemoveUntil(
         context,
         RoutePath.login,
