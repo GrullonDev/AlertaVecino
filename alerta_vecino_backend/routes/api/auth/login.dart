@@ -108,7 +108,9 @@ Future<Response> onRequest(RequestContext context) async {
       statusCode: HttpStatus.badRequest,
       body: {'error': 'Formato JSON inválido'},
     );
-  } catch (_) {
+  } catch (e, st) {
+    // ignore: avoid_print
+    print('[login] ERROR: $e\n$st');
     return Response.json(
       statusCode: HttpStatus.internalServerError,
       body: {'error': 'Error interno del servidor'},
