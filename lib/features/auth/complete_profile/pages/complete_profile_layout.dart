@@ -55,7 +55,11 @@ class CompleteProfileLayout extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(Icons.assignment_ind_outlined, size: 40, color: cs.primary),
+                Icon(
+                  Icons.assignment_ind_outlined,
+                  size: 40,
+                  color: cs.primary,
+                ),
                 const SizedBox(height: 12),
                 Text(
                   l10n.completeProfileTitle,

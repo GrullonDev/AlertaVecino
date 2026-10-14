@@ -13,7 +13,7 @@ class LoginLogic extends ChangeNotifier {
   LoginLogic({
     required Repository repository,
     required SessionService sessionService,
-  })  : _repository = repository,
+  }) : _repository = repository,
        _sessionService = sessionService;
 
   final Repository _repository;
@@ -67,18 +67,12 @@ class LoginLogic extends ChangeNotifier {
         throw const LoginException(LoginErrorType.badResponse);
       }
 
-      await _sessionService.saveSession(
-        token: result.token,
-        user: result.user,
-      );
+      await _sessionService.saveSession(token: result.token, user: result.user);
 
       if (!context.mounted) return;
       setLoading(false);
       if (result.user.hasCompleteProfile) {
-        Navigator.pushReplacementNamed(
-          context,
-          RoutePath.home,
-        );
+        Navigator.pushReplacementNamed(context, RoutePath.home);
       } else {
         Navigator.pushReplacementNamed(
           context,

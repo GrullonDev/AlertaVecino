@@ -105,8 +105,7 @@ class _ProfileLayoutState extends State<ProfileLayout> {
                   ProfileSectionItem(
                     icon: Icons.email_outlined,
                     title: l10n.email,
-                    subtitle: context.watch<SessionService>().user?.email ??
-                        '',
+                    subtitle: context.watch<SessionService>().user?.email ?? '',
                     showChevron: true,
                     onTap: () {},
                   ),

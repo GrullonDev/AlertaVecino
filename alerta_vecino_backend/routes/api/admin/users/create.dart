@@ -52,10 +52,7 @@ Future<Response> onRequest(RequestContext context) async {
   final email = (body['email'] as String?)?.trim().toLowerCase();
   final password = body['password'] as String?;
 
-  if (email == null ||
-      email.isEmpty ||
-      password == null ||
-      password.isEmpty) {
+  if (email == null || email.isEmpty || password == null || password.isEmpty) {
     return Response.json(
       statusCode: HttpStatus.badRequest,
       body: {'error': 'Faltan campos obligatorios (email, password)'},
@@ -87,21 +84,13 @@ Future<Response> onRequest(RequestContext context) async {
       parameters: {
         'email': TypedValue(Type.text, email),
         'hash': TypedValue(Type.text, passwordHash),
-        'first': firstName == null
-            ? null
-            : TypedValue(Type.text, firstName),
-        'last': lastName == null
-            ? null
-            : TypedValue(Type.text, lastName),
-        'phone': phone == null
-            ? null
-            : TypedValue(Type.text, phone),
+        'first': firstName == null ? null : TypedValue(Type.text, firstName),
+        'last': lastName == null ? null : TypedValue(Type.text, lastName),
+        'phone': phone == null ? null : TypedValue(Type.text, phone),
         'residency': residency == null
             ? null
             : TypedValue(Type.text, residency),
-        'house': house == null
-            ? null
-            : TypedValue(Type.text, house),
+        'house': house == null ? null : TypedValue(Type.text, house),
         'status': TypedValue(Type.text, status),
       },
     );

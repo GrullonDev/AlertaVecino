@@ -39,11 +39,7 @@ class _RegisterLayoutState extends State<RegisterLayout> {
       password: _passwordController.text,
     );
 
-    Navigator.pushNamed(
-      context,
-      RoutePath.selectResidency,
-      arguments: draft,
-    );
+    Navigator.pushNamed(context, RoutePath.selectResidency, arguments: draft);
   }
 
   @override

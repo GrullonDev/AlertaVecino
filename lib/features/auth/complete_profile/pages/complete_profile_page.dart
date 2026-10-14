@@ -15,9 +15,8 @@ class CompleteProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<CompleteProfileLogic>(
-      create: (context) => CompleteProfileLogic(
-        repository: sl.get<CompleteProfileRepository>(),
-      ),
+      create: (context) =>
+          CompleteProfileLogic(repository: sl.get<CompleteProfileRepository>()),
       child: AuthScaffold(
         showBackButton: true,
         child: CompleteProfileLayout(args: args),

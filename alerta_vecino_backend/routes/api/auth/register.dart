@@ -40,10 +40,7 @@ Future<Response> onRequest(RequestContext context) async {
   final email = (body['email'] as String?)?.trim().toLowerCase();
   final password = body['password'] as String?;
 
-  if (email == null ||
-      email.isEmpty ||
-      password == null ||
-      password.isEmpty) {
+  if (email == null || email.isEmpty || password == null || password.isEmpty) {
     return Response.json(
       statusCode: HttpStatus.badRequest,
       body: {'error': 'Faltan campos obligatorios (email y password)'},
@@ -96,8 +93,7 @@ Future<Response> onRequest(RequestContext context) async {
     return Response.json(
       statusCode: HttpStatus.created,
       body: {
-        'message':
-            'Solicitud enviada. Tu cuenta está pendiente de aprobación.',
+        'message': 'Solicitud enviada. Tu cuenta está pendiente de aprobación.',
         'user': {
           'id': user['id'].toString(),
           'email': user['email'] as String?,

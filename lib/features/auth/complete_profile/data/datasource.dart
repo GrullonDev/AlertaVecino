@@ -71,7 +71,9 @@ class CompleteProfileDataSourceImpl implements CompleteProfileDataSource {
       throw const CompleteProfileException(CompleteProfileErrorType.connection);
     }
 
-    dev.log('Complete-profile response ${response.statusCode}: ${response.body}');
+    dev.log(
+      'Complete-profile response ${response.statusCode}: ${response.body}',
+    );
     _handleResponse(response);
   }
 

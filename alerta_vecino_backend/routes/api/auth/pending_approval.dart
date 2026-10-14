@@ -12,8 +12,7 @@ Future<Response> onRequest(RequestContext context) async {
     return Response(statusCode: HttpStatus.methodNotAllowed);
   }
 
-  final email = context
-      .request.uri.queryParameters['email']
+  final email = context.request.uri.queryParameters['email']
       ?.trim()
       .toLowerCase();
 

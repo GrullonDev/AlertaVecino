@@ -22,7 +22,8 @@ Middleware jwtGuard() {
         return handler(context);
       }
 
-      final header = context.request.headers['authorization'] ??
+      final header =
+          context.request.headers['authorization'] ??
           context.request.headers['Authorization'];
       final token = _extractBearer(header);
 

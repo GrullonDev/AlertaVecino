@@ -4,7 +4,7 @@ import 'package:neighbour_alert/features/auth/login/model/user.dart';
 
 class SessionService extends ChangeNotifier {
   SessionService({FlutterSecureStorage? storage})
-      : _storage = storage ?? const FlutterSecureStorage();
+    : _storage = storage ?? const FlutterSecureStorage();
 
   final FlutterSecureStorage _storage;
 
@@ -24,10 +24,7 @@ class SessionService extends ChangeNotifier {
   User? get user => _user;
   bool get isAuthenticated => _token != null;
 
-  Future<void> saveSession({
-    required String token,
-    required User user,
-  }) async {
+  Future<void> saveSession({required String token, required User user}) async {
     _token = token;
     _user = user;
 
@@ -35,10 +32,7 @@ class SessionService extends ChangeNotifier {
     await _storage.write(key: _userIdKey, value: user.id);
     await _storage.write(key: _userEmailKey, value: user.email);
     if (user.residency != null) {
-      await _storage.write(
-        key: _userResidencyKey,
-        value: user.residency,
-      );
+      await _storage.write(key: _userResidencyKey, value: user.residency);
     }
     if (user.house != null) {
       await _storage.write(key: _userHouseKey, value: user.house);
@@ -64,10 +58,7 @@ class SessionService extends ChangeNotifier {
       await _storage.write(key: _userPhoneKey, value: phone);
     }
     if (residency != null) {
-      await _storage.write(
-        key: _userResidencyKey,
-        value: residency,
-      );
+      await _storage.write(key: _userResidencyKey, value: residency);
     }
     if (house != null) {
       await _storage.write(key: _userHouseKey, value: house);
@@ -93,12 +84,7 @@ class SessionService extends ChangeNotifier {
       final house = await _storage.read(key: _userHouseKey);
 
       _token = token;
-      _user = User(
-        id: id,
-        email: email,
-        residency: residency,
-        house: house,
-      );
+      _user = User(id: id, email: email, residency: residency, house: house);
       notifyListeners();
       return true;
     } catch (_) {

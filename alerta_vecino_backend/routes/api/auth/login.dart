@@ -66,7 +66,8 @@ Future<Response> onRequest(RequestContext context) async {
       return Response.json(
         statusCode: HttpStatus.forbidden,
         body: {
-          'error': 'Tu cuenta está pendiente de aprobación por la '
+          'error':
+              'Tu cuenta está pendiente de aprobación por la '
               'administración',
           'status': 'pending',
         },
