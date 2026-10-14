@@ -1,6 +1,7 @@
 import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
+import 'package:neighbour_alert/core/session/session_service.dart';
 import 'package:neighbour_alert/features/auth/complete_profile/model/complete_profile_args.dart';
 import 'package:neighbour_alert/features/auth/login/data/repository.dart';
 import 'package:neighbour_alert/features/auth/login/model/login_error.dart';
@@ -9,9 +10,14 @@ import 'package:neighbour_alert/l10n/app_localizations.dart';
 import 'package:neighbour_alert/utils/router/route_path.dart';
 
 class LoginLogic extends ChangeNotifier {
-  LoginLogic({required Repository repository}) : _repository = repository;
+  LoginLogic({
+    required Repository repository,
+    required SessionService sessionService,
+  })  : _repository = repository,
+       _sessionService = sessionService;
 
   final Repository _repository;
+  final SessionService _sessionService;
 
   final formKey = GlobalKey<FormState>();
   final userController = TextEditingController();
@@ -61,13 +67,17 @@ class LoginLogic extends ChangeNotifier {
         throw const LoginException(LoginErrorType.badResponse);
       }
 
+      await _sessionService.saveSession(
+        token: result.token,
+        user: result.user,
+      );
+
       if (!context.mounted) return;
       setLoading(false);
       if (result.user.hasCompleteProfile) {
         Navigator.pushReplacementNamed(
           context,
           RoutePath.home,
-          arguments: result.user,
         );
       } else {
         Navigator.pushReplacementNamed(
