@@ -4,6 +4,8 @@
 *.pyc
 *.swp
 .DS_Store
+# macOS AppleDouble metadata (created on shared/non-APFS volumes)
+._*
 .atom/
 .buildlog/
 .history
