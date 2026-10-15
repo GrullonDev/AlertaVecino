@@ -609,6 +609,46 @@ class AppLocalizationsEn extends AppLocalizations {
   String get panicChatLog => 'Communication log';
 
   @override
+  String get panicStatusPending => 'Sending alert...';
+
+  @override
+  String get panicStatusRegistered => 'Alert received by server';
+
+  @override
+  String get panicStatusNotified => 'Security has been notified';
+
+  @override
+  String get panicStatusAcknowledged => 'Security confirmed receipt';
+
+  @override
+  String get panicStatusResponding => 'A responder is on the way';
+
+  @override
+  String get panicStatusResolved => 'Incident resolved';
+
+  @override
+  String get panicStatusCancelled => 'Alert cancelled';
+
+  @override
+  String get panicStatusUnknown => 'Checking status...';
+
+  @override
+  String get panicTriggerFailed =>
+      'We could not confirm that your alert was sent';
+
+  @override
+  String get panicTriggerFailedRetry => 'Try again';
+
+  @override
+  String get panicTriggerFailedCall => 'Call emergency';
+
+  @override
+  String get panicSendingAlert => 'Sending your alert...';
+
+  @override
+  String get panicConnectionLost => 'Connection lost — retrying...';
+
+  @override
   String get visitorsTitle => 'Visitor Control';
 
   @override

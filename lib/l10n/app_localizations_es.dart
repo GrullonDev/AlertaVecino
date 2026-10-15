@@ -615,6 +615,46 @@ class AppLocalizationsEs extends AppLocalizations {
   String get panicChatLog => 'Registro de comunicación';
 
   @override
+  String get panicStatusPending => 'Enviando alerta...';
+
+  @override
+  String get panicStatusRegistered => 'Alerta recibida por el servidor';
+
+  @override
+  String get panicStatusNotified => 'Seguridad ha sido notificada';
+
+  @override
+  String get panicStatusAcknowledged => 'Seguridad confirmó recepción';
+
+  @override
+  String get panicStatusResponding => 'Un guardia va en camino';
+
+  @override
+  String get panicStatusResolved => 'Incidente resuelto';
+
+  @override
+  String get panicStatusCancelled => 'Alerta cancelada';
+
+  @override
+  String get panicStatusUnknown => 'Verificando estado...';
+
+  @override
+  String get panicTriggerFailed =>
+      'No pudimos confirmar que tu alerta fue enviada';
+
+  @override
+  String get panicTriggerFailedRetry => 'Reintentar';
+
+  @override
+  String get panicTriggerFailedCall => 'Llamar a emergencias';
+
+  @override
+  String get panicSendingAlert => 'Enviando tu alerta...';
+
+  @override
+  String get panicConnectionLost => 'Conexión perdida — reintentando...';
+
+  @override
   String get visitorsTitle => 'Control de Visitantes';
 
   @override
