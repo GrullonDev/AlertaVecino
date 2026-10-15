@@ -42,13 +42,14 @@ Future<Response> onRequest(
         'UPDATE panic_alerts '
         'SET status = @status, resolved_by = @resolved_by, '
         'resolved_at = NOW() '
-        'WHERE id = @id AND status = @active_status '
+        'WHERE id = @id AND status NOT IN (@resolved, @cancelled) '
         'RETURNING id, status, resolved_at',
       ),
       parameters: {
         'id': TypedValue(Type.uuid, alertId),
         'status': TypedValue(Type.text, 'resolved'),
-        'active_status': TypedValue(Type.text, 'active'),
+        'resolved': TypedValue(Type.text, 'resolved'),
+        'cancelled': TypedValue(Type.text, 'cancelled'),
         'resolved_by': TypedValue(Type.uuid, resolvedBy),
       },
     );
