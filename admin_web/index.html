@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlertaVecino — Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Login Screen -->
+  <div id="login-screen" class="screen active">
+    <div class="login-card">
+      <div class="login-logo">
+        <div class="logo-icon">🏘️</div>
+        <h1>AlertaVecino</h1>
+        <p class="subtitle">Panel de Administración</p>
+      </div>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="login-email">Correo electrónico</label>
+          <input type="email" id="login-email" placeholder="admin@alertavecino.com" required>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Contraseña</label>
+          <input type="password" id="login-password" placeholder="••••••••" required>
+        </div>
+        <div id="login-error" class="error-msg hidden"></div>
+        <button type="submit" id="login-btn" class="btn btn-primary btn-full">
+          <span class="btn-text">Iniciar Sesión</span>
+          <span class="btn-loader hidden"></span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main App -->
+  <div id="app-screen" class="screen">
+    <nav class="navbar">
+      <div class="nav-brand">
+        <span class="brand-icon">🏘️</span>
+        <span class="brand-text">AlertaVecino</span>
+      </div>
+      <div class="nav-tabs" id="nav-tabs">
+        <!-- Tabs rendered dynamically based on role -->
+      </div>
+      <div class="nav-user">
+        <span id="nav-user-email"></span>
+        <span id="nav-user-role" class="role-badge"></span>
+        <button id="logout-btn" class="btn btn-sm btn-outline">Salir</button>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <!-- Admin: User Management -->
+      <section id="panel-users" class="panel hidden">
+        <div class="panel-header">
+          <h2>Gestión de Residentes</h2>
+          <div class="filter-group">
+            <button class="filter-btn active" data-status="">Todos</button>
+            <button class="filter-btn" data-status="pending">Pendientes</button>
+            <button class="filter-btn" data-status="approved">Aprobados</button>
+            <button class="filter-btn" data-status="rejected">Rechazados</button>
+          </div>
+        </div>
+        <div id="users-loading" class="loading-state">
+          <div class="spinner"></div>
+          <p>Cargando usuarios…</p>
+        </div>
+        <div id="users-empty" class="empty-state hidden">
+          <p>No hay usuarios en esta categoría.</p>
+        </div>
+        <div id="users-table-wrap" class="hidden">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Residencia</th>
+                <th>Casa/Unidad</th>
+                <th>Estado</th>
+                <th>Registro</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="users-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Guard: Pass Scanner -->
+      <section id="panel-scanner" class="panel hidden">
+        <div class="panel-header">
+          <h2>Verificación de Pases</h2>
+        </div>
+        <div class="scanner-area">
+          <div class="search-box">
+            <label for="pass-id-input">ID del Pase (del código QR)</label>
+            <div class="search-row">
+              <input type="text" id="pass-id-input" placeholder="ej. 53fca3b3-b112-4d0b-ab34-dc50dc79d81e">
+              <button id="search-pass-btn" class="btn btn-primary">Buscar</button>
+            </div>
+            <p class="hint">Escanea el código QR del visitante o ingresa el ID manualmente.</p>
+          </div>
+          <div id="pass-error" class="error-msg hidden"></div>
+          <div id="pass-loading" class="loading-state hidden">
+            <div class="spinner"></div>
+            <p>Buscando pase…</p>
+          </div>
+          <div id="pass-result" class="hidden">
+            <div class="pass-card">
+              <div class="pass-header">
+                <div class="pass-status-badge" id="pass-status-badge">ESPERADO</div>
+                <div class="pass-type" id="pass-type">familiar</div>
+              </div>
+              <div class="pass-details">
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <span class="detail-label">Visitante</span>
+                    <span class="detail-value" id="pass-visitor-name">—</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-label">DPI</span>
+                    <span class="detail-value" id="pass-dpi">—</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-label">Placa</span>
+                    <span class="detail-value" id="pass-plate">—</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-label">Válido desde</span>
+                    <span class="detail-value" id="pass-valid-from">—</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-label">Válido hasta</span>
+                    <span class="detail-value" id="pass-valid-until">—</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-label">Hora de entrada</span>
+                    <span class="detail-value" id="pass-entry-time">—</span>
+                  </div>
+                </div>
+                <div class="resident-info">
+                  <h4>Residente que autorizó</h4>
+                  <div class="detail-grid">
+                    <div class="detail-item">
+                      <span class="detail-label">Nombre</span>
+                      <span class="detail-value" id="pass-resident-name">—</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">Email</span>
+                      <span class="detail-value" id="pass-resident-email">—</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">Residencia</span>
+                      <span class="detail-value" id="pass-resident-residency">—</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">Casa</span>
+                      <span class="detail-value" id="pass-resident-house">—</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pass-actions" id="pass-actions">
+                <!-- Dynamic action buttons -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Confirm Dialog -->
+  <div id="confirm-dialog" class="modal-overlay hidden">
+    <div class="modal-card">
+      <h3 id="confirm-title">Confirmar</h3>
+      <p id="confirm-message">¿Está seguro?</p>
+      <div class="modal-actions">
+        <button id="confirm-cancel" class="btn btn-outline">Cancelar</button>
+        <button id="confirm-ok" class="btn btn-primary">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
