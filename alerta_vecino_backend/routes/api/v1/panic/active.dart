@@ -24,11 +24,11 @@ Future<Response> onRequest(RequestContext context) async {
         'u.residency, u.house '
         'FROM panic_alerts pa '
         'JOIN users u ON u.id = pa.user_id '
-        'WHERE pa.status = @status '
+        'WHERE pa.status != @status '
         'ORDER BY pa.created_at DESC',
       ),
       parameters: {
-        'status': TypedValue(Type.text, 'active'),
+        'status': TypedValue(Type.text, 'resolved'),
       },
     );
 

@@ -71,9 +71,9 @@ Future<Response> onRequest(RequestContext context) async {
     final result = await pool.execute(
       Sql.named(
         'INSERT INTO panic_alerts '
-        '(user_id, latitude, longitude, emergency_type, description) '
-        'VALUES (@user_id, @lat::float8, @lng::float8, @type, @desc) '
-        'RETURNING id, created_at',
+        '(user_id, latitude, longitude, emergency_type, description, status) '
+        'VALUES (@user_id, @lat::float8, @lng::float8, @type, @desc, @status) '
+        'RETURNING id, status, created_at',
       ),
       parameters: {
         'user_id': TypedValue(Type.uuid, userId),
@@ -83,6 +83,7 @@ Future<Response> onRequest(RequestContext context) async {
         'desc': description == null || description.isEmpty
             ? null
             : TypedValue(Type.text, description),
+        'status': TypedValue(Type.text, 'registered'),
       },
     );
 
@@ -94,6 +95,7 @@ Future<Response> onRequest(RequestContext context) async {
         'message': 'Alerta de pánico emitida',
         'alert': {
           'id': row['id'].toString(),
+          'status': row['status'],
           'createdAt': (row['created_at'] as DateTime).toIso8601String(),
         },
       },

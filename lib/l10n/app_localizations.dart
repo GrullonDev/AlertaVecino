@@ -1238,6 +1238,84 @@ abstract class AppLocalizations {
   /// **'Registro de comunicación'**
   String get panicChatLog;
 
+  /// No description provided for @panicStatusPending.
+  ///
+  /// In es, this message translates to:
+  /// **'Enviando alerta...'**
+  String get panicStatusPending;
+
+  /// No description provided for @panicStatusRegistered.
+  ///
+  /// In es, this message translates to:
+  /// **'Alerta recibida por el servidor'**
+  String get panicStatusRegistered;
+
+  /// No description provided for @panicStatusNotified.
+  ///
+  /// In es, this message translates to:
+  /// **'Seguridad ha sido notificada'**
+  String get panicStatusNotified;
+
+  /// No description provided for @panicStatusAcknowledged.
+  ///
+  /// In es, this message translates to:
+  /// **'Seguridad confirmó recepción'**
+  String get panicStatusAcknowledged;
+
+  /// No description provided for @panicStatusResponding.
+  ///
+  /// In es, this message translates to:
+  /// **'Un guardia va en camino'**
+  String get panicStatusResponding;
+
+  /// No description provided for @panicStatusResolved.
+  ///
+  /// In es, this message translates to:
+  /// **'Incidente resuelto'**
+  String get panicStatusResolved;
+
+  /// No description provided for @panicStatusCancelled.
+  ///
+  /// In es, this message translates to:
+  /// **'Alerta cancelada'**
+  String get panicStatusCancelled;
+
+  /// No description provided for @panicStatusUnknown.
+  ///
+  /// In es, this message translates to:
+  /// **'Verificando estado...'**
+  String get panicStatusUnknown;
+
+  /// No description provided for @panicTriggerFailed.
+  ///
+  /// In es, this message translates to:
+  /// **'No pudimos confirmar que tu alerta fue enviada'**
+  String get panicTriggerFailed;
+
+  /// No description provided for @panicTriggerFailedRetry.
+  ///
+  /// In es, this message translates to:
+  /// **'Reintentar'**
+  String get panicTriggerFailedRetry;
+
+  /// No description provided for @panicTriggerFailedCall.
+  ///
+  /// In es, this message translates to:
+  /// **'Llamar a emergencias'**
+  String get panicTriggerFailedCall;
+
+  /// No description provided for @panicSendingAlert.
+  ///
+  /// In es, this message translates to:
+  /// **'Enviando tu alerta...'**
+  String get panicSendingAlert;
+
+  /// No description provided for @panicConnectionLost.
+  ///
+  /// In es, this message translates to:
+  /// **'Conexión perdida — reintentando...'**
+  String get panicConnectionLost;
+
   /// No description provided for @visitorsTitle.
   ///
   /// In es, this message translates to:

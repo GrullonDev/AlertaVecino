@@ -2,7 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
 import 'package:neighbour_alert/config/app_theme.dart';
+import 'package:neighbour_alert/core/session/session_service.dart';
+import 'package:neighbour_alert/features/panic/data/panic_service.dart';
 import 'package:neighbour_alert/features/panic/pages/panic_type_selection_page.dart';
 import 'package:neighbour_alert/l10n/app_localizations.dart';
 
@@ -13,12 +16,16 @@ class PanicActivePage extends StatefulWidget {
     required this.typeName,
     required this.typeColor,
     required this.typeIcon,
+    required this.alertId,
+    required this.initialStatus,
   });
 
   final PanicType panicType;
   final String typeName;
   final Color typeColor;
   final IconData typeIcon;
+  final String alertId;
+  final String initialStatus;
 
   @override
   State<PanicActivePage> createState() => _PanicActivePageState();
@@ -28,14 +35,26 @@ class _PanicActivePageState extends State<PanicActivePage>
     with SingleTickerProviderStateMixin {
   late final AnimationController _flashController;
   late final Timer _elapsedTimer;
+  Timer? _pollTimer;
   final _chatController = TextEditingController();
   final _chatMessages = <_ChatMsg>[];
   int _elapsedSeconds = 0;
+  late String _currentStatus;
+  bool _connectionLost = false;
+
+  static const _workflowOrder = [
+    'registered',
+    'notified',
+    'acknowledged',
+    'responding',
+    'resolved',
+  ];
 
   @override
   void initState() {
     super.initState();
     HapticFeedback.heavyImpact();
+    _currentStatus = widget.initialStatus;
 
     _flashController = AnimationController(
       vsync: this,
@@ -46,41 +65,69 @@ class _PanicActivePageState extends State<PanicActivePage>
       setState(() => _elapsedSeconds++);
     });
 
-    Future.delayed(const Duration(seconds: 2), () {
-      if (mounted) {
-        final l10n = AppLocalizations.of(context)!;
-        setState(() {
-          _chatMessages.add(
-            _ChatMsg(
-              sender: 'Sistema',
-              text: l10n.panicSecurityNotified,
-              isSystem: true,
-            ),
-          );
-        });
-      }
-    });
+    _startPolling();
+  }
 
-    Future.delayed(const Duration(seconds: 5), () {
-      if (mounted) {
-        final l10n = AppLocalizations.of(context)!;
-        setState(() {
+  void _startPolling() {
+    _pollTimer = Timer.periodic(const Duration(seconds: 5), (_) async {
+      final session = GetIt.I<SessionService>();
+      final token = session.token;
+      if (token == null) return;
+
+      final service = PanicService(token: token);
+      final status = await service.fetchStatus(widget.alertId);
+
+      if (!mounted) return;
+
+      if (status == null) {
+        setState(() => _connectionLost = true);
+        return;
+      }
+
+      setState(() {
+        _connectionLost = false;
+        if (status != _currentStatus) {
+          _currentStatus = status;
+          final l10n = AppLocalizations.of(context)!;
           _chatMessages.add(
             _ChatMsg(
               sender: 'Sistema',
-              text: l10n.panicGuardOnWay,
+              text: _statusLabel(l10n, status),
               isSystem: true,
             ),
           );
-        });
+        }
+      });
+
+      if (status == 'resolved' || status == 'cancelled') {
+        _pollTimer?.cancel();
       }
     });
+  }
+
+  String _statusLabel(AppLocalizations l10n, String status) => switch (status) {
+        'pending' => l10n.panicStatusPending,
+        'registered' => l10n.panicStatusRegistered,
+        'notified' => l10n.panicStatusNotified,
+        'acknowledged' => l10n.panicStatusAcknowledged,
+        'responding' => l10n.panicStatusResponding,
+        'resolved' => l10n.panicStatusResolved,
+        'cancelled' => l10n.panicStatusCancelled,
+        _ => l10n.panicStatusUnknown,
+      };
+
+  bool _isStatusReached(String target) {
+    final currentIdx = _workflowOrder.indexOf(_currentStatus);
+    final targetIdx = _workflowOrder.indexOf(target);
+    if (currentIdx == -1 || targetIdx == -1) return false;
+    return currentIdx >= targetIdx;
   }
 
   @override
   void dispose() {
     _flashController.dispose();
     _elapsedTimer.cancel();
+    _pollTimer?.cancel();
     _chatController.dispose();
     super.dispose();
   }
@@ -196,6 +243,28 @@ class _PanicActivePageState extends State<PanicActivePage>
                 ),
               ),
 
+              if (_connectionLost)
+                Container(
+                  width: double.infinity,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  color: cs.errorContainer,
+                  child: Row(
+                    children: [
+                      Icon(Icons.wifi_off, size: 16, color: cs.onErrorContainer),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          l10n.panicConnectionLost,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: cs.onErrorContainer,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
               // Info row
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
@@ -225,17 +294,27 @@ class _PanicActivePageState extends State<PanicActivePage>
                 ),
               ),
 
-              // Status timeline
+              // Status timeline — driven by real backend status
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
                 child: _StatusRow(
                   items: [
-                    _StatusItem(l10n.panicAlertSent, true),
                     _StatusItem(
-                      l10n.panicSecurityNotified,
-                      _elapsedSeconds >= 2,
+                      l10n.panicStatusRegistered,
+                      _isStatusReached('registered'),
                     ),
-                    _StatusItem(l10n.panicGuardOnWay, _elapsedSeconds >= 5),
+                    _StatusItem(
+                      l10n.panicStatusNotified,
+                      _isStatusReached('notified'),
+                    ),
+                    _StatusItem(
+                      l10n.panicStatusAcknowledged,
+                      _isStatusReached('acknowledged'),
+                    ),
+                    _StatusItem(
+                      l10n.panicStatusResponding,
+                      _isStatusReached('responding'),
+                    ),
                   ],
                   cs: cs,
                   theme: theme,
@@ -431,9 +510,8 @@ class _StatusRow extends StatelessWidget {
                       item.label,
                       style: theme.textTheme.bodyMedium?.copyWith(
                         color: item.done ? cs.onSurface : cs.onSurfaceVariant,
-                        fontWeight: item.done
-                            ? FontWeight.w600
-                            : FontWeight.w400,
+                        fontWeight:
+                            item.done ? FontWeight.w600 : FontWeight.w400,
                       ),
                     ),
                   ),
