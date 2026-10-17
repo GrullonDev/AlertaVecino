@@ -288,6 +288,10 @@
   "announcementsMarkRead": "Marcar como leído",
   "announcementsPullToRefresh": "Desliza hacia abajo para actualizar",
   "announcementsRefreshing": "Actualizando...",
+  "announcementsRetry": "Reintentar",
+  "announcementsErrorConnection": "No se pudo conectar al servidor",
+  "announcementsErrorAuth": "Sesión expirada. Inicia sesión de nuevo",
+  "announcementsErrorGeneric": "Ocurrió un error al cargar los anuncios",
 
   "announcementsMock1Title": "Corte de agua no programado",
   "announcementsMock1Body": "Se informa a todos los residentes que debido a una reparación de emergencia en la tubería principal, el servicio de agua será suspendido hoy de 14:00 a 18:00 hrs. Se recomienda almacenar agua con anticipación. Disculpe las molestias.",

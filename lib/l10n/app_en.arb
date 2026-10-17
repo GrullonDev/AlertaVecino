@@ -288,6 +288,10 @@
   "announcementsMarkRead": "Mark as read",
   "announcementsPullToRefresh": "Pull down to refresh",
   "announcementsRefreshing": "Refreshing...",
+  "announcementsRetry": "Retry",
+  "announcementsErrorConnection": "Could not connect to the server",
+  "announcementsErrorAuth": "Session expired. Please log in again",
+  "announcementsErrorGeneric": "An error occurred while loading announcements",
 
   "announcementsMock1Title": "Unscheduled water outage",
   "announcementsMock1Body": "All residents are informed that due to an emergency repair on the main pipeline, water service will be suspended today from 2:00 PM to 6:00 PM. We recommend storing water in advance. We apologize for the inconvenience.",

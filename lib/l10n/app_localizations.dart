@@ -1598,6 +1598,30 @@ abstract class AppLocalizations {
   /// **'Actualizando...'**
   String get announcementsRefreshing;
 
+  /// No description provided for @announcementsRetry.
+  ///
+  /// In es, this message translates to:
+  /// **'Reintentar'**
+  String get announcementsRetry;
+
+  /// No description provided for @announcementsErrorConnection.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo conectar al servidor'**
+  String get announcementsErrorConnection;
+
+  /// No description provided for @announcementsErrorAuth.
+  ///
+  /// In es, this message translates to:
+  /// **'Sesión expirada. Inicia sesión de nuevo'**
+  String get announcementsErrorAuth;
+
+  /// No description provided for @announcementsErrorGeneric.
+  ///
+  /// In es, this message translates to:
+  /// **'Ocurrió un error al cargar los anuncios'**
+  String get announcementsErrorGeneric;
+
   /// No description provided for @announcementsMock1Title.
   ///
   /// In es, this message translates to:

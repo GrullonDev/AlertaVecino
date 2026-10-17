@@ -815,6 +815,20 @@ class AppLocalizationsEs extends AppLocalizations {
   String get announcementsRefreshing => 'Actualizando...';
 
   @override
+  String get announcementsRetry => 'Reintentar';
+
+  @override
+  String get announcementsErrorConnection => 'No se pudo conectar al servidor';
+
+  @override
+  String get announcementsErrorAuth =>
+      'Sesión expirada. Inicia sesión de nuevo';
+
+  @override
+  String get announcementsErrorGeneric =>
+      'Ocurrió un error al cargar los anuncios';
+
+  @override
   String get announcementsMock1Title => 'Corte de agua no programado';
 
   @override

@@ -806,6 +806,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get announcementsRefreshing => 'Refreshing...';
 
   @override
+  String get announcementsRetry => 'Retry';
+
+  @override
+  String get announcementsErrorConnection => 'Could not connect to the server';
+
+  @override
+  String get announcementsErrorAuth => 'Session expired. Please log in again';
+
+  @override
+  String get announcementsErrorGeneric =>
+      'An error occurred while loading announcements';
+
+  @override
   String get announcementsMock1Title => 'Unscheduled water outage';
 
   @override
