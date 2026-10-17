@@ -1,5 +1,13 @@
 enum AnnouncementCategory { urgent, maintenance, info }
 
+AnnouncementCategory _parseCategory(String? value) {
+  return switch (value) {
+    'urgent' => AnnouncementCategory.urgent,
+    'maintenance' => AnnouncementCategory.maintenance,
+    _ => AnnouncementCategory.info,
+  };
+}
+
 class Announcement {
   final String id;
   final String title;
@@ -22,6 +30,20 @@ class Announcement {
     this.imageUrl,
     this.pdfUrl,
   });
+
+  factory Announcement.fromJson(Map<String, dynamic> json) {
+    return Announcement(
+      id: json['id'] as String? ?? '',
+      title: json['title'] as String? ?? '',
+      body: json['body'] as String? ?? '',
+      category: _parseCategory(json['category'] as String?),
+      author: json['author'] as String? ?? 'Administración',
+      publishedAt: DateTime.tryParse(json['publishedAt'] as String? ?? '') ??
+          DateTime.now(),
+      imageUrl: json['imageUrl'] as String?,
+      pdfUrl: json['pdfUrl'] as String?,
+    );
+  }
 
   Announcement copyWith({bool? isRead}) {
     return Announcement(
