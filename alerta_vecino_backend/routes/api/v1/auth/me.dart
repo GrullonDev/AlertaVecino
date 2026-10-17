@@ -27,8 +27,8 @@ Future<Response> onRequest(RequestContext context) async {
 
     final result = await pool.execute(
       Sql.named(
-        'SELECT id, email, first_name, last_name, phone, residency, house, '
-        'status, created_at '
+        'SELECT id, email, first_name, last_name, phone, '
+        'residency, house, status, role, created_at '
         'FROM users WHERE id = @id LIMIT 1',
       ),
       parameters: {'id': TypedValue(Type.uuid, userId)},
@@ -54,7 +54,9 @@ Future<Response> onRequest(RequestContext context) async {
           'residency': user['residency'] as String?,
           'house': user['house'] as String?,
           'status': user['status'] as String?,
-          'createdAt': (user['created_at'] as DateTime?)?.toIso8601String(),
+          'role': user['role'] as String? ?? 'resident',
+          'createdAt':
+              (user['created_at'] as DateTime?)?.toIso8601String(),
         },
       },
     );

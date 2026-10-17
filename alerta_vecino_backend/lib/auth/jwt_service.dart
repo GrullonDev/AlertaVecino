@@ -14,12 +14,14 @@ class JwtService {
     required String email,
     String? residency,
     String? house,
+    String role = 'resident',
   }) {
     final jwt = JWT(
       {
         'email': email,
         'residency': residency,
         'house': house,
+        'role': role,
       },
       subject: userId,
       issuer: 'alerta_vecino_backend',

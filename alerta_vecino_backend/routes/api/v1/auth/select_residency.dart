@@ -69,6 +69,7 @@ Future<Response> onRequest(RequestContext context) async {
       email: email,
       residency: user['residency'] as String?,
       house: user['house'] as String?,
+      role: (payload['role'] as String?) ?? 'resident',
     );
 
     return Response.json(

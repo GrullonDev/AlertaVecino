@@ -34,7 +34,8 @@ Future<Response> onRequest(RequestContext context) async {
 
     final result = await pool.execute(
       Sql.named(
-        'SELECT id, email, password_hash, residency, house, status '
+        'SELECT id, email, password_hash, residency, house, '
+        'status, role '
         'FROM users WHERE email = @email LIMIT 1',
       ),
       parameters: {'email': TypedValue(Type.text, email)},
@@ -84,11 +85,14 @@ Future<Response> onRequest(RequestContext context) async {
       );
     }
 
+    final role = user['role'] as String? ?? 'resident';
+
     final token = JwtService.issueSessionToken(
       userId: user['id'].toString(),
       email: user['email'] as String,
       residency: user['residency'] as String?,
       house: user['house'] as String?,
+      role: role,
     );
 
     return Response.json(
@@ -96,11 +100,13 @@ Future<Response> onRequest(RequestContext context) async {
         'message': 'Login exitoso',
         'token': token,
         'status': status,
+        'role': role,
         'user': {
           'id': user['id'].toString(),
           'email': user['email'] as String?,
           'residency': user['residency'] as String?,
           'house': user['house'] as String?,
+          'role': role,
         },
       },
     );
