@@ -1,80 +1,194 @@
-# AlertaVecino 🚨🏘️
+# AlertaVecino
 
-**AlertaVecino** no es solo una aplicación de alertas; es una **plataforma comunitaria integral** diseñada para transformar la seguridad, gestión de emergencias, movilidad y servicios vecinales en tu colonia o sector. 
-
----
-
-## ⚠️ El Problema Real
-
-Actualmente, las comunidades vecinales dependen de grupos de WhatsApp u otras plataformas de mensajería genéricas para comunicarse. Sin embargo, esto genera varios problemas críticos:
-
-1. **Alertas desordenadas:** Los reportes de robos, personas sospechosas, emergencias médicas o accidentes de tránsito se mezclan con mensajes cotidianos, memes o discusiones sin importancia.
-2. **Falta de ubicación precisa:** La mayoría de los reportes son ambiguos ("por la entrada", "cerca del puente", "por el parque"), lo que retrasa la respuesta ante una emergencia por no tener un punto exacto en el mapa.
-3. **Pérdida de historial e información:** Después de unos días, los mensajes se pierden. No existe una manera de analizar qué sectores son más vulnerables, dónde ocurren más inundaciones, o qué servicios públicos fallan con mayor frecuencia.
+**AlertaVecino** es una plataforma comunitaria integral de seguridad y gestión residencial para condominios, sectores y comunidades vecinales. Reemplaza los grupos de mensajería genéricos por una red privada y verificada donde cada usuario está asociado a una residencia concreta.
 
 ---
 
-## 💡 Nuestra Solución
+## El Problema
 
-**AlertaVecino** es una aplicación desarrollada en **Flutter** (para Android, iOS y próximamente Web / Panel Administrativo) que permite a los vecinos reportar eventos en tiempo real con geolocalización exacta.
+Las comunidades vecinales dependen de grupos de WhatsApp para comunicarse, lo que genera:
 
-La aplicación funciona como una **red privada por colonia o sector**. Cada usuario está verificado y asignado a su área, garantizando que solo reciba y envíe alertas que son verdaderamente relevantes para su zona.
-
-### 🚀 Características Principales (En Desarrollo)
-
-- **📍 Geolocalización Exacta:** Reporta incidentes con un punto exacto en el mapa para una respuesta rápida.
-- **🚨 Botón de Pánico:** Activación rápida para emergencias críticas.
-- **📊 Historial y Estadísticas:** Registro detallado de incidentes para analizar zonas de riesgo y fallas recurrentes.
-- **🗺️ Mapa de Reportes Activos:** Visualización en tiempo real de lo que ocurre a tu alrededor.
-- **🔔 Notificaciones Inteligentes:** Alertas segmentadas solo para los vecinos del sector afectado.
-- **🛡️ Verificación de Usuarios:** Acceso controlado para asegurar que solo los residentes del sector participen.
+1. **Alertas desordenadas** — incidentes mezclados con conversación cotidiana.
+2. **Falta de ubicación precisa** — reportes ambiguos que retrasan la respuesta.
+3. **Pérdida de historial** — sin trazabilidad ni análisis de zonas de riesgo.
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
+## Solución
 
-- **Framework:** [Flutter](https://flutter.dev/) (Soporte multiplataforma)
-- **Lenguaje:** Dart
-- **Plataformas Objetivo:** Android, iOS, Web (Panel Administrativo)
+Una red privada por colonia con tres componentes:
+
+- **App Móvil** (Flutter) — para residentes: botón de pánico, pases de visita con QR, comunicados, mapa de alertas.
+- **Backend API** (Dart Frog + PostgreSQL) — autenticación JWT, roles, endpoints REST.
+- **Panel Web** (HTML/CSS/JS) — para administradores y guardias de seguridad.
 
 ---
 
-## ⚙️ Configuración del Proyecto (Desarrollo)
+## Características Implementadas
 
-Si deseas clonar y correr este proyecto localmente, sigue estos pasos:
+- **Autenticación completa** — registro, login con JWT (HS256), roles (resident/admin/guard), aprobación de cuentas por administrador.
+- **Botón de Pánico** — activación en 2 pasos con cuenta regresiva, alertas activas con resolución.
+- **Control de Visitas** — pases con QR (`alertavecino://pass/<id>`), flujo de estados (expected → at_gate → entered → expired).
+- **Comunicados** — CRUD de avisos oficiales con categorías (urgent/maintenance/info).
+- **Panel de Administración Web** — gestión de residentes (aprobar/rechazar) y verificación de pases para guardias.
+- **Geolocalización** — mapa de reportes activos con marcadores y filtros.
+
+---
+
+## Stack Tecnológico
+
+| Componente | Tecnología |
+|---|---|
+| App Móvil | Flutter 3.47.1 (FVM), Dart ^3.11.5, Material 3, Provider + ChangeNotifier, GetIt |
+| Backend | Dart Frog, PostgreSQL 17, JWT (dart_jsonwebtoken), bcrypt |
+| Panel Web | HTML5 / CSS3 / JavaScript vanilla |
+| QR | qr_flutter (generación), alertavecino:// URL scheme |
+| Mapas | flutter_map + latlong2 |
+
+---
+
+## Estructura del Proyecto
+
+```
+AlertaVecino/
+├── lib/                            # App Flutter (feature-first)
+│   ├── features/
+│   │   ├── auth/                   # login, registro, selección de residencia
+│   │   ├── home/                   # dashboard
+│   │   ├── panic/                  # botón de pánico
+│   │   ├── visitors/               # pases de visita + QR
+│   │   ├── announcements/          # comunicados
+│   │   ├── alerts/                 # historial de alertas
+│   │   ├── maps/                   # mapa de reportes
+│   │   └── profile/                # perfil de usuario
+│   ├── l10n/                       # app_es.arb, app_en.arb
+│   └── utils/                      # DI, router, widgets globales
+├── alerta_vecino_backend/          # Backend Dart Frog
+│   ├── routes/api/v1/              # Endpoints REST
+│   │   ├── auth/                   # login, register, me, complete-profile, select_residency
+│   │   ├── admin/                  # users (list/approve/reject/delete), announcements (create)
+│   │   ├── announcements/          # list, detail
+│   │   ├── panic/                  # trigger, active, [id]/resolve
+│   │   └── visitors/passes/        # list, create, [id] detail, [id]/status
+│   ├── migrations/                 # 0001–0006 SQL migrations
+│   └── build.sh                    # Build con fix de route ordering
+├── admin_web/                      # Panel web admin/guardia
+│   ├── index.html
+│   ├── style.css
+│   └── app.js
+└── .env                            # Variables de entorno (no commitear)
+```
+
+---
+
+## Configuración de Desarrollo
 
 ### Prerrequisitos
 
-1. Instalar [Flutter SDK](https://docs.flutter.dev/get-started/install).
-2. Contar con un IDE compatible como **VS Code** o **Android Studio**.
-3. Tener configurado un emulador (Android/iOS) o un dispositivo físico.
+- [Flutter SDK](https://docs.flutter.dev/get-started/install) (o FVM)
+- [Dart Frog CLI](https://dartfrog.vgv.dev/)
+- PostgreSQL 17
+- Un emulador o dispositivo físico
 
 ### Instalación
 
-1. **Clonar el repositorio:**
-   ```bash
-   git clone git@github.com:GrullonDev/AlertaVecino.git
-   ```
+```bash
+git clone git@github.com:GrullonDev/AlertaVecino.git
+cd AlertaVecino
 
-2. **Acceder al directorio del proyecto:**
-   ```bash
-   cd AlertaVecino
-   ```
+# Frontend
+flutter pub get
+flutter gen-l10n
 
-3. **Instalar las dependencias:**
-   ```bash
-   flutter pub get
-   ```
+# Backend
+cd alerta_vecino_backend
+dart pub get
+# Aplicar migraciones (requiere PostgreSQL corriendo)
+psql -U alerta_vecino -d alerta_vecino_db -f migrations/0001_create_users.sql
+# ... hasta 0006
+```
 
-4. **Ejecutar la aplicación:**
-   ```bash
-   flutter run
-   ```
+### Ejecución
 
-*(Nota: Asegúrate de tener seleccionado el dispositivo correcto donde deseas correr la aplicación).*
+```bash
+# Backend (desde alerta_vecino_backend/)
+./build.sh                          # Build con fix de route ordering
+dart build/bin/server.dart          # http://localhost:8080
+
+# App Flutter (desde la raíz)
+flutter run
+
+# Panel Web (desde admin_web/)
+python3 -m http.server 3000        # http://localhost:3000
+```
+
+### Variables de Entorno
+
+**Frontend** (`.env` en la raíz):
+```
+API_BASE_URL=http://10.0.2.2:8080/api
+```
+> `10.0.2.2` = host desde el emulador Android. En iOS Simulator usa `localhost`. En dispositivo físico, la IP LAN.
+
+**Backend** (`.env` en `alerta_vecino_backend/`): credenciales PostgreSQL y secreto JWT.
 
 ---
 
-## 🤝 Contribución
+## API Endpoints
 
-Actualmente, el proyecto es mantenido por el equipo principal de desarrollo. Pronto se agregarán guías para contribuciones de código, reporte de bugs y sugerencias de características.
+### Autenticación (`/api/v1/auth`)
+| Método | Ruta | Descripción |
+|---|---|---|
+| POST | `/login` | Login con email + password, devuelve JWT con rol |
+| POST | `/register` | Registro de nuevo residente (status: pending) |
+| GET | `/me` | Datos del usuario autenticado |
+| POST | `/complete-profile` | Completar residencia y unidad |
+| POST | `/select_residency` | Cambiar residencia activa |
+| GET | `/pending_approval` | Estado de aprobación |
+
+### Administración (`/api/v1/admin`) — requiere rol admin
+| Método | Ruta | Descripción |
+|---|---|---|
+| GET | `/users?status=` | Listar usuarios con filtro opcional |
+| POST | `/users/approve` | Aprobar residente |
+| POST | `/users/reject` | Rechazar residente |
+| POST | `/users/create` | Crear usuario |
+| POST | `/users/delete` | Eliminar usuario |
+| POST | `/announcements/create` | Crear comunicado |
+
+### Comunicados (`/api/v1/announcements`)
+| Método | Ruta | Descripción |
+|---|---|---|
+| GET | `/?category=` | Listar comunicados con filtro |
+| GET | `/:id` | Detalle de comunicado |
+
+### Pases de Visita (`/api/v1/visitors/passes`)
+| Método | Ruta | Descripción |
+|---|---|---|
+| GET | `/` | Listar pases del residente autenticado |
+| POST | `/` | Crear nuevo pase |
+| GET | `/:id` | Detalle del pase (incluye datos del residente) |
+| PATCH | `/:id/status` | Cambiar estado (admin/guard para at_gate/entered) |
+
+### Pánico (`/api/v1/panic`)
+| Método | Ruta | Descripción |
+|---|---|---|
+| POST | `/trigger` | Activar alerta de pánico |
+| GET | `/active` | Alertas activas |
+| POST | `/:id/resolve` | Resolver alerta |
+
+---
+
+## Roles de Usuario
+
+| Rol | Acceso App | Acceso Panel Web | Capacidades |
+|---|---|---|---|
+| `resident` | Completo | No | Crear pases, reportar, ver comunicados |
+| `admin` | Completo | Completo | Aprobar/rechazar residentes, crear comunicados, gestionar pases |
+| `guard` | Limitado | Solo pases | Verificar pases QR, registrar entradas |
+
+---
+
+## Contribución
+
+Actualmente mantenido por el equipo principal de desarrollo.

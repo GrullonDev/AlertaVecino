@@ -58,17 +58,33 @@ El problema que resuelve:
 
 - **Framework:** **Dart Frog** — enrutamiento **basado en archivos** bajo `routes/`.
   Cada archivo define un endpoint y exporta `onRequest(RequestContext context)`.
-- **Autenticación:** basada en **JSON Web Tokens (JWT)** (actualmente en fase inicial/simulada; ver §6).
+- **Autenticación:** **JWT real** con `dart_jsonwebtoken` (HS256, 24 h de expiración). El token incluye
+  `sub` (userId), `email`, `residency`, `house` y `role`. Contraseñas hasheadas con `bcrypt`.
+- **Roles:** `resident` (default), `admin`, `guard` — almacenados en `users.role` e incluidos en el JWT.
+- **Middleware:** `routes/api/_middleware.dart` aplica CORS, JWT guard y pool de conexiones.
+  `routes/api/v1/admin/_middleware.dart` acepta `x-admin-key` O JWT con `role=admin`.
 - **Puerto por defecto:** `8080` (`PORT` sobrescribible por variable de entorno).
 - **Nombre del paquete:** `alerta_vecino_backend`.
+- **Build:** usar `./build.sh` (no `dart_frog build` directo) — el script limpia archivos AppleDouble
+  y corrige el orden de montaje de rutas en `shelf_router` (rutas específicas antes que padres).
 
 ### 2.3 Base de Datos
 
-- **PostgreSQL local.**
-- Conexión configurada mediante **variables de entorno** en `.env` (nunca hardcodear credenciales).
-- La capa de acceso a datos debe vivir detrás de un repositorio/datasource (nunca en las rutas).
+- **PostgreSQL 17** (Homebrew).
+- Conexión mediante **pool** (`package:postgres`) configurada en variables de entorno.
+- **Migraciones** en `migrations/` (0001–0006): users, announcements, user roles, visitor_passes.
+- SQL parametrizado con `Sql.named()` y `TypedValue` — nunca concatenar valores en queries.
 
-### 2.4 Variables de Entorno
+### 2.4 Panel Web de Administración
+
+- **Ubicación:** `admin_web/` — HTML/CSS/JS vanilla, sin framework.
+- **Funcionalidad Admin:** tabla de usuarios con filtro por estado, acciones de aprobar/rechazar.
+- **Funcionalidad Guardia:** búsqueda de pase por ID (o URL QR `alertavecino://pass/<id>`),
+  visualización de detalles del visitante y residente, cambio de estado del pase.
+- **Autenticación:** usa el mismo endpoint `/api/v1/auth/login`, almacena JWT en `sessionStorage`.
+- **Servir:** cualquier servidor HTTP estático (e.g. `python3 -m http.server 3000`).
+
+### 2.5 Variables de Entorno
 
 **Frontend** (`.env` en la raíz; ya declarado como asset en `pubspec.yaml`):
 
@@ -132,40 +148,85 @@ lib/
 - Un widget por archivo, con nombre igual al archivo.
 - Patrón de página: `*_page.dart` (dueña del `ChangeNotifierProvider`) y `*_layout.dart` (UI, `Consumer`).
 
-### 3.2 Backend (`routes/`)
+### 3.2 Backend (`alerta_vecino_backend/`)
 
 Enrutamiento **file-based**: la ruta HTTP se deriva de la estructura de carpetas.
 
 ```
 alerta_vecino_backend/
+├── lib/
+│   ├── auth/
+│   │   ├── jwt_service.dart        # issueSessionToken / verifySessionToken (HS256)
+│   │   └── password_verifier.dart  # bcrypt verify
+│   └── config/
+│       └── env.dart                # Variables de entorno
 ├── routes/
-│   ├── index.dart                  # GET /  → "API AlertaVecino funcionando"
+│   ├── index.dart                  # GET / → health check
 │   └── api/
-│       ├── auth/
-│       │   └── login.dart          # POST /api/auth/login
-│       ├── users/                  # (planificado) /api/users/...
-│       ├── visitors/               # (planificado) /api/visitors/... (pases QR)
-│       ├── panic/                  # (planificado) /api/panic/...
-│       ├── alerts/                 # (planificado) /api/alerts/...
-│       └── announcements/          # (planificado) /api/announcements/...
-├── test/                           # pruebas de rutas (mocktail / test)
+│       ├── _middleware.dart         # CORS + JWT guard + DB pool
+│       └── v1/
+│           ├── auth/
+│           │   ├── login.dart              # POST — login con JWT + rol
+│           │   ├── register.dart           # POST — registro (status: pending)
+│           │   ├── me.dart                 # GET  — datos del usuario
+│           │   ├── complete-profile.dart   # POST — completar residencia
+│           │   ├── select_residency.dart   # POST — cambiar residencia
+│           │   └── pending_approval.dart   # GET  — estado de aprobación
+│           ├── admin/
+│           │   ├── _middleware.dart         # Admin guard (x-admin-key o JWT admin)
+│           │   ├── users/
+│           │   │   ├── index.dart          # GET  — listar usuarios (?status=)
+│           │   │   ├── approve.dart        # POST — aprobar residente
+│           │   │   ├── reject.dart         # POST — rechazar residente
+│           │   │   ├── create.dart         # POST — crear usuario
+│           │   │   └── delete.dart         # POST — eliminar usuario
+│           │   └── announcements/
+│           │       └── create.dart         # POST — crear comunicado
+│           ├── announcements/
+│           │   ├── index.dart              # GET  — listar (?category=)
+│           │   └── [id].dart              # GET  — detalle
+│           ├── visitors/passes/
+│           │   ├── index.dart              # GET/POST — listar/crear pases
+│           │   └── [id]/
+│           │       ├── index.dart          # GET  — detalle del pase
+│           │       └── status.dart         # PATCH — cambiar estado
+│           └── panic/
+│               ├── trigger.dart            # POST — activar pánico
+│               ├── active.dart             # GET  — alertas activas
+│               └── [id]/
+│                   └── resolve.dart        # POST — resolver alerta
+├── migrations/
+│   ├── 0001_create_users.sql
+│   ├── 0002_add_user_verification.sql
+│   ├── 0003_fix_rejection_flow.sql
+│   ├── 0004_create_announcements.sql
+│   ├── 0005_add_user_roles.sql
+│   └── 0006_create_visitor_passes.sql
+├── build.sh                        # Build + fix route ordering + AppleDouble cleanup
 ├── pubspec.yaml
 └── .env                            # (no commitear) DB + JWT secret
 ```
 
-**Mapeo de archivos a rutas:**
-
-| Archivo                         | Método / Ruta                           |
-| ------------------------------- | --------------------------------------- |
-| `routes/index.dart`             | `GET /`                                 |
-| `routes/api/auth/login.dart`    | `/api/auth/login`                       |
-| `routes/api/visitors/[id].dart` | `/api/visitors/:id` (segmento dinámico) |
-| `routes/api/_middleware.dart`   | Middleware aplicado a `/api/*`          |
+**Convenciones de endpoints:**
 
 - Cada endpoint exporta `Future<Response> onRequest(RequestContext context)`.
 - Valida el método HTTP explícitamente (`HttpMethod.post`, etc.) y responde `405` si no coincide.
 - Usa `Response.json(...)` y códigos de estado de `dart:io` (`HttpStatus.*`).
-- **Nunca** coloques lógica de negocio ni SQL crudo dentro de `onRequest`: extrae a servicios/repositorios.
+- SQL parametrizado con `Sql.named()` + `TypedValue` — nunca concatenar valores.
+- Rutas dinámicas (`[id]`) reciben el parámetro como `String id` en `onRequest`.
+
+**Nota sobre routing:** Dart Frog genera el `server.dart` con mounts en orden que puede causar que
+rutas padre capturen requests antes que rutas hijas (e.g. `/passes` antes de `/passes/<id>`).
+El script `build.sh` corrige esto automáticamente. Siempre usar `./build.sh` en vez de `dart_frog build` directamente.
+
+### 3.3 Panel Web (`admin_web/`)
+
+```
+admin_web/
+├── index.html                      # Login + layout con tabs por rol
+├── style.css                       # Design tokens, responsive
+└── app.js                          # Auth, user management, pass scanner
+```
 
 ---
 
@@ -264,14 +325,14 @@ Con **FVM** (versión fijada en `.fvmrc`), antepón `fvm`: `fvm flutter run`, `f
 # Dependencias
 dart pub get
 
-# Servidor de desarrollo con hot reload (http://localhost:8080)
-dart_frog dev
-
-# Compilar a un build de producción
-dart_frog build
+# Build de producción (limpia AppleDouble, corrige route ordering)
+./build.sh
 
 # Servir el build
-dart_frog start
+dart build/bin/server.dart          # http://localhost:8080
+
+# Servidor de desarrollo con hot reload (puede fallar en terminal no interactiva)
+dart_frog dev
 
 # Analizar código
 dart analyze
@@ -280,21 +341,51 @@ dart analyze
 dart test
 ```
 
+> **Nota:** `dart_frog dev` puede fallar con `StdinException` en terminales no interactivas.
+> En ese caso, usar `./build.sh` + `dart build/bin/server.dart`.
+>
+> **Nota:** En volúmenes SMB/AFP (como WorkShare), macOS genera archivos AppleDouble (`._*`)
+> que corrompen el build de Dart Frog. El script `build.sh` los limpia automáticamente.
+
 > Para el emulador de Android, el backend en `localhost:8080` se alcanza como `http://10.0.2.2:8080/api`
 > (ya configurado en `.env`). En dispositivo físico, usa la IP LAN de tu máquina.
+
+### Panel Web
+
+```bash
+# Desde admin_web/
+python3 -m http.server 3000        # http://localhost:3000
+```
 
 ---
 
 ## 6. Estado Actual y Notas de Implementación
 
-- **Auth de extremo a extremo:** `routes/api/auth/login.dart` ya valida método y campos, pero la validación
-  contra base de datos y la **generación real de JWT están pendientes (`//? TODO`)**; hoy devuelve un token
-  simulado y un usuario de ejemplo.
-- **Frontend ↔ Backend:** `LoginLogic` consume `Repository.login()` y, ante error, redirige igualmente a Home
-  (comportamiento provisional a revisar al integrar JWT y manejo de sesión).
-- Al implementar persistencia real: añade la conexión **PostgreSQL** detrás de un repositorio en el backend,
-  firma/verifica **JWT** (login + middleware de autorización), y guarda el token de forma segura en el frontend.
-- Añade aquí cualquier deuda técnica relevante al cerrar una tarea, para mantener el contexto actualizado.
+### Completado
+
+- **Autenticación real de extremo a extremo:** login con PostgreSQL, bcrypt para passwords, JWT (HS256, 24 h)
+  con claims de rol, residencia y email. Middleware JWT en todas las rutas `/api/*`.
+- **Sistema de roles:** `resident`, `admin`, `guard` — almacenado en `users.role`, incluido en JWT,
+  verificado en middleware admin y endpoints de pases.
+- **Flujo de aprobación de cuentas:** registro → pending → admin aprueba/rechaza → login habilitado/bloqueado.
+- **Comunicados (Announcements):** CRUD completo con categorías (urgent/maintenance/info), frontend wired
+  con datasource, repository, logic (ChangeNotifier) y UI (Page/Layout pattern).
+- **Pases de visita:** CRUD + flujo de estados (expected → at_gate → entered → expired), detalle con
+  datos del residente, QR encoding `alertavecino://pass/<id>`.
+- **Panel Web de administración:** login, gestión de residentes (aprobar/rechazar), verificación de pases
+  para guardias con cambio de estado.
+- **CORS:** habilitado en middleware para acceso cross-origin desde el panel web.
+- **Migraciones:** 6 migraciones aplicadas (users, verification, rejection flow, announcements, roles, visitor_passes).
+
+### Pendiente / Deuda Técnica
+
+- **Passwords en texto plano** en usuarios de prueba (demo, guardia). Los usuarios reales registrados
+  via `/register` sí usan bcrypt.
+- **Frontend de pases de visita** — datasource, repository, logic y UI en la app móvil (estructura existe pero no wired).
+- **Notificaciones push** — no implementadas.
+- **Alertas / Historial** — endpoints y frontend pendientes.
+- **Tests** — cobertura mínima; faltan tests de integración para endpoints.
+- Añade aquí cualquier deuda técnica relevante al cerrar una tarea.
 
 ---
 
