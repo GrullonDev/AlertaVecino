@@ -57,6 +57,7 @@ bool _isPublicRoute(String path) {
     '/auth/register',
     '/auth/pending_approval',
     '/admin/',
+    '/residencies',
   ];
   return publicSegments.any(path.contains);
 }
