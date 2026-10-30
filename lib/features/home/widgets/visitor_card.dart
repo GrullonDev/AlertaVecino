@@ -1,9 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:neighbour_alert/features/visitors/data/visitors_repository.dart';
+import 'package:neighbour_alert/features/visitors/models/visitor_pass.dart'
+    show VisitorStatus;
 import 'package:neighbour_alert/l10n/app_localizations.dart';
+import 'package:neighbour_alert/utils/injection_container.dart';
 import 'package:neighbour_alert/utils/router/route_path.dart';
 
-class VisitorCard extends StatelessWidget {
+class VisitorCard extends StatefulWidget {
   const VisitorCard({super.key});
+
+  @override
+  State<VisitorCard> createState() => _VisitorCardState();
+}
+
+class _VisitorCardState extends State<VisitorCard> {
+  int _expectedCount = 0;
+  bool _hasAtGate = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _load();
+  }
+
+  Future<void> _load() async {
+    try {
+      final repo = sl<VisitorsRepository>();
+      final passes = await repo.listPasses();
+      if (!mounted) return;
+      final active = passes.where(
+        (p) =>
+            p.status == VisitorStatus.expected ||
+            p.status == VisitorStatus.atGate,
+      );
+      setState(() {
+        _expectedCount = active.length;
+        _hasAtGate = active.any((p) => p.status == VisitorStatus.atGate);
+      });
+    } catch (_) {
+      // Silently fail — dashboard widget should not block
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +77,7 @@ class VisitorCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
-                  l10n.expectedToday(0),
+                  l10n.expectedToday(_expectedCount),
                   style: theme.textTheme.labelMedium?.copyWith(
                     color: cs.onSecondaryContainer,
                   ),
@@ -53,22 +90,32 @@ class VisitorCard extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: cs.surfaceContainerHighest,
+              color: _hasAtGate
+                  ? cs.tertiaryContainer
+                  : cs.surfaceContainerHighest,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
               children: [
                 Icon(
-                  Icons.check_circle_outline,
+                  _hasAtGate
+                      ? Icons.doorbell_outlined
+                      : Icons.check_circle_outline,
                   size: 20,
-                  color: cs.onSurfaceVariant,
+                  color: _hasAtGate
+                      ? cs.onTertiaryContainer
+                      : cs.onSurfaceVariant,
                 ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    l10n.noVisitorsAtGate,
+                    _hasAtGate
+                        ? l10n.visitorAtGate
+                        : l10n.noVisitorsAtGate,
                     style: theme.textTheme.bodyMedium?.copyWith(
-                      color: cs.onSurfaceVariant,
+                      color: _hasAtGate
+                          ? cs.onTertiaryContainer
+                          : cs.onSurfaceVariant,
                     ),
                   ),
                 ),

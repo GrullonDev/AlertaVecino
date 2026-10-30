@@ -1,7 +1,12 @@
+import 'dart:developer' as dev;
+
 import 'package:flutter/material.dart';
+import 'package:neighbour_alert/core/api/api_exception.dart';
+import 'package:neighbour_alert/features/visitors/data/visitors_repository.dart';
 import 'package:neighbour_alert/features/visitors/models/visitor_pass.dart';
 import 'package:neighbour_alert/features/visitors/widgets/qr_share_sheet.dart';
 import 'package:neighbour_alert/l10n/app_localizations.dart';
+import 'package:neighbour_alert/utils/injection_container.dart';
 
 class CreatePassPage extends StatefulWidget {
   const CreatePassPage({super.key});
@@ -18,6 +23,7 @@ class _CreatePassPageState extends State<CreatePassPage> {
   VisitType _visitType = VisitType.family;
   DateTime _validFrom = DateTime.now();
   DateTime _validUntil = DateTime.now().add(const Duration(hours: 8));
+  bool _submitting = false;
 
   @override
   void dispose() {
@@ -59,11 +65,14 @@ class _CreatePassPageState extends State<CreatePassPage> {
     });
   }
 
-  void _submit() {
+  Future<void> _submit() async {
     if (!(_formKey.currentState?.validate() ?? false)) return;
+    if (_submitting) return;
 
-    final pass = VisitorPass(
-      id: 'pass-${DateTime.now().millisecondsSinceEpoch}',
+    setState(() => _submitting = true);
+
+    final draft = VisitorPass(
+      id: '',
       visitorName: _nameController.text.trim(),
       dpi: _dpiController.text.trim().isEmpty
           ? null
@@ -76,16 +85,42 @@ class _CreatePassPageState extends State<CreatePassPage> {
       validUntil: _validUntil,
     );
 
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (_) => QrShareSheet(pass: pass),
-    ).then((_) {
-      if (mounted) Navigator.pop(context, pass);
-    });
+    try {
+      final created = await sl<VisitorsRepository>().createPass(draft);
+
+      if (!mounted) return;
+      setState(() => _submitting = false);
+
+      final l10n = AppLocalizations.of(context)!;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.passCreated)),
+      );
+
+      await showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        builder: (_) => QrShareSheet(pass: created),
+      );
+
+      if (mounted) Navigator.pop(context, created);
+    } on ApiException catch (e) {
+      dev.log('[create_pass] $e');
+      if (!mounted) return;
+      setState(() => _submitting = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.serverMessage ?? 'Error al crear el pase')),
+      );
+    } catch (e) {
+      dev.log('[create_pass] unexpected: $e');
+      if (!mounted) return;
+      setState(() => _submitting = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Error inesperado')),
+      );
+    }
   }
 
   String _formatDateTime(DateTime dt) {
@@ -207,8 +242,14 @@ class _CreatePassPageState extends State<CreatePassPage> {
                   width: double.infinity,
                   height: 52,
                   child: ElevatedButton.icon(
-                    onPressed: _submit,
-                    icon: const Icon(Icons.qr_code, size: 22),
+                    onPressed: _submitting ? null : _submit,
+                    icon: _submitting
+                        ? const SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : const Icon(Icons.qr_code, size: 22),
                     label: Text(l10n.savePass),
                   ),
                 ),

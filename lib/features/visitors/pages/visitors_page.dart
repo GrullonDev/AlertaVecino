@@ -1,9 +1,14 @@
+import 'dart:developer' as dev;
+
 import 'package:flutter/material.dart';
+import 'package:neighbour_alert/core/api/api_exception.dart';
+import 'package:neighbour_alert/features/visitors/data/visitors_repository.dart';
 import 'package:neighbour_alert/features/visitors/models/visitor_pass.dart';
 import 'package:neighbour_alert/features/visitors/pages/create_pass_page.dart';
 import 'package:neighbour_alert/features/visitors/widgets/visitor_history_tab.dart';
 import 'package:neighbour_alert/features/visitors/widgets/visitor_passes_tab.dart';
 import 'package:neighbour_alert/l10n/app_localizations.dart';
+import 'package:neighbour_alert/utils/injection_container.dart';
 
 class VisitorsPage extends StatefulWidget {
   const VisitorsPage({super.key});
@@ -13,58 +18,54 @@ class VisitorsPage extends StatefulWidget {
 }
 
 class _VisitorsPageState extends State<VisitorsPage> {
-  final List<VisitorPass> _passes = [
-    VisitorPass(
-      id: 'pass-001',
-      visitorName: 'María López',
-      plate: 'P-123ABC',
-      visitType: VisitType.family,
-      validFrom: DateTime.now(),
-      validUntil: DateTime.now().add(const Duration(hours: 8)),
-      status: VisitorStatus.expected,
-    ),
-    VisitorPass(
-      id: 'pass-002',
-      visitorName: 'Carlos Pérez',
-      visitType: VisitType.delivery,
-      validFrom: DateTime.now().subtract(const Duration(hours: 1)),
-      validUntil: DateTime.now().add(const Duration(hours: 2)),
-      status: VisitorStatus.atGate,
-    ),
-  ];
+  final VisitorsRepository _repository = sl<VisitorsRepository>();
 
-  final List<VisitorPass> _history = [
-    VisitorPass(
-      id: 'hist-001',
-      visitorName: 'Ana García',
-      plate: 'C-456DEF',
-      visitType: VisitType.family,
-      validFrom: DateTime.now().subtract(const Duration(hours: 3)),
-      validUntil: DateTime.now().subtract(const Duration(hours: 1)),
-      status: VisitorStatus.entered,
-      entryTime: DateTime.now().subtract(const Duration(hours: 2, minutes: 45)),
-    ),
-    VisitorPass(
-      id: 'hist-002',
-      visitorName: 'Delivery Express',
-      visitType: VisitType.delivery,
-      validFrom: DateTime.now().subtract(const Duration(days: 1, hours: 5)),
-      validUntil: DateTime.now().subtract(const Duration(days: 1, hours: 3)),
-      status: VisitorStatus.entered,
-      entryTime: DateTime.now().subtract(const Duration(days: 1, hours: 4)),
-    ),
-    VisitorPass(
-      id: 'hist-003',
-      visitorName: 'Roberto Méndez',
-      plate: 'M-789GHI',
-      visitType: VisitType.service,
-      validFrom: DateTime.now().subtract(const Duration(days: 2)),
-      validUntil: DateTime.now()
-          .subtract(const Duration(days: 2))
-          .add(const Duration(hours: 4)),
-      status: VisitorStatus.expired,
-    ),
-  ];
+  List<VisitorPass> _passes = [];
+  bool _loading = true;
+  String? _error;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadPasses();
+  }
+
+  Future<void> _loadPasses() async {
+    setState(() {
+      _loading = true;
+      _error = null;
+    });
+    try {
+      final passes = await _repository.listPasses();
+      if (!mounted) return;
+      setState(() {
+        _passes = passes;
+        _loading = false;
+      });
+    } on ApiException catch (e) {
+      dev.log('[visitors] $e');
+      if (!mounted) return;
+      setState(() {
+        _error = e.serverMessage ?? 'Error al cargar los pases';
+        _loading = false;
+      });
+    } catch (e) {
+      dev.log('[visitors] unexpected: $e');
+      if (!mounted) return;
+      setState(() {
+        _error = 'Error inesperado';
+        _loading = false;
+      });
+    }
+  }
+
+  List<VisitorPass> get _activePasses =>
+      _passes.where((p) => p.status != VisitorStatus.entered &&
+          p.status != VisitorStatus.expired).toList();
+
+  List<VisitorPass> get _history =>
+      _passes.where((p) => p.status == VisitorStatus.entered ||
+          p.status == VisitorStatus.expired).toList();
 
   void _onPassCreated(VisitorPass pass) {
     setState(() => _passes.insert(0, pass));
@@ -90,12 +91,35 @@ class _VisitorsPageState extends State<VisitorsPage> {
             ],
           ),
         ),
-        body: TabBarView(
-          children: [
-            VisitorPassesTab(passes: _passes),
-            VisitorHistoryTab(history: _history),
-          ],
-        ),
+        body: _loading
+            ? const Center(child: CircularProgressIndicator())
+            : _error != null
+                ? Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.error_outline,
+                            size: 48, color: cs.error),
+                        const SizedBox(height: 12),
+                        Text(_error!,
+                            style: TextStyle(color: cs.onSurfaceVariant)),
+                        const SizedBox(height: 12),
+                        FilledButton.tonal(
+                          onPressed: _loadPasses,
+                          child: Text(l10n.announcementsRetry),
+                        ),
+                      ],
+                    ),
+                  )
+                : RefreshIndicator(
+                    onRefresh: _loadPasses,
+                    child: TabBarView(
+                      children: [
+                        VisitorPassesTab(passes: _activePasses),
+                        VisitorHistoryTab(history: _history),
+                      ],
+                    ),
+                  ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () async {
             final pass = await Navigator.push<VisitorPass>(
