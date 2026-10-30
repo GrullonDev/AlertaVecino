@@ -84,7 +84,8 @@ Future<Response> onRequest(RequestContext context) async {
       Sql.named(
         'UPDATE users SET residency = @residency, house = @house '
         'WHERE id = @id '
-        'RETURNING id, email, residency, house',
+        'RETURNING id, email, first_name, last_name, phone, '
+        'residency, house, role',
       ),
       parameters: {
         'id': TypedValue(Type.uuid, userId),
@@ -118,8 +119,12 @@ Future<Response> onRequest(RequestContext context) async {
         'user': {
           'id': user['id'].toString(),
           'email': email,
+          'firstName': user['first_name'] as String?,
+          'lastName': user['last_name'] as String?,
+          'phone': user['phone'] as String?,
           'residency': user['residency'] as String?,
           'house': user['house'] as String?,
+          'role': user['role'] as String? ?? 'resident',
         },
       },
     );
