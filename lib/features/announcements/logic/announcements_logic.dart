@@ -47,8 +47,7 @@ class AnnouncementsLogic extends ChangeNotifier {
   }
 
   Future<void> load() async {
-    final token = _session.token;
-    if (token == null) {
+    if (_session.token == null) {
       _error = AnnouncementsErrorType.unauthorized;
       notifyListeners();
       return;
@@ -59,7 +58,7 @@ class AnnouncementsLogic extends ChangeNotifier {
     notifyListeners();
 
     try {
-      _announcements = await _repository.list(token: token);
+      _announcements = await _repository.list();
       _error = null;
     } on AnnouncementsException catch (e) {
       dev.log('[announcements] $e');

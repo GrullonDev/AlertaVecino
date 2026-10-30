@@ -16,6 +16,7 @@ class SessionService extends ChangeNotifier {
   static const _userFirstNameKey = 'user_first_name';
   static const _userLastNameKey = 'user_last_name';
   static const _userPhoneKey = 'user_phone';
+  static const _userRoleKey = 'user_role';
 
   String? _token;
   User? _user;
@@ -31,45 +32,38 @@ class SessionService extends ChangeNotifier {
     await _storage.write(key: _tokenKey, value: token);
     await _storage.write(key: _userIdKey, value: user.id);
     await _storage.write(key: _userEmailKey, value: user.email);
+    if (user.firstName != null) {
+      await _storage.write(key: _userFirstNameKey, value: user.firstName);
+    }
+    if (user.lastName != null) {
+      await _storage.write(key: _userLastNameKey, value: user.lastName);
+    }
+    if (user.phone != null) {
+      await _storage.write(key: _userPhoneKey, value: user.phone);
+    }
     if (user.residency != null) {
       await _storage.write(key: _userResidencyKey, value: user.residency);
     }
     if (user.house != null) {
       await _storage.write(key: _userHouseKey, value: user.house);
     }
+    if (user.role != null) {
+      await _storage.write(key: _userRoleKey, value: user.role);
+    }
 
     notifyListeners();
   }
 
-  Future<void> updateUserDetails({
-    String? firstName,
-    String? lastName,
-    String? phone,
-    String? residency,
-    String? house,
-  }) async {
-    if (firstName != null) {
-      await _storage.write(key: _userFirstNameKey, value: firstName);
-    }
-    if (lastName != null) {
-      await _storage.write(key: _userLastNameKey, value: lastName);
-    }
-    if (phone != null) {
-      await _storage.write(key: _userPhoneKey, value: phone);
-    }
-    if (residency != null) {
-      await _storage.write(key: _userResidencyKey, value: residency);
-    }
-    if (house != null) {
-      await _storage.write(key: _userHouseKey, value: house);
-    }
-
-    _user = User(
-      id: _user?.id ?? '',
-      email: _user?.email ?? '',
-      residency: residency ?? _user?.residency,
-      house: house ?? _user?.house,
-    );
+  Future<void> updateUser(User user) async {
+    _user = user;
+    await _storage.write(key: _userIdKey, value: user.id);
+    await _storage.write(key: _userEmailKey, value: user.email);
+    await _writeOrDelete(_userFirstNameKey, user.firstName);
+    await _writeOrDelete(_userLastNameKey, user.lastName);
+    await _writeOrDelete(_userPhoneKey, user.phone);
+    await _writeOrDelete(_userResidencyKey, user.residency);
+    await _writeOrDelete(_userHouseKey, user.house);
+    await _writeOrDelete(_userRoleKey, user.role);
     notifyListeners();
   }
 
@@ -80,11 +74,24 @@ class SessionService extends ChangeNotifier {
 
       final id = await _storage.read(key: _userIdKey) ?? '';
       final email = await _storage.read(key: _userEmailKey) ?? '';
+      final firstName = await _storage.read(key: _userFirstNameKey);
+      final lastName = await _storage.read(key: _userLastNameKey);
+      final phone = await _storage.read(key: _userPhoneKey);
       final residency = await _storage.read(key: _userResidencyKey);
       final house = await _storage.read(key: _userHouseKey);
+      final role = await _storage.read(key: _userRoleKey);
 
       _token = token;
-      _user = User(id: id, email: email, residency: residency, house: house);
+      _user = User(
+        id: id,
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        phone: phone,
+        residency: residency,
+        house: house,
+        role: role,
+      );
       notifyListeners();
       return true;
     } catch (_) {
@@ -97,5 +104,13 @@ class SessionService extends ChangeNotifier {
     _user = null;
     await _storage.deleteAll();
     notifyListeners();
+  }
+
+  Future<void> _writeOrDelete(String key, String? value) async {
+    if (value != null && value.isNotEmpty) {
+      await _storage.write(key: key, value: value);
+    } else {
+      await _storage.delete(key: key);
+    }
   }
 }

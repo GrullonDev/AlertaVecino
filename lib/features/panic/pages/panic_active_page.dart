@@ -2,12 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get_it/get_it.dart';
 import 'package:neighbour_alert/config/app_theme.dart';
-import 'package:neighbour_alert/core/session/session_service.dart';
-import 'package:neighbour_alert/features/panic/data/panic_service.dart';
+import 'package:neighbour_alert/features/panic/data/panic_repository.dart';
 import 'package:neighbour_alert/features/panic/pages/panic_type_selection_page.dart';
 import 'package:neighbour_alert/l10n/app_localizations.dart';
+import 'package:neighbour_alert/utils/injection_container.dart';
 
 class PanicActivePage extends StatefulWidget {
   const PanicActivePage({
@@ -70,11 +69,7 @@ class _PanicActivePageState extends State<PanicActivePage>
 
   void _startPolling() {
     _pollTimer = Timer.periodic(const Duration(seconds: 5), (_) async {
-      final session = GetIt.I<SessionService>();
-      final token = session.token;
-      if (token == null) return;
-
-      final service = PanicService(token: token);
+      final service = sl<PanicRepository>();
       final status = await service.fetchStatus(widget.alertId);
 
       if (!mounted) return;

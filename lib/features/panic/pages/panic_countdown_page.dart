@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get_it/get_it.dart';
-import 'package:neighbour_alert/core/session/session_service.dart';
-import 'package:neighbour_alert/features/panic/data/panic_service.dart';
+import 'package:neighbour_alert/features/panic/data/panic_repository.dart';
 import 'package:neighbour_alert/features/panic/pages/panic_active_page.dart';
 import 'package:neighbour_alert/features/panic/pages/panic_type_selection_page.dart';
 import 'package:neighbour_alert/l10n/app_localizations.dart';
+import 'package:neighbour_alert/utils/injection_container.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PanicCountdownPage extends StatefulWidget {
@@ -74,14 +73,7 @@ class _PanicCountdownPageState extends State<PanicCountdownPage>
       _failed = false;
     });
 
-    final session = GetIt.I<SessionService>();
-    final token = session.token;
-    if (token == null) {
-      setState(() => _failed = true);
-      return;
-    }
-
-    final service = PanicService(token: token);
+    final service = sl<PanicRepository>();
     final emergencyType = _mapPanicType(widget.panicType);
 
     // TODO: use real device location
