@@ -416,5 +416,7 @@
   "profileLegalSection": "LEGAL",
   "profileTerms": "Términos y condiciones",
   "profilePrivacyPolicy": "Política de privacidad",
-  "profileVersion": "AlertaVecino v1.0.0"
+  "profileVersion": "AlertaVecino v1.0.0",
+  "retry": "Reintentar",
+  "visitorAtGate": "Visitante en la entrada"
 }

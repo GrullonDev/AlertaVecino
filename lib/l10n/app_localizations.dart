@@ -2305,6 +2305,18 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'AlertaVecino v1.0.0'**
   String get profileVersion;
+
+  /// No description provided for @retry.
+  ///
+  /// In es, this message translates to:
+  /// **'Reintentar'**
+  String get retry;
+
+  /// No description provided for @visitorAtGate.
+  ///
+  /// In es, this message translates to:
+  /// **'Visitante en la entrada'**
+  String get visitorAtGate;
 }
 
 class _AppLocalizationsDelegate

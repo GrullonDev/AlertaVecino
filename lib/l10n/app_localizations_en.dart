@@ -1181,4 +1181,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileVersion => 'AlertaVecino v1.0.0';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get visitorAtGate => 'Visitor at the gate';
 }
