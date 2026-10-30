@@ -13,7 +13,7 @@ class ProfileHeader extends StatelessWidget {
     final theme = Theme.of(context);
     final session = context.watch<SessionService>();
     final user = session.user;
-    final displayName = user?.email ?? '';
+    final displayName = user?.displayName ?? '';
     final residencyLabel = user?.residency ?? l10n.profileResidenceLabel;
 
     return Column(

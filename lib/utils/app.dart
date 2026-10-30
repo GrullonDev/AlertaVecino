@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         theme: AppTheme.light,
         darkTheme: AppTheme.dark,
         onGenerateRoute: RouteSwitch.onGenerateRoute,
-        initialRoute: RoutePath.login,
+        initialRoute: RoutePath.splash,
       ),
     );
   }

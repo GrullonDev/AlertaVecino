@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:neighbour_alert/core/session/session_service.dart';
 import 'package:neighbour_alert/l10n/app_localizations.dart';
@@ -12,6 +13,9 @@ class ProfileInfoCard extends StatelessWidget {
     final cs = Theme.of(context).colorScheme;
     final theme = Theme.of(context);
     final user = context.watch<SessionService>().user;
+    final memberSince = user?.createdAt != null
+        ? DateFormat.yMMMd().format(user!.createdAt!)
+        : null;
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -45,7 +49,12 @@ class ProfileInfoCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          Text(l10n.activeMemberSince, style: theme.textTheme.bodySmall),
+          Text(
+            memberSince != null
+                ? '${l10n.activeMemberSince} $memberSince'
+                : l10n.activeMemberSince,
+            style: theme.textTheme.bodySmall,
+          ),
         ],
       ),
     );

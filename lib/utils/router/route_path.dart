@@ -1,4 +1,6 @@
 class RoutePath {
+  static const String splash = '/';
+
   // 1. Autenticación y Onboarding
   static const String login = '/login';
   static const String register = '/register';

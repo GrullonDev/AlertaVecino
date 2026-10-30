@@ -19,7 +19,7 @@ class DashboardHeader extends StatelessWidget {
     final cs = Theme.of(context).colorScheme;
     final theme = Theme.of(context);
     final user = context.watch<SessionService>().user;
-    final name = user?.email.split('@').first ?? 'Vecino';
+    final name = user?.displayName ?? 'Vecino';
 
     return Row(
       children: [

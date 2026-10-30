@@ -8,6 +8,7 @@ import 'package:neighbour_alert/features/auth/register/model/registration_draft.
 import 'package:neighbour_alert/features/auth/register/pages/register_page.dart';
 import 'package:neighbour_alert/features/auth/select_residency/pages/select_residency_page.dart';
 import 'package:neighbour_alert/features/home/pages/home_page.dart';
+import 'package:neighbour_alert/features/splash.dart';
 import 'package:neighbour_alert/features/panic/pages/panic_type_selection_page.dart';
 import 'package:neighbour_alert/features/announcements/pages/announcements_page.dart';
 import 'package:neighbour_alert/features/visitors/pages/visitors_page.dart';
@@ -19,6 +20,8 @@ import 'package:neighbour_alert/utils/widgets/widget_not_found.dart';
 class RouteSwitch {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case RoutePath.splash:
+        return MaterialPageRoute(builder: (_) => const SplashPage());
       case RoutePath.login:
         return MaterialPageRoute(builder: (_) => const LoginPage());
       case RoutePath.register:
