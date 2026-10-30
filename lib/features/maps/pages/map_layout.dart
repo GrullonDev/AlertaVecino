@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:neighbour_alert/core/api/api_exception.dart';
+import 'package:neighbour_alert/features/maps/data/map_repository.dart';
 import 'package:neighbour_alert/features/maps/models/map_marker_item.dart';
 import 'package:neighbour_alert/features/maps/widgets/map_background.dart';
 import 'package:neighbour_alert/features/maps/widgets/map_detail_card.dart';
 import 'package:neighbour_alert/features/maps/widgets/map_filter_tabs.dart';
-import 'package:neighbour_alert/features/maps/widgets/map_markers.dart';
 import 'package:neighbour_alert/features/maps/widgets/map_search_bar.dart';
 import 'package:neighbour_alert/features/maps/widgets/map_sos_button.dart';
-import 'package:neighbour_alert/l10n/app_localizations.dart';
+import 'package:neighbour_alert/utils/injection_container.dart';
 
 class MapLayout extends StatefulWidget {
   const MapLayout({super.key});
@@ -18,18 +19,49 @@ class MapLayout extends StatefulWidget {
 
 class _MapLayoutState extends State<MapLayout> {
   final _mapController = MapController();
-  late List<MapMarkerItem> _allMarkers;
+  List<MapMarkerItem> _allMarkers = [];
   final Set<MarkerCategory> _activeFilters = {
     MarkerCategory.panic,
     MarkerCategory.gate,
     MarkerCategory.incident,
   };
   MapMarkerItem? _selectedMarker;
+  bool _loading = true;
+  String? _error;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _allMarkers = buildMockMarkers(AppLocalizations.of(context)!);
+  void initState() {
+    super.initState();
+    _loadMarkers();
+  }
+
+  Future<void> _loadMarkers() async {
+    setState(() {
+      _loading = true;
+      _error = null;
+    });
+
+    try {
+      final repo = sl<MapRepository>();
+      final markers = await repo.fetchMarkers();
+      if (!mounted) return;
+      setState(() {
+        _allMarkers = markers;
+        _loading = false;
+      });
+    } on ApiException catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _error = e.serverMessage ?? 'Error al cargar marcadores';
+        _loading = false;
+      });
+    } catch (_) {
+      if (!mounted) return;
+      setState(() {
+        _error = 'Error de conexión';
+        _loading = false;
+      });
+    }
   }
 
   List<MapMarkerItem> get _filteredMarkers =>
@@ -80,6 +112,49 @@ class _MapLayoutState extends State<MapLayout> {
           onMarkerTap: _selectMarker,
           onTap: _clearSelection,
         ),
+        if (_loading)
+          Center(
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: cs.surface,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const CircularProgressIndicator(),
+            ),
+          ),
+        if (_error != null)
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: SafeArea(
+              child: Container(
+                margin: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: cs.errorContainer,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.cloud_off, color: cs.onErrorContainer),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        _error!,
+                        style: TextStyle(color: cs.onErrorContainer),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: _loadMarkers,
+                      icon: Icon(Icons.refresh, color: cs.onErrorContainer),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
         Positioned(
           top: 0,
           left: 0,

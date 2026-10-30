@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:neighbour_alert/core/api/api_exception.dart';
+import 'package:neighbour_alert/features/alerts/data/alerts_repository.dart';
 import 'package:neighbour_alert/features/alerts/models/alert_history_item.dart';
 import 'package:neighbour_alert/features/alerts/widgets/alert_card.dart';
 import 'package:neighbour_alert/features/alerts/widgets/alert_detail_sheet.dart';
 import 'package:neighbour_alert/features/alerts/widgets/alerts_filter_tabs.dart';
 import 'package:neighbour_alert/features/alerts/widgets/alerts_search_bar.dart';
 import 'package:neighbour_alert/l10n/app_localizations.dart';
+import 'package:neighbour_alert/utils/injection_container.dart';
 
 class AlertsLayout extends StatefulWidget {
   const AlertsLayout({super.key});
@@ -15,12 +18,43 @@ class AlertsLayout extends StatefulWidget {
 
 class _AlertsLayoutState extends State<AlertsLayout> {
   AlertFilter _filter = AlertFilter.all;
-  late List<AlertHistoryItem> _allItems;
+  List<AlertHistoryItem> _allItems = [];
+  bool _loading = true;
+  String? _error;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _allItems = _buildMockData(AppLocalizations.of(context)!);
+  void initState() {
+    super.initState();
+    _loadAlerts();
+  }
+
+  Future<void> _loadAlerts() async {
+    setState(() {
+      _loading = true;
+      _error = null;
+    });
+
+    try {
+      final repo = sl<AlertsRepository>();
+      final items = await repo.fetchHistory();
+      if (!mounted) return;
+      setState(() {
+        _allItems = items;
+        _loading = false;
+      });
+    } on ApiException catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _error = e.serverMessage ?? 'Error al cargar alertas';
+        _loading = false;
+      });
+    } catch (_) {
+      if (!mounted) return;
+      setState(() {
+        _error = 'Error de conexión';
+        _loading = false;
+      });
+    }
   }
 
   List<AlertHistoryItem> get _filtered {
@@ -50,12 +84,7 @@ class _AlertsLayoutState extends State<AlertsLayout> {
   }
 
   Future<void> _onRefresh() async {
-    await Future.delayed(const Duration(seconds: 1));
-    if (mounted) {
-      setState(() {
-        _allItems = _buildMockData(AppLocalizations.of(context)!);
-      });
-    }
+    await _loadAlerts();
   }
 
   @override
@@ -89,7 +118,35 @@ class _AlertsLayoutState extends State<AlertsLayout> {
                   ),
                 ),
               ),
-              if (items.isEmpty)
+              if (_loading)
+                const SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: Center(child: CircularProgressIndicator()),
+                )
+              else if (_error != null)
+                SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(32),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.cloud_off, size: 56, color: cs.error),
+                          const SizedBox(height: 16),
+                          Text(_error!, style: theme.textTheme.titleMedium),
+                          const SizedBox(height: 12),
+                          ElevatedButton.icon(
+                            onPressed: _loadAlerts,
+                            icon: const Icon(Icons.refresh),
+                            label: Text(l10n.retry),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+              else if (items.isEmpty)
                 SliverFillRemaining(
                   hasScrollBody: false,
                   child: Center(
@@ -141,82 +198,5 @@ class _AlertsLayoutState extends State<AlertsLayout> {
         ),
       ),
     );
-  }
-
-  List<AlertHistoryItem> _buildMockData(AppLocalizations l10n) {
-    final now = DateTime.now();
-    return [
-      AlertHistoryItem(
-        id: '1',
-        category: AlertCategory.medical,
-        status: AlertStatus.active,
-        title: l10n.alertMock1Title,
-        location: l10n.alertMock1Location,
-        reportedAt: now.subtract(const Duration(minutes: 8)),
-        duration: l10n.alertMock1Duration,
-        description: l10n.alertMock1Desc,
-        reportedBy: l10n.alertMock1ReportedBy,
-        responseTime: l10n.alertMock1ResponseTime,
-      ),
-      AlertHistoryItem(
-        id: '2',
-        category: AlertCategory.security,
-        status: AlertStatus.handled,
-        title: l10n.alertMock2Title,
-        location: l10n.alertMock2Location,
-        reportedAt: now.subtract(const Duration(minutes: 45)),
-        duration: l10n.alertMock2Duration,
-        description: l10n.alertMock2Desc,
-        guardNotes: l10n.alertMock2GuardNotes,
-        reportedBy: l10n.alertMock2ReportedBy,
-        responseTime: l10n.alertMock2ResponseTime,
-      ),
-      AlertHistoryItem(
-        id: '3',
-        category: AlertCategory.fire,
-        status: AlertStatus.resolved,
-        title: l10n.alertMock3Title,
-        location: l10n.alertMock3Location,
-        reportedAt: now.subtract(const Duration(hours: 3)),
-        duration: l10n.alertMock3Duration,
-        description: l10n.alertMock3Desc,
-        guardNotes: l10n.alertMock3GuardNotes,
-        reportedBy: l10n.alertMock3ReportedBy,
-        responseTime: l10n.alertMock3ResponseTime,
-      ),
-      AlertHistoryItem(
-        id: '4',
-        category: AlertCategory.security,
-        status: AlertStatus.falseAlarm,
-        title: l10n.alertMock4Title,
-        location: l10n.alertMock4Location,
-        reportedAt: now.subtract(const Duration(hours: 6)),
-        duration: l10n.alertMock4Duration,
-        description: l10n.alertMock4Desc,
-        guardNotes: l10n.alertMock4GuardNotes,
-      ),
-      AlertHistoryItem(
-        id: '5',
-        category: AlertCategory.medical,
-        status: AlertStatus.resolved,
-        title: l10n.alertMock5Title,
-        location: l10n.alertMock5Location,
-        reportedAt: now.subtract(const Duration(days: 1, hours: 2)),
-        duration: l10n.alertMock5Duration,
-        description: l10n.alertMock5Desc,
-        reportedBy: l10n.alertMock5ReportedBy,
-        responseTime: l10n.alertMock5ResponseTime,
-      ),
-      AlertHistoryItem(
-        id: '6',
-        category: AlertCategory.general,
-        status: AlertStatus.resolved,
-        title: l10n.alertMock6Title,
-        location: l10n.alertMock6Location,
-        reportedAt: now.subtract(const Duration(days: 2)),
-        duration: l10n.alertMock6Duration,
-        description: l10n.alertMock6Desc,
-      ),
-    ];
   }
 }
