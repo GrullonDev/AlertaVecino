@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:neighbour_alert/core/api/api_exception.dart';
 import 'package:neighbour_alert/features/auth/register/logic/register_logic.dart';
 import 'package:neighbour_alert/features/auth/register/model/registration_draft.dart';
-import 'package:neighbour_alert/features/auth/select_residency/data/residency_options.dart';
+import 'package:neighbour_alert/features/auth/select_residency/data/residency_datasource.dart';
+import 'package:neighbour_alert/features/auth/select_residency/data/residency_repository.dart';
+import 'package:neighbour_alert/features/auth/select_residency/widgets/residency_list.dart';
 import 'package:neighbour_alert/features/auth/select_residency/widgets/residency_picker.dart';
 import 'package:neighbour_alert/l10n/app_localizations.dart';
+import 'package:neighbour_alert/utils/injection_container.dart';
 import 'package:neighbour_alert/utils/router/route_path.dart';
 import 'package:neighbour_alert/utils/widgets/error_banner.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +22,66 @@ class SelectResidencyLayout extends StatefulWidget {
 }
 
 class _SelectResidencyLayoutState extends State<SelectResidencyLayout> {
+  List<ResidencyItem>? _residencies;
+  bool _loadingList = true;
+  String? _loadError;
+
+  static const _icons = [
+    Icons.location_city,
+    Icons.apartment,
+    Icons.home_work,
+    Icons.villa,
+    Icons.domain,
+    Icons.holiday_village,
+    Icons.corporate_fare,
+    Icons.house,
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadResidencies();
+  }
+
+  Future<void> _loadResidencies() async {
+    setState(() {
+      _loadingList = true;
+      _loadError = null;
+    });
+
+    try {
+      final repo = sl<ResidencyRepository>();
+      final dtos = await repo.listResidencies();
+      if (!mounted) return;
+      setState(() {
+        _residencies = [
+          for (var i = 0; i < dtos.length; i++)
+            _toItem(dtos[i], i),
+        ];
+        _loadingList = false;
+      });
+    } on ApiException catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _loadError = e.serverMessage ?? 'Error al cargar residencias';
+        _loadingList = false;
+      });
+    } catch (_) {
+      if (!mounted) return;
+      setState(() {
+        _loadError = 'Error de conexión';
+        _loadingList = false;
+      });
+    }
+  }
+
+  static ResidencyItem _toItem(ResidencyDto dto, int index) => ResidencyItem(
+        name: dto.name,
+        location: dto.location,
+        residentCount: dto.residentCount,
+        icon: _icons[index % _icons.length],
+      );
+
   Future<void> _submit(String residency, String section, String unit) async {
     final logic = context.read<RegisterLogic>();
     final l10n = AppLocalizations.of(context)!;
@@ -76,15 +140,47 @@ class _SelectResidencyLayoutState extends State<SelectResidencyLayout> {
           ),
           const SizedBox(height: 20),
           Expanded(
-            child: logic.isLoading
-                ? const Center(child: CircularProgressIndicator())
-                : ResidencyPicker(
-                    residencies: mockResidencies,
-                    onConfirm: _submit,
-                  ),
+            child: _buildBody(logic),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildBody(RegisterLogic logic) {
+    if (logic.isLoading || _loadingList) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    if (_loadError != null) {
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.cloud_off,
+                size: 48,
+                color: Theme.of(context).colorScheme.error,
+              ),
+              const SizedBox(height: 12),
+              Text(_loadError!, textAlign: TextAlign.center),
+              const SizedBox(height: 16),
+              ElevatedButton.icon(
+                onPressed: _loadResidencies,
+                icon: const Icon(Icons.refresh),
+                label: Text(AppLocalizations.of(context)!.retry),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    return ResidencyPicker(
+      residencies: _residencies ?? [],
+      onConfirm: _submit,
     );
   }
 }
