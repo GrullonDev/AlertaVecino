@@ -1187,4 +1187,86 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get visitorAtGate => 'Visitor at the gate';
+
+  @override
+  String get adminPanel => 'Admin Panel';
+
+  @override
+  String get adminLoginSubtitle => 'Sign in with your administrator account';
+
+  @override
+  String get adminNotAuthorized =>
+      'This account does not have admin permissions';
+
+  @override
+  String get adminDataProtected => 'Access restricted to authorized personnel';
+
+  @override
+  String get adminDashboard => 'Dashboard';
+
+  @override
+  String get adminUsers => 'Users';
+
+  @override
+  String get adminTotalUsers => 'Total users';
+
+  @override
+  String get adminPendingApprovals => 'Pending approvals';
+
+  @override
+  String get adminActiveAlerts => 'Active alerts';
+
+  @override
+  String get adminRecentPending => 'Recent pending approvals';
+
+  @override
+  String get adminStatusPending => 'Pending';
+
+  @override
+  String get adminStatusApproved => 'Approved';
+
+  @override
+  String get adminStatusRejected => 'Rejected';
+
+  @override
+  String get adminApprove => 'Approve';
+
+  @override
+  String get adminReject => 'Reject';
+
+  @override
+  String get adminDelete => 'Delete';
+
+  @override
+  String get adminConfirmDelete => 'Delete this user?';
+
+  @override
+  String get adminRejectReason => 'Rejection reason (optional)';
+
+  @override
+  String get adminNoUsers => 'No users match this filter';
+
+  @override
+  String get adminCreateAnnouncement => 'Create Announcement';
+
+  @override
+  String get adminAnnouncementTitle => 'Announcement title';
+
+  @override
+  String get adminAnnouncementBody => 'Announcement content';
+
+  @override
+  String get adminAnnouncementCategory => 'Category';
+
+  @override
+  String get adminAnnouncementCreated => 'Announcement published successfully';
+
+  @override
+  String get adminPublish => 'Publish';
+
+  @override
+  String get adminRecentAnnouncements => 'Recent announcements';
+
+  @override
+  String get adminNoActiveAlerts => 'No active alerts';
 }

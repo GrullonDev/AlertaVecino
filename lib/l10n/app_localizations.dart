@@ -2317,6 +2317,168 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Visitante en la entrada'**
   String get visitorAtGate;
+
+  /// No description provided for @adminPanel.
+  ///
+  /// In es, this message translates to:
+  /// **'Panel de Administración'**
+  String get adminPanel;
+
+  /// No description provided for @adminLoginSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Ingresa con tu cuenta de administrador'**
+  String get adminLoginSubtitle;
+
+  /// No description provided for @adminNotAuthorized.
+  ///
+  /// In es, this message translates to:
+  /// **'Esta cuenta no tiene permisos de administrador'**
+  String get adminNotAuthorized;
+
+  /// No description provided for @adminDataProtected.
+  ///
+  /// In es, this message translates to:
+  /// **'Acceso restringido al personal autorizado'**
+  String get adminDataProtected;
+
+  /// No description provided for @adminDashboard.
+  ///
+  /// In es, this message translates to:
+  /// **'Dashboard'**
+  String get adminDashboard;
+
+  /// No description provided for @adminUsers.
+  ///
+  /// In es, this message translates to:
+  /// **'Usuarios'**
+  String get adminUsers;
+
+  /// No description provided for @adminTotalUsers.
+  ///
+  /// In es, this message translates to:
+  /// **'Usuarios totales'**
+  String get adminTotalUsers;
+
+  /// No description provided for @adminPendingApprovals.
+  ///
+  /// In es, this message translates to:
+  /// **'Aprobaciones pendientes'**
+  String get adminPendingApprovals;
+
+  /// No description provided for @adminActiveAlerts.
+  ///
+  /// In es, this message translates to:
+  /// **'Alertas activas'**
+  String get adminActiveAlerts;
+
+  /// No description provided for @adminRecentPending.
+  ///
+  /// In es, this message translates to:
+  /// **'Aprobaciones pendientes recientes'**
+  String get adminRecentPending;
+
+  /// No description provided for @adminStatusPending.
+  ///
+  /// In es, this message translates to:
+  /// **'Pendiente'**
+  String get adminStatusPending;
+
+  /// No description provided for @adminStatusApproved.
+  ///
+  /// In es, this message translates to:
+  /// **'Aprobado'**
+  String get adminStatusApproved;
+
+  /// No description provided for @adminStatusRejected.
+  ///
+  /// In es, this message translates to:
+  /// **'Rechazado'**
+  String get adminStatusRejected;
+
+  /// No description provided for @adminApprove.
+  ///
+  /// In es, this message translates to:
+  /// **'Aprobar'**
+  String get adminApprove;
+
+  /// No description provided for @adminReject.
+  ///
+  /// In es, this message translates to:
+  /// **'Rechazar'**
+  String get adminReject;
+
+  /// No description provided for @adminDelete.
+  ///
+  /// In es, this message translates to:
+  /// **'Eliminar'**
+  String get adminDelete;
+
+  /// No description provided for @adminConfirmDelete.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Eliminar este usuario?'**
+  String get adminConfirmDelete;
+
+  /// No description provided for @adminRejectReason.
+  ///
+  /// In es, this message translates to:
+  /// **'Motivo del rechazo (opcional)'**
+  String get adminRejectReason;
+
+  /// No description provided for @adminNoUsers.
+  ///
+  /// In es, this message translates to:
+  /// **'No hay usuarios con este filtro'**
+  String get adminNoUsers;
+
+  /// No description provided for @adminCreateAnnouncement.
+  ///
+  /// In es, this message translates to:
+  /// **'Crear Anuncio'**
+  String get adminCreateAnnouncement;
+
+  /// No description provided for @adminAnnouncementTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Título del anuncio'**
+  String get adminAnnouncementTitle;
+
+  /// No description provided for @adminAnnouncementBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Contenido del anuncio'**
+  String get adminAnnouncementBody;
+
+  /// No description provided for @adminAnnouncementCategory.
+  ///
+  /// In es, this message translates to:
+  /// **'Categoría'**
+  String get adminAnnouncementCategory;
+
+  /// No description provided for @adminAnnouncementCreated.
+  ///
+  /// In es, this message translates to:
+  /// **'Anuncio publicado exitosamente'**
+  String get adminAnnouncementCreated;
+
+  /// No description provided for @adminPublish.
+  ///
+  /// In es, this message translates to:
+  /// **'Publicar'**
+  String get adminPublish;
+
+  /// No description provided for @adminRecentAnnouncements.
+  ///
+  /// In es, this message translates to:
+  /// **'Anuncios recientes'**
+  String get adminRecentAnnouncements;
+
+  /// No description provided for @adminNoActiveAlerts.
+  ///
+  /// In es, this message translates to:
+  /// **'No hay alertas activas'**
+  String get adminNoActiveAlerts;
 }
 
 class _AppLocalizationsDelegate

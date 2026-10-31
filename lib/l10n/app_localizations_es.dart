@@ -1197,4 +1197,86 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get visitorAtGate => 'Visitante en la entrada';
+
+  @override
+  String get adminPanel => 'Panel de Administración';
+
+  @override
+  String get adminLoginSubtitle => 'Ingresa con tu cuenta de administrador';
+
+  @override
+  String get adminNotAuthorized =>
+      'Esta cuenta no tiene permisos de administrador';
+
+  @override
+  String get adminDataProtected => 'Acceso restringido al personal autorizado';
+
+  @override
+  String get adminDashboard => 'Dashboard';
+
+  @override
+  String get adminUsers => 'Usuarios';
+
+  @override
+  String get adminTotalUsers => 'Usuarios totales';
+
+  @override
+  String get adminPendingApprovals => 'Aprobaciones pendientes';
+
+  @override
+  String get adminActiveAlerts => 'Alertas activas';
+
+  @override
+  String get adminRecentPending => 'Aprobaciones pendientes recientes';
+
+  @override
+  String get adminStatusPending => 'Pendiente';
+
+  @override
+  String get adminStatusApproved => 'Aprobado';
+
+  @override
+  String get adminStatusRejected => 'Rechazado';
+
+  @override
+  String get adminApprove => 'Aprobar';
+
+  @override
+  String get adminReject => 'Rechazar';
+
+  @override
+  String get adminDelete => 'Eliminar';
+
+  @override
+  String get adminConfirmDelete => '¿Eliminar este usuario?';
+
+  @override
+  String get adminRejectReason => 'Motivo del rechazo (opcional)';
+
+  @override
+  String get adminNoUsers => 'No hay usuarios con este filtro';
+
+  @override
+  String get adminCreateAnnouncement => 'Crear Anuncio';
+
+  @override
+  String get adminAnnouncementTitle => 'Título del anuncio';
+
+  @override
+  String get adminAnnouncementBody => 'Contenido del anuncio';
+
+  @override
+  String get adminAnnouncementCategory => 'Categoría';
+
+  @override
+  String get adminAnnouncementCreated => 'Anuncio publicado exitosamente';
+
+  @override
+  String get adminPublish => 'Publicar';
+
+  @override
+  String get adminRecentAnnouncements => 'Anuncios recientes';
+
+  @override
+  String get adminNoActiveAlerts => 'No hay alertas activas';
 }
