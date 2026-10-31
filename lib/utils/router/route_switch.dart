@@ -15,6 +15,8 @@ import 'package:neighbour_alert/features/visitors/pages/visitors_page.dart';
 import 'package:neighbour_alert/features/maps/pages/map_page.dart';
 import 'package:neighbour_alert/features/profile/pages/profile_page.dart';
 import 'package:neighbour_alert/utils/router/route_path.dart';
+import 'package:neighbour_alert/features/admin/login/pages/admin_login_page.dart';
+import 'package:neighbour_alert/features/admin/shell/admin_shell.dart';
 import 'package:neighbour_alert/utils/widgets/widget_not_found.dart';
 
 class RouteSwitch {
@@ -58,6 +60,10 @@ class RouteSwitch {
         return MaterialPageRoute(builder: (_) => const AlertsPage());
       case RoutePath.profile:
         return MaterialPageRoute(builder: (_) => const ProfilePage());
+      case RoutePath.adminLogin:
+        return MaterialPageRoute(builder: (_) => const AdminLoginPage());
+      case RoutePath.adminDashboard:
+        return MaterialPageRoute(builder: (_) => const AdminShell());
     }
     return MaterialPageRoute(builder: (_) => const WidgetNotFound());
   }

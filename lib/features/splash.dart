@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:neighbour_alert/core/session/session_service.dart';
 import 'package:neighbour_alert/features/profile/data/profile_repository.dart';
@@ -21,6 +22,22 @@ class _SplashPageState extends State<SplashPage> {
   Future<void> _bootstrap() async {
     final session = sl<SessionService>();
     final restored = await session.tryRestoreSession();
+
+    if (kIsWeb) {
+      if (!restored || session.user?.role != 'admin') {
+        _navigate(RoutePath.adminLogin);
+        return;
+      }
+      try {
+        final repo = sl<ProfileRepository>();
+        final user = await repo.fetchMe();
+        await session.updateUser(user);
+        _navigate(RoutePath.adminDashboard);
+      } catch (_) {
+        _navigate(RoutePath.adminLogin);
+      }
+      return;
+    }
 
     if (!restored) {
       _navigate(RoutePath.login);

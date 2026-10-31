@@ -36,6 +36,7 @@ class RoutePath {
   static const String profile = '/profile';
   static const String settings = '/settings';
 
-  // 7. Administración
-  static const String adminPanel = '/admin-panel';
+  // 7. Administración (web)
+  static const String adminLogin = '/admin-login';
+  static const String adminDashboard = '/admin-dashboard';
 }
