@@ -22,6 +22,8 @@ import 'package:neighbour_alert/features/auth/select_residency/data/residency_da
 import 'package:neighbour_alert/features/auth/select_residency/data/residency_repository.dart';
 import 'package:neighbour_alert/features/maps/data/map_datasource.dart';
 import 'package:neighbour_alert/features/maps/data/map_repository.dart';
+import 'package:neighbour_alert/features/admin/data/admin_datasource.dart';
+import 'package:neighbour_alert/features/admin/data/admin_repository.dart';
 import 'package:neighbour_alert/features/profile/data/profile_datasource.dart';
 import 'package:neighbour_alert/features/profile/data/profile_repository.dart';
 import 'package:neighbour_alert/features/panic/data/panic_datasource.dart';
@@ -164,6 +166,18 @@ void initDependencies() {
   if (!sl.isRegistered<MapRepository>()) {
     sl.registerLazySingleton<MapRepository>(
       () => MapRepositoryImpl(dataSource: sl<MapDataSource>()),
+    );
+  }
+
+  // Admin
+  if (!sl.isRegistered<AdminDataSource>()) {
+    sl.registerLazySingleton<AdminDataSource>(
+      () => AdminDataSourceImpl(apiClient: sl<ApiClient>()),
+    );
+  }
+  if (!sl.isRegistered<AdminRepository>()) {
+    sl.registerLazySingleton<AdminRepository>(
+      () => AdminRepositoryImpl(dataSource: sl<AdminDataSource>()),
     );
   }
 
